@@ -14,9 +14,12 @@ namespace Papyrus.Serialization
 	{
 		public static RuntimeTypeModel TypeModel;
 
+		private static List<Type> _handled; 
+
 		public static void Initialise()
 		{
 
+			_handled = new List<Type>(100);
 			TypeModel = ProtoBuf.Meta.TypeModel.Create();
 
 			var types = RecordDatabase.GetRecordTypes();
@@ -27,9 +30,27 @@ namespace Papyrus.Serialization
 			var rType = TypeModel.Add(typeof (Record), false);
 
 			foreach (var rootRecord in RecordDatabase.RootRecords) {
+
+				ScanSubRecords(TypeModel, rootRecord.Assembly);
 				TagRecordClass(TypeModel, rootRecord);
 				rType.AddSubType(fieldNo, rootRecord);
 				++fieldNo;
+
+			}
+
+		}
+
+		/// <summary>
+		/// Scans an assembly and updates the type model with any SubRecords found
+		/// </summary>
+		/// <param name="assembly"></param>
+		private static void ScanSubRecords(RuntimeTypeModel model, Assembly assembly)
+		{
+
+			var subRecords = assembly.GetTypes().Where(p => Attribute.IsDefined(p, typeof (SubRecordAttribute)));
+
+			foreach (var subRecord in subRecords) {
+				TagRecordClass(model, subRecord);
 			}
 
 		}
@@ -40,6 +61,11 @@ namespace Papyrus.Serialization
 		/// <param name="type"></param>
 		public static void TagRecordClass(RuntimeTypeModel model, Type type)
 		{
+
+			if (_handled.Contains(type))
+				return;
+
+			_handled.Add(type);
 
 			var rType = model.Add(type, false);
 

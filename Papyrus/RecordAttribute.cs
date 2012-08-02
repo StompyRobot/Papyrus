@@ -6,6 +6,9 @@ using System.Text;
 namespace Papyrus
 {
 
+	/// <summary>
+	/// Marks a class as being a record
+	/// </summary>
 	[AttributeUsage(AttributeTargets.Class)]
 	public sealed class RecordAttribute : Attribute
 	{
@@ -21,5 +24,23 @@ namespace Papyrus
 		}
 
 	}
+	
+	/// <summary>
+	/// Marks a class as being a subrecord, which means it can be serialized
+	/// correctly inside a record.
+	/// </summary>
+	[AttributeUsage(AttributeTargets.Class)]
+	public sealed class SubRecordAttribute : Attribute
+	{
+
+
+		public SubRecordAttribute()
+		{
+
+		}
+
+	}
+
+	
 
 }
