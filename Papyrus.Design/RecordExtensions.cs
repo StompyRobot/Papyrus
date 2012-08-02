@@ -46,13 +46,13 @@ namespace Papyrus.Design
 
 			using (MemoryStream str = new MemoryStream()) {
 
-				ProtoBuf.Serializer.Serialize(str, record);
+				Serialization.ProtoBufUtils.TypeModel.Serialize(str, record);
 
 				var recordBytes = str.GetBuffer();
 
 				using (MemoryStream str2 = new MemoryStream()) {
 
-					ProtoBuf.Serializer.Serialize(str2, otherRecord);
+					Serialization.ProtoBufUtils.TypeModel.Serialize(str2, otherRecord);
 
 					var otherRecordBtyes = str2.GetBuffer();
 
@@ -64,6 +64,34 @@ namespace Papyrus.Design
 			}
 
 			return false;
+
+		}
+
+		/// <summary>
+		/// Returns an editable copy of a record
+		/// </summary>
+		/// <param name="record"></param>
+		/// <returns></returns>
+		public static Record GetEditableCopy(this Record record)
+		{
+
+			if (!(record.Database is MutableRecordDatabase))
+				return null;
+
+			return (record.Database as MutableRecordDatabase).GetEditableCopy(record);
+		}
+
+		/// <summary>
+		/// Saves an editable record
+		/// </summary>
+		/// <param name="record"></param>
+		public static void SaveEditableCopy(this Record record)
+		{
+			
+			if(record.ReadOnly)
+				throw new Exception("Attempted to save a read only record.");
+
+			(record.Database as MutableRecordDatabase).SaveRecord(record);
 
 		}
 

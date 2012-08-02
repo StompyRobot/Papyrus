@@ -54,6 +54,13 @@ namespace Papyrus
 		public DateTime LastModified { get; set; }
 
 		/// <summary>
+		/// Modules this plugin relies on to be loaded. (Normally defined per-game)
+		/// </summary>
+		[DataMember]
+		[ProtoMember(6)]
+		public List<Guid> ModuleDependencies { get; set; } 
+
+		/// <summary>
 		/// The file this plugin was loaded from.
 		/// </summary>
 		public string SourceFile { get; set; }
@@ -61,6 +68,7 @@ namespace Papyrus
 		public RecordPlugin()
 		{
 			RecordLists = new Dictionary<string, IRecordList>();
+			ModuleDependencies = new List<Guid>();
 		}
 
 		/// <summary>
@@ -282,7 +290,12 @@ namespace Papyrus
 
 		public static string RecordListKeyForType(Type type)
 		{
-			return type.Name;
+			return type.FullName;
+		}
+
+		internal void AfterDeserialization()
+		{
+			GetAllRecords().ForEach(p => p.GetRecord().ReadOnly = true);
 		}
 
 		private const string SummaryBigSep = "-------------------";

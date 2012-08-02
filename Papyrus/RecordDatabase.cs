@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using Papyrus.DataTypes;
+using Papyrus.Serialization;
 
 namespace Papyrus
 {
@@ -22,7 +23,39 @@ namespace Papyrus
 
 		public Dictionary<Type, ReadOnlyCollection<Record>> RecordTable { get; protected set; }
 
-		public List<Type> RecordTypes { get { return GetRecordTypes(); } } 
+		/// <summary>
+		/// Record types, including abstract types
+		/// </summary>
+		private static List<RecordType> _recordTypes = new List<RecordType>();
+
+		/// <summary>
+		/// Modules currently loaded
+		/// </summary>
+		static internal List<Guid> ActiveModules = new List<Guid>(); 
+
+		static internal List<Type> RootRecords = new List<Type>(); 
+
+		private static bool _initialized;
+
+		/// <summary>
+		/// Initialize papyrus with the provided module assemblies
+		/// </summary>
+		/// <param name="moduleAssemblies">List of assemblies to load</param>
+		public static void Initialize(IEnumerable<string> moduleAssemblies)
+		{
+
+			if(_initialized)
+				throw new InvalidOperationException("Papyrus cannot be re-intialized");
+
+			_initialized = true;
+
+			foreach (var module in moduleAssemblies) {
+				LoadModuleAssembly(module);
+			}
+
+			Serialization.ProtoBufUtils.Initialise();
+
+		}
 
 		/// <summary>
 		/// Creates an empty database.
@@ -89,23 +122,16 @@ namespace Papyrus
 		} 
 
 		/// <summary>
-		/// Returns a list of non-abstract record types.
-		/// </summary>
-		/// <returns></returns>
-		public static List<Type> GetRecordTypes()
-		{
-
-			return DataTypes.RecordTypes.Types.Where(p => p.Type != null && !p.Type.IsAbstract).Select(p => p.Type).ToList();
-
-		}
-
-		/// <summary>
 		/// Returns a list of all record types.
 		/// </summary>
 		/// <returns></returns>
-		public static List<Type> GetRecordTypesFull()
+		public static IEnumerable<RecordType> GetRecordTypes()
 		{
-			return DataTypes.RecordTypes.Types.Select(p => p.Type).Where(p => p != null).ToList();
+
+
+			return _recordTypes.AsReadOnly();
+
+
 		} 
 
 		/// <summary>
@@ -138,6 +164,9 @@ namespace Papyrus
 			var ser = Serialization.SerializationHelper.ResolveFromPath(path);
 
 			var plugin = ser.Deserialize(path);
+
+			if(plugin.ModuleDependencies.Except(ActiveModules).Any())
+				throw new PluginLoadException("Missing active modules");
 
 			return plugin;
 		}
@@ -187,7 +216,7 @@ namespace Papyrus
 			// Add a collection of records to the record table for each type
 			foreach (var dataType in dataTypes)
 			{
-				RecordTable.Add(dataType, CacheRecordsOfType(dataType));
+				RecordTable.Add(dataType.Type, CacheRecordsOfType(dataType.Type));
 			}
 
 		}
@@ -232,5 +261,72 @@ namespace Papyrus
 
 		} 
 
+		/// <summary>
+		/// Loads a module assembly
+		/// </summary>
+		/// <param name="moduleName"></param>
+		internal static void LoadModuleAssembly(string moduleName)
+		{
+
+			try {
+
+				var assem = Assembly.Load(moduleName);
+
+				var modules = (PapyrusModuleAttribute[])assem.GetCustomAttributes(typeof (PapyrusModuleAttribute), true);
+
+				foreach (var papyrusModuleAttribute in modules) {
+					LoadModule(papyrusModuleAttribute);
+				}
+
+			} catch(Exception e) {
+				throw new Exception(string.Format("Failed loading assembly [{0}].\n{1}", moduleName, e.Message), e);
+			}
+
+
+		}
+
+		/// <summary>
+		/// Loads a module
+		/// </summary>
+		/// <param name="module"></param>
+		internal static void LoadModule(PapyrusModuleAttribute module)
+		{
+			
+			ActiveModules.Add(module.ID);
+
+			// Fetch all the types which are part of this module
+			var assemTypes = module.RootRecord.Assembly.GetTypes().Where(p => module.RootRecord.IsAssignableFrom(p));
+
+			// Iterate through them
+			foreach (var recordType in assemTypes) {
+
+				if (_recordTypes.Any(p => p.Type == recordType)) {
+					throw new Exception("Type can only be a member of one module");
+				}
+
+				// Default record type definition
+				RecordType type = new RecordType();
+				type.Type = recordType;
+				type.Abstract = recordType.IsAbstract;
+
+				// If the attribute exists, replace the default values with any user defined
+				if (Attribute.IsDefined(recordType, typeof(RecordAttribute))) {
+
+					var attrib = Attribute.GetCustomAttribute(recordType, typeof (RecordAttribute)) as RecordAttribute;
+					type.ShowInEditor = attrib.ShowInEditor;
+
+				}
+
+				_recordTypes.Add(type);
+
+			}
+
+			RootRecords.Add(module.RootRecord);
+
+		}
+
 	}
+
+
+
 }

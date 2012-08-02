@@ -101,6 +101,7 @@ namespace Papyrus.Design
 		public void SaveActivePlugin()
 		{
 
+			ActivePlugin.ModuleDependencies = new List<Guid>(ActiveModules);
 			ActivePlugin.LastModified = DateTime.UtcNow;
 			var ser = Serialization.SerializationHelper.ResolveFromPath(ActivePlugin.SourceFile);
 			ser.Serialize(ActivePlugin, Path.GetDirectoryName(ActivePlugin.SourceFile), true);
@@ -119,6 +120,7 @@ namespace Papyrus.Design
 
 			var oldContainer = record.Container;
 			var recordCopy = record.Clone();
+			recordCopy.ReadOnly = false;
 
 			// Resolve any data pointers using this database. (They aren't copied)
 			recordCopy.ResolveDependencies(this);
@@ -143,8 +145,7 @@ namespace Papyrus.Design
 		}
 
 		/// <summary>
-		/// Saves the record into the active plugin. NOTE: Do not modify the record after this point. Maybe enforced by 
-		/// throwing exceptions if you try later.
+		/// Saves the record into the active plugin.
 		/// </summary>
 		/// <param name="record"></param>
 		public void SaveRecord(Record record)
@@ -168,8 +169,14 @@ namespace Papyrus.Design
 						return;
 					}
 
+					// Overwrite the old records values with our own
+					oldRecord.ReadOnly = false;
+					Serialization.ProtoBufUtils.OverWrite(oldRecord, record);
+					oldRecord.ResolveDependencies(this);
+					oldRecord.ReadOnly = true;
+
 					// Change the record container from what it was before to our new record.
-					record.Container.SetRecord(record);
+					//record.Container.SetRecord(record);
 
 				} else {
 					// Add the record to the plugin

@@ -22,27 +22,24 @@ namespace Papyrus
 		/// <typeparam name="T">The type of object being copied.</typeparam>
 		/// <param name="source">The object instance to copy.</param>
 		/// <returns>The copied object.</returns>
-		public static T Clone<T>(this T source)
+		public static T Clone<T>(this T source) where T : Record
 		{
 			/*if (!Attribute.IsDefined(typeof(T), typeof(ProtoBuf.ProtoContractAttribute)))
 			{
 				throw new ArgumentException("The type must be a protocontract.", "source");
 			}*/
 
-			var clone = ProtoBuf.Serializer.DeepClone(source);
+			var clone = Serialization.ProtoBufUtils.TypeModel.DeepClone(source) as T;
 
-			if(clone is Record) {
-				
-				(clone as Record).ResolveDependencies((source as Record).Database);
+			clone.ResolveDependencies((source as Record).Database);
 
-			}
 
 			return clone;
 
 		}
 	}
 
-	public class DamageStructConverter : ExpandableObjectConverter
+	/*public class DamageStructConverter : ExpandableObjectConverter
 	{
 
 		public override object CreateInstance(ITypeDescriptorContext context, System.Collections.IDictionary propertyValues)
@@ -76,7 +73,7 @@ namespace Papyrus
 			return true;
 		}
 
-	}
+	}*/
 
 	public class IntSizeStructConverter : ExpandableObjectConverter
 	{

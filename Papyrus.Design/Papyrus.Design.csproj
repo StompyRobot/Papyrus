@@ -66,12 +66,8 @@
     <Compile Include="Controls\DataPointerTypeEditor.xaml.cs">
       <DependentUpon>DataPointerTypeEditor.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\EffectCollectionEditor.xaml.cs">
-      <DependentUpon>EffectCollectionEditor.xaml</DependentUpon>
-    </Compile>
     <Compile Include="DataPointerConverter.cs" />
     <Compile Include="DataPointerUtils.cs" />
-    <Compile Include="HardpointUtils.cs" />
     <Compile Include="MutableRecordDatabase.cs" />
     <Compile Include="RecordExtensions.cs" />
     <Compile Include="RecordConverters.cs" />
@@ -98,10 +94,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\DataPointerTypeEditor.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Controls\EffectCollectionEditor.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

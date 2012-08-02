@@ -26,6 +26,9 @@ namespace Papyrus.Serialization
 		[ProtoMember(4)]
 		public string Author;
 
+		[ProtoMember(5)]
+		public List<Guid> ModuleDependencies;
+
 	}
 
 	internal class DataProtoPiecemealSerializer : IDataSerializer
@@ -48,9 +51,10 @@ namespace Papyrus.Serialization
 			if ((File.Exists(headerPath) || Directory.Exists(pluginPath)) && !overwrite)
 				throw new Exception("Plugin already exists.");
 
+			// Get a temporary file
 			var tempPluginPath = Path.GetTempFileName();
-			File.Delete(tempPluginPath);
-			Directory.CreateDirectory(tempPluginPath);
+			File.Delete(tempPluginPath); // Delete the file
+			Directory.CreateDirectory(tempPluginPath); // Create a directory instead
 
 			bool error = false;
 
@@ -63,7 +67,7 @@ namespace Papyrus.Serialization
 				}
 
 				var header = new ProtoPiecemealHeader()
-				             {Name = recordPlugin.Name, DirectoryName = recordPlugin.Name, Description = recordPlugin.Description, Author = recordPlugin.Author};
+				             {Name = recordPlugin.Name, DirectoryName = recordPlugin.Name, Description = recordPlugin.Description, Author = recordPlugin.Author, ModuleDependencies = recordPlugin.ModuleDependencies};
 
 				using(var headerFile = File.Open(headerPath, FileMode.Create)) {
 					ProtoBuf.Serializer.Serialize(headerFile, header);
@@ -83,9 +87,6 @@ namespace Papyrus.Serialization
 				}
 
 			}
-
-			if (error)
-				return null;
 
 			// Delete the plugin that already exists
 			if (Directory.Exists(pluginPath)) {
@@ -124,6 +125,7 @@ namespace Papyrus.Serialization
 			plugin.Description = header.Description;
 			plugin.Author = header.Author;
 			plugin.RecordLists = new Dictionary<string, IRecordList>();
+			plugin.ModuleDependencies = header.ModuleDependencies ?? new List<Guid>();
 
 			var dataTypes = Directory.GetDirectories(pluginDir);
 			var dataAssem = Assembly.GetAssembly(typeof (Record));
@@ -133,17 +135,27 @@ namespace Papyrus.Serialization
 
 				var dataTypeName = dataType.Split(Path.DirectorySeparatorChar).Last();
 
-				var type = dataAssem.GetType("Papyrus.DataTypes." + dataTypeName);
+				Type type = null;
 
-				// Limit data types to the DataType namespace
-				if(type == null || type.Namespace != typeof(Record).Namespace)
-					throw new Exception("Invalid Data Type");
+				foreach (var rootRecord in RecordDatabase.RootRecords) {
+
+					type = rootRecord.Assembly.GetType(dataTypeName);
+
+					if (type != null)
+						break;
+				}
+
+				// Limit types to subtypes of record
+				if(type == null || !typeof(Record).IsAssignableFrom(type))
+					throw new PluginLoadException("Invalid Data Type");
 
 				var recordList = DeserializeRecordList(type, dataType);
 
 				plugin.RecordLists.Add(RecordPlugin.RecordListKeyForType(type), recordList);
 
 			}
+
+			plugin.AfterDeserialization();
 
 			return plugin;
 
@@ -182,8 +194,8 @@ namespace Papyrus.Serialization
 				var recordContainer = list.Records[i];
 
 				using (var file = File.Open(Path.Combine(directory,FileNameForContainer(recordContainer) + ".rec"), FileMode.Create)) {
-					
-					ProtoBuf.Serializer.Serialize(file, recordContainer);
+
+					ProtoBufUtils.TypeModel.Serialize(file, recordContainer);
 
 				}
 				
@@ -229,7 +241,7 @@ namespace Papyrus.Serialization
 				
 				using(var recordFile = File.OpenRead(file)) {
 
-					var recordContainer = ProtoBuf.Serializer.Deserialize<RecordContainer<T>>(recordFile);
+					var recordContainer = ProtoBufUtils.TypeModel.Deserialize(recordFile, null, typeof(RecordContainer<T>)) as RecordContainer<T>;
 					recordList.Records.Add(recordContainer);
 
 				}

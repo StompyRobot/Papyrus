@@ -78,7 +78,7 @@ namespace Papyrus
 	/// <typeparam name="T">Type of record to point to</typeparam>
 	[ProtoContract]
 	[DataContract]
-	[Editor("Data.Design.Controls.DataPointerTypeEditor, Data.Design", "Data.Design.Controls.DataPointerTypeEditor, Data.Design")]
+	[Editor("Papyrus.Design.Controls.DataPointerTypeEditor, Papyrus.Design", "Papyrus.Design.Controls.DataPointerTypeEditor, Papyrus.Design")]
 	public sealed class DataPointer<T> : DataPointer, IEquatable<DataPointer<T>> where T : Record
 	{
 

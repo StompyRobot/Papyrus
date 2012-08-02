@@ -9,14 +9,14 @@ namespace Papyrus.Serialization
 	{
 
 
-		static readonly Type[] KnownDataTypes = new Type[] {
+		/*static readonly Type[] KnownDataTypes = new Type[] {
 		                                   	//typeof(Data.DataTypes.DataPointer<>),
 											typeof(Record),
 											//typeof(Data.RecordList<>),
 											typeof(RecordList<Government>),
 											typeof(RecordList<StarSystem>),
 											typeof(DataPointer<Government>), typeof(DataPointer<StarSystem>)
-		                                   };
+		                                   };*/
 
 		public string Serialize(RecordPlugin database, string directory, bool overwrite)
 		{

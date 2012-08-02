@@ -40,7 +40,7 @@ namespace Papyrus
 					
 					errorList.Add(new PluginInfo() {
 					                             	IsValid = false, Enabled = false,
-													SourceFile = pluginPath, Name = Path.GetFileNameWithoutExtension(pluginPath)
+													SourceFile = pluginPath, Name = Path.GetFileNameWithoutExtension(pluginPath), IsActive = false
 					                             });
 
 				}

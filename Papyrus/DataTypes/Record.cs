@@ -11,15 +11,28 @@ namespace Papyrus.DataTypes
 {
 
 	//[Serializable]
-	[ProtoContract]
-	abstract public class Record : IEquatable<Record>
+	//[ProtoContract]
+	abstract public class Record : ViewModel, IEquatable<Record>
 	{
+
+
+		private string _id;
 
 		/// <summary>
 		/// This is the editor name for a data object.
 		/// </summary>
-		[ProtoMember(1), DataMember, Category("Data"), Description("The design ID for this item. This is not shown in the game, it is only for use in the editor.")]
-		public string ID { get; set; }
+		[RecordProperty(1), DataMember, Category("Data"), Description("The design ID for this item. This is not shown in the game, it is only for use in the editor.")]
+		public string ID
+		{
+			get { return _id; }
+			set { ThrowIfReadOnly("ID"); _id = value; RaisePropertyChanged("ID"); }
+		}
+
+		/// <summary>
+		/// Is this object read only
+		/// </summary>
+		[Browsable(false), Bindable(false)]
+		public bool ReadOnly { get; internal set; }
 
 		/// <summary>
 		/// Reference to the database that this record resides in.
@@ -33,6 +46,17 @@ namespace Papyrus.DataTypes
 		public override string ToString()
 		{
 			return ID;
+		}
+
+		protected void ThrowIfReadOnly(string propName)
+		{
+
+			if (ReadOnly) {
+				
+				throw new InvalidOperationException(string.Format("Tried to modify propety {0} of record of type {1} while record is read only.", propName, this.GetType().Name));
+
+			}
+
 		}
 
 		private static MethodInfo _getDataPointerMethodInfo;

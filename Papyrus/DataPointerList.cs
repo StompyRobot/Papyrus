@@ -33,7 +33,7 @@ namespace Papyrus
 	/// </summary>
 	/// <typeparam name="T">Record type</typeparam>
 	[ProtoContract(IgnoreListHandling = true)]
-	[Editor("Data.Design.Controls.DataPointerListTypeEditor, Data.Design", "Data.Design.Controls.DataPointerListTypeEditor, Data.Design")]
+	[Editor("Papyrus.Design.Controls.DataPointerListTypeEditor, Papyrus.Design", "Papyrus.Design.Controls.DataPointerListTypeEditor, Papyrus.Design")]
 	public class DataPointerList<T> : IDataPointerList, IList<DataPointer<T>> where T : Record
 	{
 

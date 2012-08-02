@@ -8,7 +8,7 @@ using ProtoBuf;
 namespace Papyrus.DataTypes
 {
 	[ProtoContract]
-	[TypeConverter("Data.Design.Vector2TypeConverter, Data.Design")]
+	[TypeConverter("Papyrus.Design.Vector2TypeConverter, Papyrus.Design")]
 	public struct Vector2
 	{
 

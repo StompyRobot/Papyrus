@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Reflection;
 using Papyrus.DataTypes;
+using ProtoBuf.Meta;
 
 namespace Papyrus.Serialization
 {
@@ -20,10 +22,10 @@ namespace Papyrus.Serialization
 			// Use the static init to tell protobuf-net about ProtoIncludes
 
 			Dictionary<Type, int> fieldNum = new Dictionary<Type, int>();
-			fieldNum.Add(typeof(Record), 5); // leave a bit of room for more fields in case we need them later.
+			fieldNum.Add(typeof(Record), 10); // leave a bit of room for more fields in case we need them later.
 			fieldNum.Add(typeof(IRecordList), 1);
 
-			var dataTypes = new List<RecordTypes.RecordType>(RecordTypes.Types);
+			/*var dataTypes = new List<TypeDefinition>(RecordTypes.Types);
 
 			foreach (var recordType in dataTypes)
 			{
@@ -70,7 +72,8 @@ namespace Papyrus.Serialization
 				fieldNum[typeof(IRecordList)] = fieldNum[typeof(IRecordList)] + 1;
 
 			}
-
+			*/
+			
 			// Temp hack to allow loading of old data files (none remain, so this is just here for reference)
 			/*ProtoBuf.Meta.RuntimeTypeModel.Default.DynamicTypeFormatting += (sender, args) =>
 			                                                                {
@@ -80,8 +83,9 @@ namespace Papyrus.Serialization
 																				}
 			                                                                };*/
 			//ProtoBuf.
-
+			
 		}
+
 
 		public DataProtoSerializer()
 		{
@@ -104,7 +108,7 @@ namespace Papyrus.Serialization
 			using (var tmpStream = new MemoryStream(512)) {
 
 				//Serialize to a memory buffer before the file in case something goes wrong.
-				ProtoBuf.Serializer.Serialize(tmpStream, recordPlugin);
+				ProtoBufUtils.TypeModel.Serialize(tmpStream, recordPlugin);
 
 				using (var stream = File.Open(path, FileMode.Create)) {
 
@@ -129,8 +133,9 @@ namespace Papyrus.Serialization
 			try {
 
 				using (var stream = File.Open(fileName, FileMode.Open)) {
-					RecordPlugin recordPlugin = ProtoBuf.Serializer.Deserialize<RecordPlugin>(stream);
+					RecordPlugin recordPlugin = ProtoBufUtils.TypeModel.Deserialize(stream, null, typeof(RecordPlugin)) as RecordPlugin;
 					recordPlugin.SourceFile = fileName;
+					recordPlugin.AfterDeserialization();
 					return recordPlugin;
 				}
 
