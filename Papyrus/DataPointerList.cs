@@ -44,7 +44,7 @@ namespace Papyrus
 	public class DataPointerList<T> : IDataPointerList, IList<DataPointer<T>> where T : Record
 	{
 
-		[ProtoMember(1)]
+		[ProtoMember(1, OverwriteList = true)]
 		private List<DataPointer<T>> _internalList = new List<DataPointer<T>>();
 
 		/// <summary>
