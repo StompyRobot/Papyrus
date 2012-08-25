@@ -69,6 +69,7 @@
     <Compile Include="DataPointerConverter.cs" />
     <Compile Include="DataPointerUtils.cs" />
     <Compile Include="MutableRecordDatabase.cs" />
+    <Compile Include="NewRecordEventArgs.cs" />
     <Compile Include="RecordExtensions.cs" />
     <Compile Include="RecordConverters.cs" />
     <Compile Include="Vector2TypeConverter.cs" />

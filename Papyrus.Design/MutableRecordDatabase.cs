@@ -22,6 +22,8 @@ namespace Papyrus.Design
 	{
 
 
+		public event EventHandler<NewRecordEventArgs> NewRecordAdded;
+
 		private RecordPlugin _activePlugin;
 		private bool _needsSaving;
 
@@ -187,8 +189,23 @@ namespace Papyrus.Design
 					//record.Container.SetRecord(record);
 
 				} else {
+
 					// Add the record to the plugin
+
+					// Copy the record
+					var newRecord = record.Clone();
+					// Set it to be read only...
+					newRecord.ReadOnly = true;
+					// Set our record to the the containers primary record
+					container.SetRecord(newRecord);
+
 					ActivePlugin.AddRecord(container);
+					
+					// Now the container passed in will be able to save edits correctly
+
+					if(NewRecordAdded != null)
+						NewRecordAdded(this, new NewRecordEventArgs(container.GetRecord()));
+
 				}
 
 				if (container.Mode != RecordMode.Append) {

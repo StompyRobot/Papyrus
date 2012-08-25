@@ -82,5 +82,8 @@ namespace Papyrus
 			return Record;
 		}
 
+		public RecordContainer() {}
+
+
 	}
 }

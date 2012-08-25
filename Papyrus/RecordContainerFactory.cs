@@ -101,5 +101,39 @@ namespace Papyrus
 
 		}
 
+		private static MethodInfo _cloneRecordContainerMethod;
+
+		/// <summary>
+		/// Clones a record container
+		/// </summary>
+		/// <param name="container"></param>
+		/// <returns></returns>
+		public static IRecordContainer Clone(IRecordContainer container)
+		{
+
+			if (_cloneRecordContainerMethod == null)
+				_cloneRecordContainerMethod = typeof(RecordContainerFactory).GetMethods(BindingFlags.Public | BindingFlags.Static).Single(p => p.Name == "Clone" && p.IsGenericMethod);
+
+			var method = _cloneRecordContainerMethod.MakeGenericMethod(container.RecordType);
+
+			return method.Invoke(null, new object[] { container }) as IRecordContainer;
+
+		}
+
+		public static RecordContainer<T> Clone<T>(RecordContainer<T> container) where T : Record
+		{
+
+			var newContainer = new RecordContainer<T>();
+
+			newContainer.Mode = container.Mode;
+			newContainer.Index = container.Index;
+			newContainer.Location = container.Location;
+			newContainer.Destination = container.Destination;
+			newContainer.Record = container.Record;
+
+			return newContainer;
+
+		} 
+
 	}
 }
