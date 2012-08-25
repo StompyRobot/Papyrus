@@ -18,23 +18,40 @@ namespace Papyrus
 	/// <summary>
 	/// A class describing a plugin.
 	/// </summary>
-	public class PluginInfo
+	public class PluginInfo : ViewModel
 	{
 
+		private bool _enabled;
 		/// <summary>
 		/// Is this plugin enabled or not.
 		/// </summary>
-		public bool Enabled { get; set; } 
+		public bool Enabled
+		{
+			get { return _enabled; }
+			set { _enabled = value; RaisePropertyChanged("Enabled"); }
+		}
+
+		private bool _isValid;
 
 		/// <summary>
 		/// False if this plugin cannot be loaded for one reason or another.
 		/// </summary>
-		public bool IsValid { get; set; }
+		public bool IsValid
+		{
+			get { return _isValid; }
+			set { _isValid = value; RaisePropertyChanged("IsValid"); }
+		}
+
+		private string _name;
 
 		/// <summary>
 		/// Name of this plugin
 		/// </summary>
-		public string Name { get; set; }
+		public string Name
+		{
+			get { return _name; }
+			set { _name = value; }
+		}
 
 		/// <summary>
 		/// File this plugin is loaded from
@@ -61,11 +78,17 @@ namespace Papyrus
 		/// </summary>
 		public List<string> Dependencies { get; set; }
 
+
+		private bool _isActive;
 		/// <summary>
 		/// Used by the editor to determine if this plugin is currently
 		/// active.
 		/// </summary>
-		public bool IsActive { get; set; }
+		public bool IsActive
+		{
+			get { return _isActive; }
+			set { _isActive = value; RaisePropertyChanged("IsActive"); }
+		}
 
 		/// <summary>
 		/// Data format this plugin is saved into

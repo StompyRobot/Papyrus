@@ -62,7 +62,8 @@ namespace Papyrus.Design
 		{
 			
 			if(files.Contains(targetPlugin ?? "")) {
-				throw new InvalidOperationException("targetPlugin was present in the plugin array.");
+				files.Remove(targetPlugin);
+				//throw new InvalidOperationException("targetPlugin was present in the plugin array.");
 			}
 
 			var plugins = LoadPlugins(files);
