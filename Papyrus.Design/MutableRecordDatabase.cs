@@ -175,7 +175,6 @@ namespace Papyrus.Design
 
 					// Check if there have been any changes
 					if(oldRecord.BinaryEquals(record)) {
-						Console.WriteLine("No Change");
 						return;
 					}
 
