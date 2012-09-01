@@ -72,7 +72,7 @@
     <Compile Include="ChildRecordAttribute.cs" />
     <Compile Include="DataPointer.cs" />
     <Compile Include="DataPointerList.cs" />
-    <Compile Include="DataTypes\RecordTypes.cs" />
+    <Compile Include="DataTypes\AudioAsset.cs" />
     <Compile Include="LoadOrder.cs" />
     <Compile Include="PapyrusModuleAttribute.cs" />
     <Compile Include="PluginInfo.cs" />

@@ -19,6 +19,7 @@ namespace Papyrus.DataTypes
 
 	//[Serializable]
 	//[ProtoContract]
+	[ChildRecord(10, typeof(AudioAsset))]
 	abstract public class Record : ViewModel, IEquatable<Record>
 	{
 

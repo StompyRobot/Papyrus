@@ -5,11 +5,22 @@
  * have received a copy of the license along with the source code. If not, an online copy
  * of the license can be found at https://github.com/stompyrobot/Papyrus/wiki/License.
  */
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+
+using System.ComponentModel;
 
 namespace Papyrus.DataTypes
 {
 
+
+	/// <summary>
+	/// Wrapper for an audio asset
+	/// </summary>
+	public class AudioAsset : Record
+	{
+
+		[RecordProperty(1)]
+		[Description("Content path to the audio asset")]
+		public string Path { get; set; }
+
+	}
 }

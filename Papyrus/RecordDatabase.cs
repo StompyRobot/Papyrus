@@ -56,6 +56,12 @@ namespace Papyrus
 
 			_initialized = true;
 
+			_recordTypes.Add(new RecordType() {
+			                                  	Abstract = false,
+												ShowInEditor = true,
+												Type = typeof(AudioAsset)
+			                                  });
+
 			foreach (var module in moduleAssemblies) {
 				LoadModuleAssembly(module);
 			}
