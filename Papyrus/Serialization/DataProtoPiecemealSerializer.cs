@@ -152,6 +152,10 @@ namespace Papyrus.Serialization
 						break;
 				}
 
+				// If not found in a plugin assembly, search the papyrus assembly for built in types
+				if(type == null)
+					type = GetType().Assembly.GetType(dataTypeName);
+
 				// Limit types to subtypes of record
 				if(type == null || !typeof(Record).IsAssignableFrom(type))
 					throw new PluginLoadException("Invalid Data Type");
