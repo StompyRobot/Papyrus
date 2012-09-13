@@ -42,6 +42,21 @@ namespace Papyrus.Design
 		}
 
 		/// <summary>
+		/// Returns true if this record is in the current active plugin (plugin being edited).
+		/// </summary>
+		/// <param name="record"></param>
+		/// <returns>True if record is located in the active plugin.</returns>
+		public static bool IsInActivePlugin(this Record record)
+		{
+
+			if(!(record.Database is MutableRecordDatabase))
+				return false;
+
+			return record.RecordLocation() == (record.Database as MutableRecordDatabase).ActivePluginName;
+
+		}
+
+		/// <summary>
 		/// Serialises a record and compares the binary output to another record to detect
 		/// differences
 		/// </summary>
