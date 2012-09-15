@@ -61,7 +61,7 @@ namespace Papyrus.DataTypes
 
 			if (ReadOnly) {
 				
-				throw new InvalidOperationException(string.Format("Tried to modify propety {0} of record of type {1} while record is read only.", propName, this.GetType().Name));
+				throw new InvalidOperationException(string.Format("Tried to modify property [{0}] of record of type [{1}] while record is read only.", propName, this.GetType().Name));
 
 			}
 
@@ -76,6 +76,10 @@ namespace Papyrus.DataTypes
 		/// <returns></returns>
 		public DataPointer<T> GetDataPointer<T>() where T : Record
 		{
+
+			if(string.IsNullOrEmpty(Container.Location) || Container.Index < 0)
+				throw new InvalidOperationException("Attempted to get a data pointer to an unsaved record.");
+
 			var newPointer =  new DataPointer<T>(Container.Index, Container.Destination, Container.Location);
 
 			try {
