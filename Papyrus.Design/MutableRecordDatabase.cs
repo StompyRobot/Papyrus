@@ -247,6 +247,8 @@ namespace Papyrus.Design
 
 			var container = RecordContainerFactory.CreateNewRecordContainer<T>(ActivePlugin);
 
+			container.Record.ResolveDependencies(this);
+
 			return container.Record;
 
 		}
