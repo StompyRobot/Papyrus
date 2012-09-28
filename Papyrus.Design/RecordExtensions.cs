@@ -89,6 +89,22 @@ namespace Papyrus.Design
 
 		}
 
+		public static Record Duplicate(this Record record)
+		{
+
+			if (!(record.Database is MutableRecordDatabase))
+				return null;
+
+			var database = record.Database as MutableRecordDatabase;
+
+			var newRecord = database.NewRecord(record.GetType());
+
+			Serialization.ProtoBufUtils.OverWrite(newRecord, record);
+
+			return newRecord;
+
+		}
+
 		/// <summary>
 		/// Returns an editable copy of a record
 		/// </summary>
