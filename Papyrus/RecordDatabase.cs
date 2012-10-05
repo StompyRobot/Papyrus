@@ -138,7 +138,7 @@ namespace Papyrus
 		/// Returns a list of all record types.
 		/// </summary>
 		/// <returns></returns>
-		public static IEnumerable<RecordType> GetRecordTypes()
+		public static IList<RecordType> GetRecordTypes()
 		{
 
 
