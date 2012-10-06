@@ -40,6 +40,14 @@ namespace Papyrus.Serialization
 
 	internal class DataProtoPiecemealSerializer : IDataSerializer
 	{
+
+		public static readonly string Extension = "sgpp";
+
+		string IDataSerializer.Extension
+		{
+			get { return DataProtoPiecemealSerializer.Extension; }
+		}
+
 		private static MethodInfo _serializeRecordListMethod;
 		private static MethodInfo _deserializeRecordListMethod;
 

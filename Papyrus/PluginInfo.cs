@@ -95,6 +95,11 @@ namespace Papyrus
 		/// </summary>
 		public Serialization.DataFormat Format { get; set; }
 
+		public PluginInfo()
+		{
+			Dependencies = new List<string>();
+		}
+
 		public PluginInfo Copy()
 		{
 			var pluginInfo = (PluginInfo)this.MemberwiseClone();

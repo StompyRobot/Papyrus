@@ -15,7 +15,12 @@ namespace Papyrus.Serialization
 	internal class DataXMLPieacemealSerializer : IDataSerializer
 	{
 
+		public static readonly string Extension = "sgppx";
 
+		string IDataSerializer.Extension
+		{
+			get { return DataXMLPieacemealSerializer.Extension; }
+		}
 
 		public string Serialize(RecordPlugin database, string directory, bool overwrite)
 		{

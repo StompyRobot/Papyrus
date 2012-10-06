@@ -21,17 +21,19 @@ namespace Papyrus.Serialization
 		Proto,
 
 		ProtoPiecemeal,
-		XMLPiecemeal
+		XMLPiecemeal,
+
+		JSON
 	}
 
 	public class DataSerializerInfo
 	{
 
-		public Type Type;
-		public string Extension;
-		public string Name;
-		public string Description;
-		public DataFormat Format;
+		public Type Type { get; internal set; }
+		public string Extension { get; internal set; }
+		public string Name { get; internal set; }
+		public string Description { get; internal set; }
+		public DataFormat Format { get; internal set; }
 
 	}
 
@@ -58,10 +60,11 @@ namespace Papyrus.Serialization
 		static SerializationHelper()
 		{
 
-			SerializationHelper.RegisterFileFormat<DataProtoSerializer>("sgp", "SpaceGame Plugin", "Binary data format contained in one file.", DataFormat.Proto);
-			SerializationHelper.RegisterFileFormat<DataProtoSerializer>("sgpx", "SpaceGame XML Plugin", "XML data format contained in one file.", DataFormat.XML);
-			SerializationHelper.RegisterFileFormat<DataProtoPiecemealSerializer>("sgpp", "SpaceGame Piecemeal Plugin", "Binary data format spread across many files.", DataFormat.ProtoPiecemeal);
-			SerializationHelper.RegisterFileFormat<DataXMLPieacemealSerializer>("sgppx", "SpaceGame XML Piecemeal Plugin", "XML data format spread across many files. Recommended if using source control.", DataFormat.XMLPiecemeal);
+			SerializationHelper.RegisterFileFormat<DataProtoSerializer>(DataProtoSerializer.Extension, "SpaceGame Plugin", "Binary data format contained in one file.", DataFormat.Proto);
+			SerializationHelper.RegisterFileFormat<DataProtoSerializer>(DataXMLSerializer.Extension, "SpaceGame XML Plugin", "XML data format contained in one file.", DataFormat.XML);
+			SerializationHelper.RegisterFileFormat<DataProtoPiecemealSerializer>(DataProtoPiecemealSerializer.Extension, "SpaceGame Piecemeal Plugin", "Binary data format spread across many files.", DataFormat.ProtoPiecemeal);
+			SerializationHelper.RegisterFileFormat<DataXMLPieacemealSerializer>(DataXMLPieacemealSerializer.Extension, "SpaceGame XML Piecemeal Plugin", "XML data format spread across many files. Recommended if using source control.", DataFormat.XMLPiecemeal);
+			SerializationHelper.RegisterFileFormat<JsonSerializer>(JsonSerializer.Extension, "SpaceGame JSON Plugin", "JSON data format contained in one file", DataFormat.JSON);
 
 		}
 

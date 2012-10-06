@@ -15,6 +15,12 @@ namespace Papyrus.Serialization
 	internal class DataXMLSerializer : IDataSerializer
 	{
 
+		public static readonly string Extension = "sgpx";
+
+		string IDataSerializer.Extension
+		{
+			get { return DataXMLSerializer.Extension; }
+		}
 
 		/*static readonly Type[] KnownDataTypes = new Type[] {
 		                                   	//typeof(Data.DataTypes.DataPointer<>),

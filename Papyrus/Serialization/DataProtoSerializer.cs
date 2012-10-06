@@ -16,6 +16,14 @@ namespace Papyrus.Serialization
 {
 	internal class DataProtoSerializer : IDataSerializer
 	{
+
+		public static readonly string Extension = "sgp";
+
+		string IDataSerializer.Extension
+		{
+			get { return DataProtoSerializer.Extension; }
+		}
+
 		private static bool _protoInitialised;
 
 		internal static void InitProtoSystem()

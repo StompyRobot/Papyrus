@@ -10,6 +10,9 @@ namespace Papyrus.Serialization
 
 	internal interface IDataSerializer
 	{
+
+		string Extension { get; }
+
 		/// <summary>
 		/// Serializes the plugin into a file in the given directory.
 		/// </summary>

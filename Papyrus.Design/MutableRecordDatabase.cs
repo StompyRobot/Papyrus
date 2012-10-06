@@ -22,7 +22,8 @@ namespace Papyrus.Design
 	{
 
 
-		public event EventHandler<NewRecordEventArgs> NewRecordAdded;
+		public event EventHandler<RecordEventArgs> RecordAdded;
+		public event EventHandler<RecordEventArgs> RecordRemoved;
 
 		private RecordPlugin _activePlugin;
 		private bool _needsSaving;
@@ -189,7 +190,20 @@ namespace Papyrus.Design
 
 				} else {
 
-					// Add the record to the plugin
+					// Add the record to the plugin.
+
+					// If we are overwriting another record, call RecordRemoved for it here.
+					if (container.Destination != ActivePlugin.Name) {
+
+						var overwriteRecord =
+							this.GetRecordsOfType(record.GetType()).Single(
+								p => p.Container.Destination == container.Destination && p.Container.Index == container.Index);
+
+						if (RecordRemoved != null) {
+							RecordRemoved(this, new RecordEventArgs(overwriteRecord));
+						}
+
+					}
 
 					// Copy the record
 					var newRecord = record.Clone();
@@ -200,10 +214,10 @@ namespace Papyrus.Design
 
 					ActivePlugin.AddRecord(container);
 					
-					// Now the container passed in will be able to save edits correctly
+					// Now the container passed in will be able to save edits correctly.
 
-					if(NewRecordAdded != null)
-						NewRecordAdded(this, new NewRecordEventArgs(container.GetRecord()));
+					if (RecordAdded != null)
+						RecordAdded(this, new RecordEventArgs(container.GetRecord()));
 
 				}
 
