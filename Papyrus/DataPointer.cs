@@ -10,6 +10,7 @@ using System.ComponentModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Papyrus.DataTypes;
+using Papyrus.Exceptions;
 using ProtoBuf;
 
 namespace Papyrus

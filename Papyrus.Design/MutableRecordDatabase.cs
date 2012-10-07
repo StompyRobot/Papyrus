@@ -11,6 +11,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using Papyrus.DataTypes;
+using Papyrus.Exceptions;
 
 namespace Papyrus.Design
 {
