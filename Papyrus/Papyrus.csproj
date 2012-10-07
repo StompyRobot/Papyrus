@@ -73,6 +73,7 @@
     <Compile Include="DataPointer.cs" />
     <Compile Include="DataPointerList.cs" />
     <Compile Include="DataTypes\AudioAsset.cs" />
+    <Compile Include="Serialization\JsonRecordListDictionaryConverter.cs" />
     <Compile Include="LoadOrder.cs" />
     <Compile Include="PapyrusModuleAttribute.cs" />
     <Compile Include="PluginInfo.cs" />
@@ -102,6 +103,7 @@
     <Compile Include="RecordList.cs" />
     <Compile Include="RecordMode.cs" />
     <Compile Include="Serialization\JsonSerializer.cs" />
+    <Compile Include="Serialization\PapyrusJsonContractResolver.cs" />
     <Compile Include="Serialization\PluginLoadException.cs" />
     <Compile Include="Serialization\ProtoBufUtils.cs" />
     <Compile Include="Serialization\SerializationHelper.cs" />

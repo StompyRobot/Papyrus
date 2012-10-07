@@ -11,6 +11,7 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization;
 using System.Text;
+using Newtonsoft.Json;
 using Papyrus.DataTypes;
 using ProtoBuf;
 
@@ -26,10 +27,6 @@ namespace Papyrus
 	{
 
 		private static MethodInfo _applyRecordMethodInfo;
-
-		[DataMember]
-		[ProtoMember(1, OverwriteList = true)]
-		public Dictionary<string, IRecordList> RecordLists { get; set; }
 
 		/// <summary>
 		/// Name of this plugin. Used by other plugins to reference this plugin.
@@ -65,7 +62,13 @@ namespace Papyrus
 		/// </summary>
 		[DataMember]
 		[ProtoMember(6)]
-		public List<Guid> ModuleDependencies { get; set; } 
+		public List<Guid> ModuleDependencies { get; set; }
+
+		[DataMember]
+		[ProtoMember(1, OverwriteList = true)]
+		[JsonConverter(typeof(Serialization.JsonRecordListDictionaryConverter))]
+		public Dictionary<string, IRecordList> RecordLists { get; set; }
+
 
 		/// <summary>
 		/// The file this plugin was loaded from.

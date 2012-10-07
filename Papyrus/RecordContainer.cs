@@ -68,6 +68,16 @@ namespace Papyrus
 			Record.Container = this;
 		}
 
+#if JSON
+
+		[OnDeserialized]
+		private void OnDeserialized(StreamingContext context)
+		{
+			PostDeserialization();
+		}
+
+#endif
+
 		public void SetRecord(Record record)
 		{
 #if DEBUG

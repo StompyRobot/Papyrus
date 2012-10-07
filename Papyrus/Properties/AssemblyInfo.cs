@@ -12,16 +12,17 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("WindowsGameLibrary1")]
-[assembly: AssemblyProduct("WindowsGameLibrary1")]
+[assembly: AssemblyTitle("Papyrus")]
+[assembly: AssemblyProduct("Papyrys")]
 [assembly: AssemblyDescription("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Stompy Robot")]
 [assembly: AssemblyCopyright("Copyright ©  2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
 // Allow the design assembly to see our privates (hoho)
 [assembly: InternalsVisibleTo("Papyrus.Design", AllInternalsVisible = true)]
+//[assembly: InternalsVisibleTo("Newtonsoft.Json", AllInternalsVisible = true)]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
 // to COM components.  If you need to access a type in this assembly from 

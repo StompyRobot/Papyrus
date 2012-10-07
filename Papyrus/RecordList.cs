@@ -9,7 +9,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
-using System.Text;
 using Papyrus.DataTypes;
 using ProtoBuf;
 
@@ -17,6 +16,7 @@ namespace Papyrus
 {
 
 	[ProtoContract]
+	[DataContract]
 	internal class RecordList<T> : IRecordList where T : Record
 	{
 
@@ -32,6 +32,7 @@ namespace Papyrus
 		/// All the non-append records contained in this list.
 		/// </summary>
 		[ProtoMember(1, OverwriteList = true)]
+		[DataMember]
 		public List<RecordContainer<T>> Records { get; protected set; }
 
 		public RecordList()

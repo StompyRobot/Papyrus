@@ -8,6 +8,7 @@
 using System;
 using System.ComponentModel;
 using System.Runtime.Serialization;
+using Newtonsoft.Json;
 using Papyrus.DataTypes;
 using ProtoBuf;
 
@@ -17,7 +18,7 @@ namespace Papyrus
 	/// <summary>
 	/// Abstract base class for all DataPointers
 	/// </summary>
-	[DataContract]
+	[JsonObject(MemberSerialization.OptIn, ItemTypeNameHandling = TypeNameHandling.All)]
 	public abstract class DataPointer// : IDataPointer
 	{
 
@@ -35,17 +36,20 @@ namespace Papyrus
 		/// <summary>
 		/// The index of the record in the source plugin
 		/// </summary>
+		[JsonProperty]
 		internal abstract uint Index { get; set; }
 
 		/// <summary>
 		/// Name of the plugin this record is resolved from.
 		/// </summary>
+		[JsonProperty]
 		public abstract string Source { get; set; }
 
 		/// <summary>
 		/// Name of the plugin this record resides in. Can be different from Source if this
 		/// record is the result of an override from a plugin.
 		/// </summary>
+		[JsonProperty]
 		public abstract string Plugin { get; set; }
 
 		/// <summary>
@@ -85,6 +89,7 @@ namespace Papyrus
 	/// <typeparam name="T">Type of record to point to</typeparam>
 	[ProtoContract]
 	[DataContract]
+	[JsonObject(MemberSerialization.OptIn, ItemTypeNameHandling = TypeNameHandling.All)]
 	[Editor("Papyrus.Design.Controls.DataPointerTypeEditor, Papyrus.Design", "Papyrus.Design.Controls.DataPointerTypeEditor, Papyrus.Design")]
 	public sealed class DataPointer<T> : DataPointer, IEquatable<DataPointer<T>> where T : Record
 	{
@@ -104,6 +109,7 @@ namespace Papyrus
 		/// </summary>
 		[ProtoMember(1)]
 		[DataMember]
+		[JsonProperty]
 		internal override uint Index { get; set; }
 
 		/// <summary>
@@ -111,6 +117,7 @@ namespace Papyrus
 		/// </summary>
 		[ProtoMember(2)]
 		[DataMember]
+		[JsonProperty]
 		public override string Source { get; set; }
 
 		/// <summary>
@@ -119,6 +126,7 @@ namespace Papyrus
 		/// </summary>
 		[ProtoMember(3)]
 		[DataMember]
+		[JsonProperty]
 		public override string Plugin { get; set; }
 
 		public T Value { get; private set; }
