@@ -6,7 +6,9 @@
  * of the license can be found at https://github.com/stompyrobot/Papyrus/wiki/License.
  */
 using System;
+using System.CodeDom.Compiler;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization;
@@ -311,65 +313,65 @@ namespace Papyrus
 		private const string SummaryBigSep = "-------------------";
 		private const string SummarySmallSep = "-------";
 
-		public string GetRecordSummary()
-		{
-			
-			StringBuilder builder = new StringBuilder();
-
-			builder.AppendFormat("Summary for {0}\n", this.Name);
-			builder.AppendLine(SummaryBigSep);
-
-			var records = GetAllRecords().GroupBy(p => p.Mode).ToDictionary(grouping => grouping.Key, grouping => grouping);
-
-			if(records.ContainsKey(RecordMode.Append)) {
-				PrintGroupInfo("Append", records[RecordMode.Append].ToList(), builder);
-			} else {
-				PrintGroupInfo("Append", new List<IRecordContainer>(), builder);
-			}
-
-			if (records.ContainsKey(RecordMode.Replace))
-			{
-				PrintGroupInfo("Replace", records[RecordMode.Replace].ToList(), builder, container =>
-				                                                                        {
-				                                                                        	return string.Format("Replace ({0}, {1}) with ({2}, {3})", container.Index, container.Destination, container.Index, container.Location);
-				                                                                        });
-			}
-			else
-			{
-				PrintGroupInfo("Replace", new List<IRecordContainer>(), builder);
-			}
-
-
-			return builder.ToString();
-
-		}
-
-		private void PrintGroupInfo(string title, List<IRecordContainer> records, StringBuilder builder, Func<IRecordContainer, string> record = null)
+		public void GetRecordSummary(TextWriter writer)
 		{
 
-			builder.AppendLine(SummaryBigSep);
-			builder.AppendFormat("{0}\n", title);
+			using (IndentedTextWriter iWriter = new IndentedTextWriter(writer)) {
+				
 
+				iWriter.WriteLine("Summary for {0}", Name);
+				iWriter.WriteLine();
 
-			foreach (var group in records.GroupBy(p => p.RecordType))
-			{
+				var records = GetAllRecords().GroupBy(p => p.Mode).ToDictionary(grouping => grouping.Key, grouping => grouping);
 
-				builder.AppendLine();
-				builder.AppendLine(group.Key.Name);
-				builder.AppendLine();
+				if (records.ContainsKey(RecordMode.Append)) {
+					PrintGroupInfo("Append", records[RecordMode.Append].ToList(), iWriter);
+				}
+				else {
+					PrintGroupInfo("Append", new List<IRecordContainer>(), iWriter);
+				}
 
-				foreach (var recordContainer in group)
-				{
-					if (record == null)
-						builder.AppendFormat("	{2} {0} ({1})\n", recordContainer.Index, recordContainer.GetRecord().ID, title);
-					else
-						builder.AppendFormat("	{0}\n", record(recordContainer));
+				if (records.ContainsKey(RecordMode.Replace)) {
+					PrintGroupInfo("Replace", records[RecordMode.Replace].ToList(), iWriter, container =>
+					{
+						return string.Format("Replace ({0}, {1}) with ({2}, {3})", container.Index, container.Destination, container.Index, container.Location);
+					});
+				}
+				else {
+					PrintGroupInfo("Replace", new List<IRecordContainer>(), iWriter);
 				}
 
 			}
 
-			builder.AppendLine(SummarySmallSep);
-			builder.AppendFormat("{0} Total\n",  records.Count());
+		}
+
+		private void PrintGroupInfo(string title, List<IRecordContainer> records, IndentedTextWriter writer, Func<IRecordContainer, string> record = null)
+		{
+
+			writer.WriteLine(title);
+			++writer.Indent;
+
+			foreach (var group in records.GroupBy(p => p.RecordType)) {
+
+				writer.WriteLine();
+				++writer.Indent;
+				writer.WriteLine(group.Key.Name);
+				++writer.Indent;
+
+				foreach (var recordContainer in group)
+				{
+					if (record == null)
+						writer.WriteLine("{2} {0} ({1})", recordContainer.Index, recordContainer.GetRecord().ID, title);
+					else
+						writer.WriteLine("{0}\n", record(recordContainer));
+				}
+
+				writer.Indent--;
+				writer.Indent--;
+
+			}
+			writer.WriteLine();
+			writer.WriteLine("{0} Total\n",  records.Count());
 
 		}
 

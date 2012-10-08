@@ -270,13 +270,16 @@ namespace Papyrus.Design
 
 		public string ActivePluginSummery()
 		{
-			return ActivePlugin.GetRecordSummary();
+
+			using (var writer = new StringWriter()) {
+
+				ActivePlugin.GetRecordSummary(writer);
+
+				return writer.ToString();
+
+			}
+
 		}
-		
-		/*public List<RecordList<T>> GetRecordsOfType<T>() where T : Record
-		{
-			
-		}*/
 
 
 
