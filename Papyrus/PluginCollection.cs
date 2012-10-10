@@ -107,31 +107,6 @@ namespace Papyrus
 
 			return new List<PluginHeader>(sorter.Sort());
 
-			var sortedPlugins = from plugin in plugins
-			                    orderby plugin.PluginDependencies
-			                    select plugin;
-
-
-			/*plugins.Sort((plugin1, plugin2) =>
-			             {
-							 Console.WriteLine("Comparing {0} -> {1}", plugin1.Name, plugin2.Name);
-			             	var p1Deps = plugin1.PluginDependencies;
-			             	var p2Deps = plugin2.PluginDependencies;
-							if (p2Deps.Contains(plugin1.Name))
-							 	return -1;
-							if (p1Deps.Contains(plugin2.Name))
-								return 1;
-
-							 // If the same, sort by number of dependencies, then by date
-
-							if (p1Deps.Count == p2Deps.Count) {
-								return plugin1.LastModified.CompareTo(plugin2.LastModified);
-							}
-
-			             	return p2Deps.Count.CompareTo(p1Deps.Count);
-			             });
-
-			return plugins;*/
 		} 
 
 	}
