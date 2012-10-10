@@ -76,6 +76,7 @@
     <Compile Include="Exceptions\DataPointerException.cs" />
     <Compile Include="Exceptions\DependencyException.cs" />
     <Compile Include="Exceptions\PluginLoadException.cs" />
+    <Compile Include="Exceptions\PluginSaveException.cs" />
     <Compile Include="PapyrusModuleAttribute.cs" />
     <Compile Include="PluginInfo.cs" />
     <Compile Include="PluginUtilities.cs" />
@@ -99,7 +100,9 @@
     <Compile Include="RecordPlugin.cs" />
     <Compile Include="RecordList.cs" />
     <Compile Include="RecordMode.cs" />
+    <Compile Include="Serialization\JsonPiecemealSerializer.cs" />
     <Compile Include="Serialization\JsonSerializer.cs" />
+    <Compile Include="Serialization\PiecemealSerializer.cs" />
     <Compile Include="Serialization\PluginHeader.cs" />
     <Compile Include="Serialization\SerializationHelper.cs" />
     <Compile Include="Serialization\Utilities\JsonRecordListDictionaryConverter.cs" />

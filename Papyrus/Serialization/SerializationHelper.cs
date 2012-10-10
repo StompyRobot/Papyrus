@@ -60,7 +60,7 @@ namespace Papyrus.Serialization
 
 			SerializationHelper.RegisterFileFormat<DataProtoSerializer>(DataProtoSerializer.Extension, "SpaceGame Plugin", "Binary data format contained in one file.", DataFormat.Proto);
 			//SerializationHelper.RegisterFileFormat<DataProtoSerializer>(DataXMLSerializer.Extension, "SpaceGame XML Plugin", "XML data format contained in one file.", DataFormat.XML);
-			SerializationHelper.RegisterFileFormat<DataProtoPiecemealSerializer>(DataProtoPiecemealSerializer.Extension, "SpaceGame Piecemeal Plugin", "Binary data format spread across many files.", DataFormat.ProtoPiecemeal);
+			SerializationHelper.RegisterFileFormat<DataProtoPiecemealSerializer>(DataProtoPiecemealSerializer.HeaderExtension, "SpaceGame Piecemeal Plugin", "Binary data format spread across many files.", DataFormat.ProtoPiecemeal);
 			//SerializationHelper.RegisterFileFormat<DataXMLPieacemealSerializer>(DataXMLPieacemealSerializer.Extension, "SpaceGame XML Piecemeal Plugin", "XML data format spread across many files. Recommended if using source control.", DataFormat.XMLPiecemeal);
 			SerializationHelper.RegisterFileFormat<JsonSerializer>(JsonSerializer.Extension, "SpaceGame JSON Plugin", "JSON data format contained in one file", DataFormat.JSON);
 
@@ -184,6 +184,25 @@ namespace Papyrus.Serialization
 			                                         };
 
 		}
+
+		/// <summary>
+		/// Returns an empty record plugin for a given header
+		/// </summary>
+		/// <param name="header"></param>
+		/// <returns></returns>
+		internal static RecordPlugin RecordPluginForHeader(PluginHeader header)
+		{
+			
+			return new RecordPlugin() {
+			                          	Author = header.Author,
+										Description = header.Description,
+										LastModified = header.LastModified,
+										ModuleDependencies = header.ModuleDependencies,
+										Name = header.Name,
+										SourceFile = header.SourceFile
+			                          };
+
+		} 
 
 	}
 
