@@ -45,12 +45,17 @@ namespace Papyrus.Serialization
 
 			var ser = GetPapyrusJsonSerializer();
 
+			var json = JObject.FromObject(plugin, ser);
+			// Insert dependencies into the json
+			var deps = JArray.FromObject(plugin.GetDependencies(), ser);
+			json.Add(new JProperty("PluginDependencies", deps));
+
 			using (var str = File.Open(filePath, FileMode.Create)) {
 				using (var strWriter = new StreamWriter(str)) {
 					using (var jsonWriter = new JsonTextWriter(strWriter)) {
-						jsonWriter.Formatting = Formatting.Indented;
 
-						ser.Serialize(jsonWriter, plugin);
+						jsonWriter.Formatting = Formatting.Indented;
+						json.WriteTo(jsonWriter, ser.Converters.ToArray());
 						
 					}
 				}
@@ -96,7 +101,8 @@ namespace Papyrus.Serialization
 			header.Author = (string) jObject.SelectToken("Author");
 			var moduleToken = (JArray)jObject.SelectToken("ModuleDependencies");
 			header.ModuleDependencies = moduleToken.Select(p => Guid.Parse((string) p)).ToList();
-			header.PluginDependencies = new List<string>();
+			var depsToken = jObject.SelectToken("PluginDependencies");
+			header.PluginDependencies = depsToken == null ? new List<string>() : depsToken.Select(p => (string)p).ToList();
 			header.SourceFile = fileName;
 			header.LastModified = (DateTime)jObject.SelectToken("LastModified");
 
