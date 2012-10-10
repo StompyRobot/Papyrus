@@ -11,6 +11,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using Papyrus.DataTypes;
+using Papyrus.Exceptions;
 using Papyrus.Serialization;
 
 namespace Papyrus
@@ -31,7 +32,7 @@ namespace Papyrus
 
 			var plugins = Serialization.SerializationHelper.PluginsInDirectory(path);
 
-			var pluginInstances = new List<RecordPlugin>(plugins.Count);
+			var pluginHeaders = new List<PluginHeader>(plugins.Count);
 
 			foreach (var pluginPath in plugins) {
 
@@ -39,9 +40,7 @@ namespace Papyrus
 
 				try {
 
-					pluginInstances.Add(ser.Deserialize(pluginPath));
-
-
+					pluginHeaders.Add(ser.ReadPluginHeader(pluginPath));
 
 				} catch(PluginLoadException) {
 					
@@ -54,13 +53,13 @@ namespace Papyrus
 
 			}
 
-			PluginCollection.SortDependencies(pluginInstances);
+			pluginHeaders = PluginCollection.SortDependencies(pluginHeaders);
 
-			foreach (var plugin in pluginInstances) {
+			foreach (var plugin in pluginHeaders) {
 
 				retList.Add(new PluginInfo()
 				{
-					Dependencies = plugin.GetDependencies(),
+					Dependencies = plugin.PluginDependencies,
 					Description = plugin.Description,
 					Name = plugin.Name,
 					IsValid = true,
@@ -112,7 +111,7 @@ namespace Papyrus
 			var plugin = ser.Deserialize(pluginInfo.SourceFile);
 
 			plugin.Author = pluginInfo.Author;
-			pluginInfo.Description = pluginInfo.Description;
+			plugin.Description = pluginInfo.Description;
 			plugin.LastModified = DateTime.UtcNow;
 
 			ser.Serialize(plugin, Path.GetDirectoryName(pluginInfo.SourceFile), true);

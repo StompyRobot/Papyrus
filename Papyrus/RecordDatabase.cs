@@ -12,7 +12,9 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using Papyrus.DataTypes;
+using Papyrus.Exceptions;
 using Papyrus.Serialization;
+using Papyrus.Serialization.Utilities;
 
 namespace Papyrus
 {
@@ -66,7 +68,7 @@ namespace Papyrus
 				LoadModuleAssembly(module);
 			}
 
-			Serialization.ProtoBufUtils.Initialise();
+			ProtoBufUtils.Initialise();
 
 		}
 

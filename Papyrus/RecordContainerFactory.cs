@@ -50,7 +50,7 @@ namespace Papyrus
 			var newContainer = new RecordContainer<T>();
 			var oldContainer = record.Container;
 
-			newContainer.Destination = oldContainer.Location;
+			newContainer.Destination = oldContainer.Destination;
 			newContainer.Index = oldContainer.Index;
 			newContainer.Mode = RecordMode.Replace;
 			newContainer.Location = plugin.Name;

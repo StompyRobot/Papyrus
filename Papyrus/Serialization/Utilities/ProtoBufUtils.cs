@@ -1,27 +1,29 @@
-﻿/*
- * Copyright © 2012 Stompy Robot (http://www.stompyrobot.co.uk) (https://github.com/stompyrobot)
+/*
+ * Copyright � 2012 Stompy Robot (http://www.stompyrobot.co.uk) (https://github.com/stompyrobot)
  * 
  * This program is licensed under the Microsoft Permissive License (Ms-PL). You should
  * have received a copy of the license along with the source code. If not, an online copy
  * of the license can be found at https://github.com/stompyrobot/Papyrus/wiki/License.
  */
+
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 using Papyrus.DataTypes;
 using ProtoBuf.Meta;
 
-namespace Papyrus.Serialization
+namespace Papyrus.Serialization.Utilities
 {
 
 	internal static class ProtoBufUtils
 	{
 		public static RuntimeTypeModel TypeModel;
 
-		private static List<Type> _handled; 
+		private static List<Type> _handled;
+
+		private static int _recordListFieldNo = 0;
 
 		public static void Initialise()
 		{
@@ -30,7 +32,7 @@ namespace Papyrus.Serialization
 			TypeModel = ProtoBuf.Meta.TypeModel.Create();
 
 			var types = RecordDatabase.GetRecordTypes();
-
+			_recordListFieldNo = 1;
 			var fieldNo = 50;
 
 			TagRecordClass(TypeModel, typeof(Record));
@@ -54,7 +56,7 @@ namespace Papyrus.Serialization
 		private static void ScanSubRecords(RuntimeTypeModel model, Assembly assembly)
 		{
 
-			var subRecords = assembly.GetTypes().Where(p => Attribute.IsDefined(p, typeof (SubRecordAttribute)));
+			var subRecords = assembly.GetTypes().Where(p => Attribute.IsDefined((MemberInfo) p, typeof (SubRecordAttribute)));
 
 			foreach (var subRecord in subRecords) {
 				TagRecordClass(model, subRecord);
@@ -107,6 +109,15 @@ namespace Papyrus.Serialization
 				}
 
 			}
+
+			// If it is a full record, create a record list type for it.
+			if (typeof(Record).IsAssignableFrom(type)) {
+
+				var recordListType = typeof (RecordList<>).MakeGenericType(type);
+
+				TypeModel.Add(typeof (IRecordList), true).AddSubType(++_recordListFieldNo, recordListType);
+			}
+
 
 
 		}

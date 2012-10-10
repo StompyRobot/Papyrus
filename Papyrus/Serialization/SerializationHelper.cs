@@ -17,13 +17,11 @@ namespace Papyrus.Serialization
 	public enum DataFormat
 	{
 		None,
-		XML,
 		Proto,
-
 		ProtoPiecemeal,
-		XMLPiecemeal,
 
-		JSON
+		JSON,
+		JSONPiecemeal
 	}
 
 	public class DataSerializerInfo
@@ -61,9 +59,9 @@ namespace Papyrus.Serialization
 		{
 
 			SerializationHelper.RegisterFileFormat<DataProtoSerializer>(DataProtoSerializer.Extension, "SpaceGame Plugin", "Binary data format contained in one file.", DataFormat.Proto);
-			SerializationHelper.RegisterFileFormat<DataProtoSerializer>(DataXMLSerializer.Extension, "SpaceGame XML Plugin", "XML data format contained in one file.", DataFormat.XML);
+			//SerializationHelper.RegisterFileFormat<DataProtoSerializer>(DataXMLSerializer.Extension, "SpaceGame XML Plugin", "XML data format contained in one file.", DataFormat.XML);
 			SerializationHelper.RegisterFileFormat<DataProtoPiecemealSerializer>(DataProtoPiecemealSerializer.Extension, "SpaceGame Piecemeal Plugin", "Binary data format spread across many files.", DataFormat.ProtoPiecemeal);
-			SerializationHelper.RegisterFileFormat<DataXMLPieacemealSerializer>(DataXMLPieacemealSerializer.Extension, "SpaceGame XML Piecemeal Plugin", "XML data format spread across many files. Recommended if using source control.", DataFormat.XMLPiecemeal);
+			//SerializationHelper.RegisterFileFormat<DataXMLPieacemealSerializer>(DataXMLPieacemealSerializer.Extension, "SpaceGame XML Piecemeal Plugin", "XML data format spread across many files. Recommended if using source control.", DataFormat.XMLPiecemeal);
 			SerializationHelper.RegisterFileFormat<JsonSerializer>(JsonSerializer.Extension, "SpaceGame JSON Plugin", "JSON data format contained in one file", DataFormat.JSON);
 
 		}
@@ -165,6 +163,27 @@ namespace Papyrus.Serialization
 			return plugins;
 
 		} 
+
+		/// <summary>
+		/// Returns a plugin header for the given record plugin
+		/// </summary>
+		/// <param name="plugin"></param>
+		/// <returns></returns>
+		internal static PluginHeader PluginHeaderForPlugin(RecordPlugin plugin)
+		{
+
+			return new PluginHeader() {
+			                                         	Author = plugin.Author,
+			                                         	Description = plugin.Description,
+			                                         	DirectoryName = null,
+			                                         	ModuleDependencies = new List<Guid>(plugin.ModuleDependencies),
+			                                         	Name = plugin.Name,
+														PluginDependencies = plugin.GetDependencies(),
+														LastModified = plugin.LastModified,
+														SourceFile = plugin.SourceFile
+			                                         };
+
+		}
 
 	}
 

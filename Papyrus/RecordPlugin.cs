@@ -15,6 +15,7 @@ using System.Runtime.Serialization;
 using System.Text;
 using Newtonsoft.Json;
 using Papyrus.DataTypes;
+using Papyrus.Serialization.Utilities;
 using ProtoBuf;
 
 namespace Papyrus
@@ -68,7 +69,7 @@ namespace Papyrus
 
 		[DataMember]
 		[ProtoMember(1, OverwriteList = true)]
-		[JsonConverter(typeof(Serialization.JsonRecordListDictionaryConverter))]
+		[JsonConverter(typeof(JsonRecordListDictionaryConverter))]
 		public Dictionary<string, IRecordList> RecordLists { get; set; }
 
 

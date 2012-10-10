@@ -29,6 +29,13 @@ namespace Papyrus.Serialization
 		/// <returns></returns>
 		RecordPlugin Deserialize(string fileName);
 
+		/// <summary>
+		/// Reads only the header from the specified file
+		/// </summary>
+		/// <param name="fileName"></param>
+		/// <returns></returns>
+		PluginHeader ReadPluginHeader(string fileName);
+
 	}
 
 }

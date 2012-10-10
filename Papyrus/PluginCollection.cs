@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Papyrus.Serialization;
 
 namespace Papyrus
 {
@@ -84,6 +85,53 @@ namespace Papyrus
 			             });
 
 			return plugins;
+		} 
+	
+		/// <summary>
+		/// Sorts a list of plugin headers so that dependencies are loaded before
+		/// plugins that depend on them.
+		/// </summary>
+		/// <param name="plugins"></param>
+		/// <returns></returns>
+		public static List<PluginHeader> SortDependencies(List<PluginHeader> plugins)
+		{
+
+			var sorter = new Utilities.DependencySorter<PluginHeader>();
+			sorter.AddObjects(plugins.ToArray());
+
+			foreach (var pluginHeader in plugins) {
+				
+				sorter.SetDependencies(pluginHeader, pluginHeader.PluginDependencies.Join(plugins, s => s, header => header.Name, (s, header) => header).ToArray());
+
+			}
+
+			return new List<PluginHeader>(sorter.Sort());
+
+			var sortedPlugins = from plugin in plugins
+			                    orderby plugin.PluginDependencies
+			                    select plugin;
+
+
+			/*plugins.Sort((plugin1, plugin2) =>
+			             {
+							 Console.WriteLine("Comparing {0} -> {1}", plugin1.Name, plugin2.Name);
+			             	var p1Deps = plugin1.PluginDependencies;
+			             	var p2Deps = plugin2.PluginDependencies;
+							if (p2Deps.Contains(plugin1.Name))
+							 	return -1;
+							if (p1Deps.Contains(plugin2.Name))
+								return 1;
+
+							 // If the same, sort by number of dependencies, then by date
+
+							if (p1Deps.Count == p2Deps.Count) {
+								return plugin1.LastModified.CompareTo(plugin2.LastModified);
+							}
+
+			             	return p2Deps.Count.CompareTo(p1Deps.Count);
+			             });
+
+			return plugins;*/
 		} 
 
 	}

@@ -75,7 +75,7 @@
     <Compile Include="DataTypes\AudioAsset.cs" />
     <Compile Include="Exceptions\DataPointerException.cs" />
     <Compile Include="Exceptions\DependencyException.cs" />
-    <Compile Include="Serialization\JsonRecordListDictionaryConverter.cs" />
+    <Compile Include="Exceptions\PluginLoadException.cs" />
     <Compile Include="PapyrusModuleAttribute.cs" />
     <Compile Include="PluginInfo.cs" />
     <Compile Include="PluginUtilities.cs" />
@@ -83,14 +83,12 @@
     <Compile Include="RecordContainerFactory.cs" />
     <Compile Include="RecordPropertyAttribute.cs" />
     <Compile Include="RecordType.cs" />
-    <Compile Include="Serialization\DataXMLPiecemealSerializer.cs" />
     <Compile Include="Serialization\DataProtoPiecemealSerializer.cs" />
     <Compile Include="Serialization\DataProtoSerializer.cs" />
     <Compile Include="DataTypes\Record.cs" />
     <Compile Include="DataTypes\Color.cs" />
     <Compile Include="DataTypes\Structs.cs" />
     <Compile Include="DataTypes\Vector2.cs" />
-    <Compile Include="Serialization\DataXMLSerializer.cs" />
     <Compile Include="Serialization\IDataSerializer.cs" />
     <Compile Include="IRecordContainer.cs" />
     <Compile Include="IRecordList.cs" />
@@ -102,10 +100,12 @@
     <Compile Include="RecordList.cs" />
     <Compile Include="RecordMode.cs" />
     <Compile Include="Serialization\JsonSerializer.cs" />
-    <Compile Include="Serialization\PapyrusJsonContractResolver.cs" />
-    <Compile Include="Serialization\PluginLoadException.cs" />
-    <Compile Include="Serialization\ProtoBufUtils.cs" />
+    <Compile Include="Serialization\PluginHeader.cs" />
     <Compile Include="Serialization\SerializationHelper.cs" />
+    <Compile Include="Serialization\Utilities\JsonRecordListDictionaryConverter.cs" />
+    <Compile Include="Serialization\Utilities\PapyrusJsonContractResolver.cs" />
+    <Compile Include="Serialization\Utilities\ProtoBufUtils.cs" />
+    <Compile Include="Utilities\DependencySorter.cs" />
     <Compile Include="Utils.cs" />
     <Compile Include="ViewModel.cs" />
   </ItemGroup>

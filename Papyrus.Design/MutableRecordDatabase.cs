@@ -12,6 +12,7 @@ using System.Linq;
 using System.Text;
 using Papyrus.DataTypes;
 using Papyrus.Exceptions;
+using Papyrus.Serialization.Utilities;
 
 namespace Papyrus.Design
 {
@@ -182,7 +183,7 @@ namespace Papyrus.Design
 
 					// Overwrite the old records values with our own
 					oldRecord.ReadOnly = false;
-					Serialization.ProtoBufUtils.OverWrite(oldRecord, record);
+					ProtoBufUtils.OverWrite(oldRecord, record);
 					oldRecord.ResolveDependencies(this);
 					oldRecord.ReadOnly = true;
 
@@ -200,7 +201,7 @@ namespace Papyrus.Design
 							this.GetRecordsOfType(record.GetType()).Single(
 								p => p.Container.Destination == container.Destination && p.Container.Index == container.Index);
 
-						if (RecordRemoved != null) {
+						if(RecordRemoved != null) {
 							RecordRemoved(this, new RecordEventArgs(overwriteRecord));
 						}
 

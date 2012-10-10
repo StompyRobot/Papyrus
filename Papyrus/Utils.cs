@@ -12,6 +12,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using Papyrus.DataTypes;
+using Papyrus.Serialization.Utilities;
 
 namespace Papyrus
 {
@@ -36,7 +37,7 @@ namespace Papyrus
 				throw new ArgumentException("The type must be a protocontract.", "source");
 			}*/
 
-			var clone = Serialization.ProtoBufUtils.TypeModel.DeepClone(source) as T;
+			var clone = ProtoBufUtils.TypeModel.DeepClone(source) as T;
 
 			clone.ResolveDependencies((source as Record).Database);
 

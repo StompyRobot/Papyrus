@@ -5,7 +5,9 @@ using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Serialization;
+using Papyrus.Serialization.Utilities;
 
 namespace Papyrus.Serialization
 {
@@ -78,6 +80,27 @@ namespace Papyrus.Serialization
 			plugin.AfterDeserialization();
 
 			return plugin;
+
+		}
+
+		public PluginHeader ReadPluginHeader(string fileName)
+		{
+
+			JObject jObject = JObject.Parse(File.ReadAllText(fileName));
+
+			PluginHeader header = new PluginHeader();
+
+			header.Name = (string)jObject.SelectToken("Name");
+			header.Description = (string) jObject.SelectToken("Description");
+			header.DirectoryName = null;
+			header.Author = (string) jObject.SelectToken("Author");
+			var moduleToken = (JArray)jObject.SelectToken("ModuleDependencies");
+			header.ModuleDependencies = moduleToken.Select(p => Guid.Parse((string) p)).ToList();
+			header.PluginDependencies = new List<string>();
+			header.SourceFile = fileName;
+			header.LastModified = (DateTime)jObject.SelectToken("LastModified");
+
+			return header;
 
 		}
 

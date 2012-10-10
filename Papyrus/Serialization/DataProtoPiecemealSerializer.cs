@@ -12,32 +12,11 @@ using System.Linq;
 using System.Reflection;
 using System.Threading;
 using Papyrus.DataTypes;
-using ProtoBuf;
+using Papyrus.Exceptions;
+using Papyrus.Serialization.Utilities;
 
 namespace Papyrus.Serialization
 {
-
-	[ProtoContract]
-	struct ProtoPiecemealHeader
-	{
-
-		[ProtoMember(1)]
-		public string Name;
-
-		[ProtoMember(2)]
-		public string DirectoryName;
-
-		[ProtoMember(3)]
-		public string Description;
-
-		[ProtoMember(4)]
-		public string Author;
-
-		[ProtoMember(5)]
-		public List<Guid> ModuleDependencies;
-
-	}
-
 	internal class DataProtoPiecemealSerializer : IDataSerializer
 	{
 
@@ -50,12 +29,6 @@ namespace Papyrus.Serialization
 
 		private static MethodInfo _serializeRecordListMethod;
 		private static MethodInfo _deserializeRecordListMethod;
-
-		public DataProtoPiecemealSerializer()
-		{
-			// Initialise any protobuffer model stuff.
-			DataProtoSerializer.InitProtoSystem();
-		}
 
 		public string Serialize(RecordPlugin recordPlugin, string directory, bool overwrite)
 		{
@@ -81,8 +54,8 @@ namespace Papyrus.Serialization
 
 				}
 
-				var header = new ProtoPiecemealHeader()
-				             {Name = recordPlugin.Name, DirectoryName = recordPlugin.Name, Description = recordPlugin.Description, Author = recordPlugin.Author, ModuleDependencies = recordPlugin.ModuleDependencies};
+				var header = SerializationHelper.PluginHeaderForPlugin(recordPlugin);
+				header.DirectoryName = header.Name;
 
 				using(var headerFile = File.Open(headerPath, FileMode.Create)) {
 					ProtoBuf.Serializer.Serialize(headerFile, header);
@@ -123,10 +96,10 @@ namespace Papyrus.Serialization
 
 		public RecordPlugin Deserialize(string fileName)
 		{
-			ProtoPiecemealHeader header;
+			PluginHeader header;
 
 			using(var headerFile = File.OpenRead(fileName)) {
-				header = ProtoBuf.Serializer.Deserialize<ProtoPiecemealHeader>(headerFile);
+				header = ProtoBuf.Serializer.Deserialize<PluginHeader>(headerFile);
 			}
 
 			var pluginDir = Path.Combine(Path.GetDirectoryName(fileName), header.DirectoryName);
@@ -177,6 +150,18 @@ namespace Papyrus.Serialization
 			plugin.AfterDeserialization();
 
 			return plugin;
+
+		}
+
+
+		public PluginHeader ReadPluginHeader(string fileName)
+		{
+
+			using(var file = File.OpenRead(fileName)) {
+				var header = (PluginHeader)ProtoBufUtils.TypeModel.Deserialize(file, null, typeof (PluginHeader));
+				header.SourceFile = fileName;
+				return header;
+			}
 
 		}
 

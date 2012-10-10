@@ -11,6 +11,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using Papyrus.DataTypes;
+using Papyrus.Serialization.Utilities;
 
 namespace Papyrus.Design
 {
@@ -68,13 +69,13 @@ namespace Papyrus.Design
 
 			using (MemoryStream str = new MemoryStream()) {
 
-				Serialization.ProtoBufUtils.TypeModel.Serialize(str, record);
+				ProtoBufUtils.TypeModel.Serialize(str, record);
 
 				var recordBytes = str.GetBuffer();
 
 				using (MemoryStream str2 = new MemoryStream()) {
 
-					Serialization.ProtoBufUtils.TypeModel.Serialize(str2, otherRecord);
+					ProtoBufUtils.TypeModel.Serialize(str2, otherRecord);
 
 					var otherRecordBtyes = str2.GetBuffer();
 
@@ -99,7 +100,7 @@ namespace Papyrus.Design
 
 			var newRecord = database.NewRecord(record.GetType());
 
-			Serialization.ProtoBufUtils.OverWrite(newRecord, record);
+			ProtoBufUtils.OverWrite(newRecord, record);
 
 			return newRecord;
 

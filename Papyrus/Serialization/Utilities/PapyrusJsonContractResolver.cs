@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
+using System;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
-namespace Papyrus.Serialization
+namespace Papyrus.Serialization.Utilities
 {
 	class PapyrusJsonContractResolver : Newtonsoft.Json.Serialization.DefaultContractResolver
 	{
