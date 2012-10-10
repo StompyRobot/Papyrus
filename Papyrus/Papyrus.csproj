@@ -106,6 +106,7 @@
     <Compile Include="Serialization\PluginHeader.cs" />
     <Compile Include="Serialization\SerializationHelper.cs" />
     <Compile Include="Serialization\Utilities\JsonRecordListDictionaryConverter.cs" />
+    <Compile Include="Serialization\Utilities\JsonUtilities.cs" />
     <Compile Include="Serialization\Utilities\PapyrusJsonContractResolver.cs" />
     <Compile Include="Serialization\Utilities\ProtoBufUtils.cs" />
     <Compile Include="Utilities\DependencySorter.cs" />

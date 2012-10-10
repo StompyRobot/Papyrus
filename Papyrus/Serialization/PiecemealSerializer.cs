@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 using System.Threading;
 using Papyrus.DataTypes;
 using Papyrus.Exceptions;
@@ -71,9 +69,9 @@ namespace Papyrus.Serialization
 				header.DirectoryName = header.Name;
 
 				using (var headerFile = File.Open(headerPath, FileMode.Create)) {
-					ProtoBuf.Serializer.Serialize(headerFile, header);
+					WriteHeader(header, headerFile);
 				}
-
+				
 
 			}
 			catch (Exception) {

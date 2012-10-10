@@ -17,15 +17,6 @@ namespace Papyrus.Serialization
 
 		public static readonly string Extension = "jpp";
 
-		public static Newtonsoft.Json.JsonSerializer GetPapyrusJsonSerializer()
-		{
-			var ser = new Newtonsoft.Json.JsonSerializer();
-			ser.TypeNameHandling = TypeNameHandling.Auto;
-			ser.ContractResolver = new PapyrusJsonContractResolver();
-			ser.Converters.Add(new StringEnumConverter());
-			return ser;
-		}
-
 		string IDataSerializer.Extension
 		{
 			get { return JsonSerializer.Extension; }
@@ -43,7 +34,7 @@ namespace Papyrus.Serialization
 				throw new Exception("File already exists and overwrite is specified as false.");
 			}
 
-			var ser = GetPapyrusJsonSerializer();
+			var ser = JsonUtilities.GetPapyrusJsonSerializer();
 
 			var json = JObject.FromObject(plugin, ser);
 			// Insert dependencies into the json
@@ -68,7 +59,7 @@ namespace Papyrus.Serialization
 		public RecordPlugin Deserialize(string fileName)
 		{
 
-			var ser = GetPapyrusJsonSerializer();
+			var ser = JsonUtilities.GetPapyrusJsonSerializer();
 
 			RecordPlugin plugin;
 

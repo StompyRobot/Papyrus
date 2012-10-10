@@ -20,8 +20,8 @@ namespace Papyrus.Serialization
 		Proto,
 		ProtoPiecemeal,
 
-		JSON,
-		JSONPiecemeal
+		Json,
+		JsonPiecemeal
 	}
 
 	public class DataSerializerInfo
@@ -58,11 +58,11 @@ namespace Papyrus.Serialization
 		static SerializationHelper()
 		{
 
-			SerializationHelper.RegisterFileFormat<DataProtoSerializer>(DataProtoSerializer.Extension, "SpaceGame Plugin", "Binary data format contained in one file.", DataFormat.Proto);
-			//SerializationHelper.RegisterFileFormat<DataProtoSerializer>(DataXMLSerializer.Extension, "SpaceGame XML Plugin", "XML data format contained in one file.", DataFormat.XML);
-			SerializationHelper.RegisterFileFormat<DataProtoPiecemealSerializer>(DataProtoPiecemealSerializer.HeaderExtension, "SpaceGame Piecemeal Plugin", "Binary data format spread across many files.", DataFormat.ProtoPiecemeal);
-			//SerializationHelper.RegisterFileFormat<DataXMLPieacemealSerializer>(DataXMLPieacemealSerializer.Extension, "SpaceGame XML Piecemeal Plugin", "XML data format spread across many files. Recommended if using source control.", DataFormat.XMLPiecemeal);
-			SerializationHelper.RegisterFileFormat<JsonSerializer>(JsonSerializer.Extension, "SpaceGame JSON Plugin", "JSON data format contained in one file", DataFormat.JSON);
+			SerializationHelper.RegisterFileFormat<DataProtoSerializer>(DataProtoSerializer.Extension, "Binary Plugin", "Binary data format contained in one file. (High performance; Recommended distribution format; Poor for source control.)", DataFormat.Proto);
+			SerializationHelper.RegisterFileFormat<DataProtoPiecemealSerializer>(DataProtoPiecemealSerializer.HeaderExtension, "Binary Piecemeal Plugin", "Binary data format spread across many files. (Medium performace; Better than nothing for source control.)", DataFormat.ProtoPiecemeal);
+			
+			SerializationHelper.RegisterFileFormat<JsonSerializer>(JsonSerializer.Extension, "JSON Plugin", "JSON data format contained in one file (Low performance; useful for source control.)", DataFormat.Json);
+			SerializationHelper.RegisterFileFormat<JsonPiecemealSerializer>(JsonPiecemealSerializer.HeaderExtension, "JSON Piecemeal Plugin", "JSON data format spread over many files. (Least performace; excellent for source control.)", DataFormat.JsonPiecemeal);
 
 		}
 
