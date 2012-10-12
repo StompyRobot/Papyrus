@@ -10,4 +10,7 @@ TestResults
 *.user
 
 # Resharper files
+
 _Resharper.*
+*.suo
+packages
