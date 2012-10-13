@@ -13,7 +13,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Papyrus")]
-[assembly: AssemblyProduct("Papyrys")]
+[assembly: AssemblyProduct("Papyrus")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyCompany("Stompy Robot")]
 [assembly: AssemblyCopyright("Copyright ©  2012")]
