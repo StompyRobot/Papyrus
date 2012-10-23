@@ -91,7 +91,7 @@ namespace Papyrus.Serialization
 			header.DirectoryName = null;
 			header.Author = (string) jObject.SelectToken("Author");
 			var moduleToken = (JArray)jObject.SelectToken("ModuleDependencies");
-			header.ModuleDependencies = moduleToken.Select(p => Guid.Parse((string) p)).ToList();
+			header.ModuleDependencies = moduleToken.Select(p => new Guid((string) p)).ToList();
 			var depsToken = jObject.SelectToken("PluginDependencies");
 			header.PluginDependencies = depsToken == null ? new List<string>() : depsToken.Select(p => (string)p).ToList();
 			header.SourceFile = fileName;

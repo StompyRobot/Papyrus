@@ -78,13 +78,13 @@ namespace Papyrus
 			var dataPointers = GetDataPointers();
 
 			foreach (var dataPointer in dataPointers) {
-				if (dataPointer != null && !string.IsNullOrWhiteSpace(dataPointer.Source) && !sources.Contains(dataPointer.Source))
+				if (dataPointer != null && !string.IsNullOrEmpty(dataPointer.Source) && !sources.Contains(dataPointer.Source))
 					sources.Add(dataPointer.Source);
 			}
 
 			foreach (var recordContainer in Records) {
 
-				if (!string.IsNullOrWhiteSpace(recordContainer.Destination))
+				if (!string.IsNullOrEmpty(recordContainer.Destination))
 					sources.Add(recordContainer.Destination);
 
 			}

@@ -220,7 +220,7 @@ namespace Papyrus
 
 		public override bool IsEmpty
 		{
-			get { return string.IsNullOrWhiteSpace(Source) || string.IsNullOrWhiteSpace(Plugin); }
+			get { return string.IsNullOrEmpty(Source) || string.IsNullOrEmpty(Plugin); }
 		}
 
 

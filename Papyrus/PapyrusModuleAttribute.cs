@@ -28,7 +28,8 @@ namespace Papyrus
 			Debug.Assert(typeof(Record).IsAssignableFrom(rootRecord));
 
 			RootRecord = rootRecord;
-			ID = Guid.Parse(guid);
+			
+			ID = new Guid(guid);
 
 		}
 

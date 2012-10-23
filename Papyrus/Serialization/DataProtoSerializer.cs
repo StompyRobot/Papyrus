@@ -11,6 +11,7 @@ using System.IO;
 using System.Reflection;
 using Papyrus.DataTypes;
 using Papyrus.Exceptions;
+using Papyrus.Extensions;
 using Papyrus.Serialization.Utilities;
 using ProtoBuf;
 using ProtoBuf.Meta;
