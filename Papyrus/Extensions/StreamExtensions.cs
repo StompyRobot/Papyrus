@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Papyrus.Extensions
 {
-	public static class SteamExtensions
+	public static class StreamExtensions
 	{
 		// Only useful before .NET 4
 		public static void CopyTo(this Stream input, Stream output)

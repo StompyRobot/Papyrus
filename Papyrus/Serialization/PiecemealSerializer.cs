@@ -73,14 +73,13 @@ namespace Papyrus.Serialization
 				}
 				
 
-			}
-			catch (Exception) {
+			} catch (Exception e) {
 
 				error = true;
-				throw;
 
-			}
-			finally {
+				throw new PluginSaveException("Error saving plugin.", e);
+
+			} finally {
 
 				// Clean up our mess if there was an error
 				if (error) {
@@ -111,17 +110,25 @@ namespace Papyrus.Serialization
 		public RecordPlugin Deserialize(string fileName)
 		{
 
-			PluginHeader header = ReadPluginHeader(fileName);
+			try {
 
-			RecordPlugin plugin = SerializationHelper.RecordPluginForHeader(header);
+				PluginHeader header = ReadPluginHeader(fileName);
 
-			var rootPath = Path.Combine(Path.GetDirectoryName(fileName), header.DirectoryName);
+				RecordPlugin plugin = SerializationHelper.RecordPluginForHeader(header);
 
-			IterateRootDirectory(rootPath, plugin);
+				var rootPath = Path.Combine(Path.GetDirectoryName(fileName), header.DirectoryName);
 
-			plugin.AfterDeserialization();
+				IterateRootDirectory(rootPath, plugin);
 
-			return plugin;
+				plugin.AfterDeserialization();
+
+				return plugin;
+
+			}
+			catch (Exception e)
+			{
+				throw new PluginLoadException("Error loading plugin", e);
+			}
 
 		}
 

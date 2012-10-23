@@ -70,7 +70,7 @@
     <Compile Include="Exceptions\DependencyException.cs" />
     <Compile Include="Exceptions\PluginLoadException.cs" />
     <Compile Include="Exceptions\PluginSaveException.cs" />
-    <Compile Include="Extensions\SteamExtensions.cs" />
+    <Compile Include="Extensions\StreamExtensions.cs" />
     <Compile Include="PapyrusModuleAttribute.cs" />
     <Compile Include="PluginInfo.cs" />
     <Compile Include="PluginUtilities.cs" />
