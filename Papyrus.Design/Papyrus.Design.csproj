@@ -73,7 +73,6 @@
     <Compile Include="RecordEventArgs.cs" />
     <Compile Include="RecordExtensions.cs" />
     <Compile Include="RecordConverters.cs" />
-    <Compile Include="Vector2TypeConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

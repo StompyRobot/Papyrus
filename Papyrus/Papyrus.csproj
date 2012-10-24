@@ -63,6 +63,8 @@
   <ItemGroup>
     <Compile Include="Attributes.cs" />
     <Compile Include="ChildRecordAttribute.cs" />
+    <Compile Include="Converters\ColorTypeConverter.cs" />
+    <Compile Include="Converters\Vector2TypeConverter.cs" />
     <Compile Include="DataPointer.cs" />
     <Compile Include="DataPointerList.cs" />
     <Compile Include="DataTypes\AudioAsset.cs" />
@@ -111,6 +113,7 @@
     <None Include="packages.config" />
     <None Include="Papyrus.licenseheader" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <!--
