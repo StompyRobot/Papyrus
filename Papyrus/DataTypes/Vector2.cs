@@ -15,7 +15,7 @@ using ProtoBuf;
 namespace Papyrus.DataTypes
 {
 	[ProtoContract]
-	[TypeConverter("Papyrus.Design.Vector2TypeConverter, Papyrus.Design")]
+	[TypeConverter(typeof(Converters.Vector2TypeConverter))]
 	public struct Vector2
 	{
 

@@ -16,7 +16,7 @@ namespace Papyrus.DataTypes
 
 	//[Serializable]
 	[ProtoBuf.ProtoContract]
-	[TypeConverter("Papyrus.Design.ColorTypeConverter, Papyrus.Design")]
+	[TypeConverter("Papyrus.Converters.ColorTypeConverter, Papyrus")]
 	//[TypeConverter(typeof(ExpandableObjectConverter))]
 	public class Color
 	{

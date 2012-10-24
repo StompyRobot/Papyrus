@@ -63,6 +63,8 @@
   <ItemGroup>
     <Compile Include="Attributes.cs" />
     <Compile Include="ChildRecordAttribute.cs" />
+    <Compile Include="Converters\ColorTypeConverter.cs" />
+    <Compile Include="Converters\Vector2TypeConverter.cs" />
     <Compile Include="DataPointer.cs" />
     <Compile Include="DataPointerList.cs" />
     <Compile Include="DataTypes\AudioAsset.cs" />
@@ -70,7 +72,7 @@
     <Compile Include="Exceptions\DependencyException.cs" />
     <Compile Include="Exceptions\PluginLoadException.cs" />
     <Compile Include="Exceptions\PluginSaveException.cs" />
-    <Compile Include="Extensions\SteamExtensions.cs" />
+    <Compile Include="Extensions\StreamExtensions.cs" />
     <Compile Include="PapyrusModuleAttribute.cs" />
     <Compile Include="PluginInfo.cs" />
     <Compile Include="PluginUtilities.cs" />
@@ -111,6 +113,7 @@
     <None Include="packages.config" />
     <None Include="Papyrus.licenseheader" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <!--
