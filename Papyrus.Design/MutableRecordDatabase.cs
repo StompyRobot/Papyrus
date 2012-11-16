@@ -238,6 +238,24 @@ namespace Papyrus.Design
 		}
 
 		/// <summary>
+		/// WARNING. This method can BREAK THINGS. Only delete a record if you are SURE it is not being used from any other
+		/// record.
+		/// </summary>
+		/// <param name="record"></param>
+		public void DeleteRecord(Record record)
+		{
+			
+			if(!record.InActivePlugin())
+				throw new InvalidOperationException("Cannot delete a record not located in the active plugin.");
+			
+			ActivePlugin.RemoveRecord(record.Container);
+
+			RefreshRecordTable();
+			NeedsSaving = true;
+
+		}
+
+		/// <summary>
 		/// Creates a new record in the plugin. Is not actually added until SaveRecord is called with this record.
 		/// </summary>
 		/// <param name="type"></param>
@@ -281,8 +299,6 @@ namespace Papyrus.Design
 			}
 
 		}
-
-
 
 	}
 }

@@ -78,6 +78,9 @@ namespace Papyrus
 		/// </summary>
 		public string SourceFile { get; set; }
 
+		private static MethodInfo _addRecordMethodInfo;
+		private static MethodInfo _removeRecordMethodInfo;
+
 		public RecordPlugin()
 		{
 			RecordLists = new Dictionary<string, IRecordList>();
@@ -199,7 +202,6 @@ namespace Papyrus
 
 		}
 
-		private static MethodInfo _addRecordMethodInfo;
 
 		/// <summary>
 		/// Adds a record to this plugin.
@@ -213,6 +215,7 @@ namespace Papyrus
 
 			var method = _addRecordMethodInfo.MakeGenericMethod(container.RecordType);
 			method.Invoke(this, new object[] {container});
+
 		}
 
 		/// <summary>
@@ -242,6 +245,38 @@ namespace Papyrus
 			}
 
 			recordList.Records.Add(container);
+
+		}
+
+		/// <summary>
+		/// Removes a record from this plugin.
+		/// </summary>
+		/// <param name="container"></param>
+		public void RemoveRecord(IRecordContainer container)
+		{
+
+			if (_removeRecordMethodInfo == null)
+				_removeRecordMethodInfo = GetType().GetMethods().Single(p => p.Name == "RemoveRecord" && p.IsGenericMethod);
+
+			var method = _removeRecordMethodInfo.MakeGenericMethod(container.RecordType);
+			method.Invoke(this, new object[] { container });
+
+		}
+
+		/// <summary>
+		/// Removes a record from this plugin.
+		/// </summary>
+		/// <typeparam name="T"></typeparam>
+		/// <param name="container"></param>
+		public void RemoveRecord<T>(RecordContainer<T> container) where T : Record
+		{
+
+			var recordList = GetRecordList<T>();
+
+			if (!recordList.Records.Contains(container))
+				return;
+
+			recordList.Records.Remove(container);
 
 		}
 

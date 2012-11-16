@@ -80,7 +80,7 @@ namespace Papyrus.DataTypes
 		{
 
 			if(string.IsNullOrEmpty(Container.Location) || Container.Index < 0)
-				throw new InvalidOperationException("Attempted to get a data pointer to an unsaved record.");
+				throw new InvalidOperationException("Attempted to get a data pointer to a record which has never been saved.");
 
 			var newPointer =  new DataPointer<T>(Container.Index, Container.Destination, Container.Location);
 

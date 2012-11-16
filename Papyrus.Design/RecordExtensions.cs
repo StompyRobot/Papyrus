@@ -43,11 +43,22 @@ namespace Papyrus.Design
 		}
 
 		/// <summary>
+		/// Returns true if this record can be pointed to. Generally returns false if a record
+		/// has not been saved at least once.
+		/// </summary>
+		/// <param name="record"></param>
+		/// <returns></returns>
+		public static bool CanGetDataPointer(this Record record)
+		{
+			return !string.IsNullOrWhiteSpace(record.Container.Location) && record.Container.Index >= 0;
+		}
+
+		/// <summary>
 		/// Returns true if this record is in the current active plugin (plugin being edited).
 		/// </summary>
 		/// <param name="record"></param>
 		/// <returns>True if record is located in the active plugin.</returns>
-		public static bool IsInActivePlugin(this Record record)
+		public static bool InActivePlugin(this Record record)
 		{
 
 			if(!(record.Database is MutableRecordDatabase))
