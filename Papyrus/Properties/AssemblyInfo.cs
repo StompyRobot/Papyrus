@@ -23,6 +23,7 @@ using System.Runtime.Versioning;
 
 // Allow the design assembly to see our privates (hoho)
 [assembly: InternalsVisibleTo("Papyrus.Design", AllInternalsVisible = true)]
+[assembly: InternalsVisibleTo("Papyrus.Design.Controls", AllInternalsVisible = true)]
 //[assembly: InternalsVisibleTo("Newtonsoft.Json", AllInternalsVisible = true)]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
