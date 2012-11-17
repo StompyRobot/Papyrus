@@ -91,7 +91,7 @@ namespace Papyrus
 	[ProtoContract]
 	[DataContract]
 	[JsonObject(MemberSerialization.OptIn, ItemTypeNameHandling = TypeNameHandling.All)]
-	[Editor("Papyrus.Design.Controls.DataPointerTypeEditor, Papyrus.Design", "Papyrus.Design.Controls.DataPointerTypeEditor, Papyrus.Design")]
+	[Editor("Papyrus.Design.Controls.DataPointerTypeEditor, Papyrus.Design.Controls", "Papyrus.Design.Controls.DataPointerTypeEditor, Papyrus.Design.Controls")]
 	public sealed class DataPointer<T> : DataPointer, IEquatable<DataPointer<T>> where T : Record
 	{
 

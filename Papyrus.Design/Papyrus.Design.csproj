@@ -10,10 +10,11 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Papyrus.Design</RootNamespace>
     <AssemblyName>Papyrus.Design</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -41,32 +42,12 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="WindowsBase" />
-    <Reference Include="WPFToolkit.Extended, Version=1.6.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>$(SolutionDir)\packages\Extended.Wpf.Toolkit.1.6.0\lib\net40\WPFToolkit.Extended.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ColorTypeConverter.cs" />
-    <Compile Include="Controls\DataPointerListEditor.xaml.cs">
-      <DependentUpon>DataPointerListEditor.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\DataPointerListTypeEditor.xaml.cs">
-      <DependentUpon>DataPointerListTypeEditor.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\DataPointerPicker.xaml.cs">
-      <DependentUpon>DataPointerPicker.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\DataPointerTypeEditor.xaml.cs">
-      <DependentUpon>DataPointerTypeEditor.xaml</DependentUpon>
-    </Compile>
     <Compile Include="DataPointerConverter.cs" />
     <Compile Include="DataPointerUtils.cs" />
     <Compile Include="MutableRecordDatabase.cs" />
@@ -80,24 +61,6 @@
       <Project>{8B4C5B15-955D-47FE-A64E-F1457286786C}</Project>
       <Name>Papyrus</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Page Include="Controls\DataPointerListEditor.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Controls\DataPointerListTypeEditor.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Controls\DataPointerPicker.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Controls\DataPointerTypeEditor.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

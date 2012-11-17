@@ -50,7 +50,7 @@ namespace Papyrus.Design
 		/// <returns></returns>
 		public static bool CanGetDataPointer(this Record record)
 		{
-			return !string.IsNullOrWhiteSpace(record.Container.Location) && record.Container.Index >= 0;
+			return !string.IsNullOrEmpty(record.Container.Location) && record.Container.Index >= 0;
 		}
 
 		/// <summary>
