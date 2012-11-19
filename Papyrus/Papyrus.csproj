@@ -68,6 +68,10 @@
     <Compile Include="DataPointer.cs" />
     <Compile Include="DataPointerList.cs" />
     <Compile Include="DataTypes\AudioAsset.cs" />
+    <Compile Include="Design\DataPointerUtils.cs" />
+    <Compile Include="Design\MutableRecordDatabase.cs" />
+    <Compile Include="Design\RecordEventArgs.cs" />
+    <Compile Include="Design\RecordExtensions.cs" />
     <Compile Include="Exceptions\DataPointerException.cs" />
     <Compile Include="Exceptions\DependencyException.cs" />
     <Compile Include="Exceptions\PluginLoadException.cs" />

@@ -47,10 +47,6 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataPointerUtils.cs" />
-    <Compile Include="MutableRecordDatabase.cs" />
-    <Compile Include="RecordEventArgs.cs" />
-    <Compile Include="RecordExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

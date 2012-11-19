@@ -334,6 +334,9 @@ namespace Papyrus
 
 				_recordTypes.Add(type);
 
+				// Attempt to sort by name so it is a deterministic order across platforms
+				_recordTypes.Sort((t1, t2) => t1.Type.Name.CompareTo(t2.Type.Name));
+
 			}
 
 			RootRecords.Add(module.RootRecord);

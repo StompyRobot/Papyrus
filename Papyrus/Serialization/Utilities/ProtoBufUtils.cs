@@ -17,7 +17,7 @@ using ProtoBuf.Meta;
 namespace Papyrus.Serialization.Utilities
 {
 
-	internal static class ProtoBufUtils
+	public static class ProtoBufUtils
 	{
 		public static RuntimeTypeModel TypeModel;
 

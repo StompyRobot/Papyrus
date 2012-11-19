@@ -84,7 +84,7 @@ namespace Papyrus.Serialization
 
 			} catch(Exception e) {
 
-				throw new PluginLoadException("Could not load plugin (" + fileName + ")", e);
+				throw new PluginLoadException("Error loading plugin (" + fileName + ")", e);
 
 			}
 
@@ -107,7 +107,7 @@ namespace Papyrus.Serialization
 			}
 			catch (Exception e) {
 
-				throw new PluginLoadException("Could not load plugin (" + fileName + ")", e);
+				throw new PluginLoadException("Error loading plugin (" + fileName + ")", e);
 
 			}
 

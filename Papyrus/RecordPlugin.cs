@@ -195,6 +195,8 @@ namespace Papyrus
 				dependencies.AddRange(recordList.Value.GetDependencies().Except(dependencies));
 			}
 
+			dependencies = dependencies.Distinct().ToList();
+			
 			// Remove ourselves from the dependencies
 			dependencies.Remove(Name);
 
