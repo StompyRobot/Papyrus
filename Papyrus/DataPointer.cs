@@ -38,20 +38,20 @@ namespace Papyrus
 		/// The index of the record in the source plugin
 		/// </summary>
 		[JsonProperty]
-		internal abstract uint Index { get; set; }
+		internal abstract int Index { get; set; }
 
 		/// <summary>
 		/// Name of the plugin this record is resolved from.
 		/// </summary>
 		[JsonProperty]
-		public abstract string Source { get; set; }
+		public abstract string Source { get; internal set; }
 
 		/// <summary>
 		/// Name of the plugin this record resides in. Can be different from Source if this
 		/// record is the result of an override from a plugin.
 		/// </summary>
 		[JsonProperty]
-		public abstract string Plugin { get; set; }
+		public abstract string Plugin { get; internal set; }
 
 		/// <summary>
 		/// True if this pointer has a valid value
@@ -111,7 +111,7 @@ namespace Papyrus
 		[ProtoMember(1)]
 		[DataMember]
 		[JsonProperty]
-		internal override uint Index { get; set; }
+		internal override int Index { get; set; }
 
 		/// <summary>
 		/// The plugin that the record is resolved from.
@@ -119,7 +119,7 @@ namespace Papyrus
 		[ProtoMember(2)]
 		[DataMember]
 		[JsonProperty]
-		public override string Source { get; set; }
+		public override string Source { get; internal set; }
 
 		/// <summary>
 		/// The plugin that the record resides in. This can be different
@@ -128,7 +128,7 @@ namespace Papyrus
 		[ProtoMember(3)]
 		[DataMember]
 		[JsonProperty]
-		public override string Plugin { get; set; }
+		public override string Plugin { get; internal set; }
 
 		public T Value { get; private set; }
 
@@ -160,7 +160,7 @@ namespace Papyrus
 			if (plugin == null)
 				plugin = source;
 
-			Index = (uint)id;
+			Index =  id;
 			Source = source;
 			Plugin = plugin;
 
