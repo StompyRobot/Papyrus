@@ -15,7 +15,10 @@
    id="svg2985"
    version="1.1"
    inkscape:version="0.48.2 r9819"
-   sodipodi:docname="PluginDependency.svg">
+   sodipodi:docname="PluginDependency.svg"
+   inkscape:export-filename="C:\Programming\cowgate\Code\Dependencies\Papyrus\Docs\DiagramSource\PluginDependency.png"
+   inkscape:export-xdpi="73.207047"
+   inkscape:export-ydpi="73.207047">
   <title
      id="title4417">RecordPointer</title>
   <defs
@@ -65,15 +68,15 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.095627"
-     inkscape:cx="413.46491"
-     inkscape:cy="926.36697"
+     inkscape:cx="466.63649"
+     inkscape:cy="815.70117"
      inkscape:current-layer="layer1"
      inkscape:document-units="px"
      showgrid="false"
      inkscape:window-width="1458"
      inkscape:window-height="803"
-     inkscape:window-x="238"
-     inkscape:window-y="294"
+     inkscape:window-x="304"
+     inkscape:window-y="254"
      inkscape:window-maximized="0"
      fit-margin-top="2"
      fit-margin-left="2"
@@ -315,5 +318,29 @@
          x="584.7533"
          y="-666.677"
          id="tspan4503">Replaces</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 147.86054,262.52273 c 109.79459,47.19054 222.80992,51.82052 338.6189,0"
+       id="path4524"
+       inkscape:connector-curvature="0"
+       transform="translate(9.1170214,-783.14411)"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 157.33949,-520.68336 c 112.07859,78.40517 450.91632,90.9791 563.86004,0"
+       id="path4524-8"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
+    <text
+       xml:space="preserve"
+       style="font-size:10.31205654px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="346.10962"
+       y="-469.43573"
+       id="text4308-1"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         x="346.10962"
+         y="-469.43573"
+         id="tspan4312-2">Depends On</tspan></text>
   </g>
 </svg>
