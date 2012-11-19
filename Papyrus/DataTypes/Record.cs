@@ -42,6 +42,9 @@ namespace Papyrus.DataTypes
 		/// Is this object read only
 		/// </summary>
 		[Browsable(false), Bindable(false)]
+#if JSON
+		[Newtonsoft.Json.JsonIgnore]
+#endif
 		public bool ReadOnly { get; internal set; }
 
 		/// <summary>

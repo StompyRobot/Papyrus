@@ -22,6 +22,9 @@ namespace Papyrus
 	/// </summary>
 	[DataContract]
 	[ProtoContract]
+#if JSON
+	[Newtonsoft.Json.JsonObject(Newtonsoft.Json.MemberSerialization.OptOut)]
+#endif
 	internal class RecordContainer<T> : IRecordContainer where T : Record
 	{
 
@@ -60,6 +63,9 @@ namespace Papyrus
 		/// <summary>
 		/// The type of record this container contains
 		/// </summary>
+#if JSON
+		[Newtonsoft.Json.JsonIgnore]
+#endif
 		public Type RecordType { get { return typeof (T); } }
 		
 		[ProtoAfterDeserialization]
