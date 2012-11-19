@@ -10,8 +10,8 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="509.69504"
-   height="211.26047"
+   width="700"
+   height="500"
    id="svg2985"
    version="1.1"
    inkscape:version="0.48.2 r9819"
@@ -54,8 +54,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.095627"
-     inkscape:cx="243.58469"
-     inkscape:cy="114.84803"
+     inkscape:cx="436.5437"
+     inkscape:cy="227.21244"
      inkscape:current-layer="layer1"
      inkscape:document-units="px"
      showgrid="false"
@@ -84,13 +84,13 @@
      id="layer1"
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
-     transform="translate(-9.1170214,-5.5954218)">
+     transform="translate(-9.1170214,283.14411)">
     <a
        id="a3838"
        transform="translate(25.815603,11.617021)" />
     <g
        id="g3845"
-       transform="translate(-42.595745,-34.594454)">
+       transform="translate(27.106382,-261.77176)">
       <rect
          style="fill:#dcdcdc;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          id="rect2993"
@@ -131,7 +131,7 @@
     </g>
     <g
        id="g3853"
-       transform="translate(-34.205659,-36.398455)">
+       transform="translate(35.496468,-263.57576)">
       <a
          transform="translate(25.815603,11.617021)"
          id="a3841">
@@ -175,30 +175,30 @@
     </g>
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow2Lend)"
-       d="m 180.70922,75.340423 165.86525,-0.64539"
+       d="m 250.41135,-151.83688 165.86525,-0.64539"
        id="path3862"
        inkscape:connector-curvature="0" />
     <text
        xml:space="preserve"
        style="font-size:10.31205654px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-       x="231.96507"
-       y="71.152321"
+       x="301.66721"
+       y="-156.02498"
        id="text4308"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
-         x="231.96507"
-         y="71.152321"
+         x="301.66721"
+         y="-156.02498"
          id="tspan4312">RecordPointer</tspan></text>
     <rect
        style="fill:#f4f3f7;fill-opacity:1;stroke:#1e2224;stroke-linecap:square;stroke-opacity:1"
        id="rect4316"
        width="106.48936"
        height="57.439716"
-       x="208.461"
-       y="80.50354" />
+       x="278.16312"
+       y="-146.67377" />
     <g
        id="g4407"
-       transform="translate(4.0250573,1.0980114)">
+       transform="translate(73.727184,-226.07929)">
       <text
          sodipodi:linespacing="125%"
          id="text4318"
@@ -244,5 +244,22 @@
            x="263.44415"
            sodipodi:role="line">Plugin B</tspan></text>
     </g>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 172.03743,-13.469718 c 109.79458,47.19054 222.80991,51.82052 338.61889,0"
+       id="path4524"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
+    <text
+       xml:space="preserve"
+       style="font-size:10.31205654px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="309.711"
+       y="36.11694"
+       id="text4308-1"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         x="309.711"
+         y="36.11694"
+         id="tspan4312-7">Depends On</tspan></text>
   </g>
 </svg>
