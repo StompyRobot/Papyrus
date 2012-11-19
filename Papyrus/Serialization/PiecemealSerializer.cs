@@ -83,7 +83,7 @@ namespace Papyrus.Serialization
 
 				// Clean up our mess if there was an error
 				if (error) {
-					Directory.Delete(tempDirectory);
+					Directory.Delete(tempDirectory, true);
 				}
 
 			}
