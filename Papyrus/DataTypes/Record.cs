@@ -152,6 +152,8 @@ namespace Papyrus.DataTypes
 			foreach (var dataPointer in dataPointers) {
 				if(!sources.Contains(dataPointer.Source))
 					sources.Add(dataPointer.Source);
+				if (!sources.Contains(dataPointer.Plugin))
+					sources.Add(dataPointer.Plugin);
 			}
 
 			return sources;
