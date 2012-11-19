@@ -38,6 +38,8 @@ namespace Papyrus.Serialization.Utilities
 			TagRecordClass(TypeModel, typeof(Record));
 			var rType = TypeModel.Add(typeof (Record), false);
 
+			RecordDatabase.RootRecords.Sort(TypeAlphaSort);
+
 			foreach (var rootRecord in RecordDatabase.RootRecords) {
 
 				ScanSubRecords(TypeModel, rootRecord.Assembly);
@@ -56,7 +58,8 @@ namespace Papyrus.Serialization.Utilities
 		private static void ScanSubRecords(RuntimeTypeModel model, Assembly assembly)
 		{
 
-			var subRecords = assembly.GetTypes().Where(p => Attribute.IsDefined((MemberInfo) p, typeof (SubRecordAttribute)));
+			var subRecords = assembly.GetTypes().Where(p => Attribute.IsDefined((MemberInfo) p, typeof (SubRecordAttribute))).ToList();
+			subRecords.Sort(TypeAlphaSort);
 
 			foreach (var subRecord in subRecords) {
 				TagRecordClass(model, subRecord);
@@ -78,8 +81,11 @@ namespace Papyrus.Serialization.Utilities
 
 			var rType = model.Add(type, false);
 
+			var children = ((ChildRecordAttribute[]) type.GetCustomAttributes(typeof (ChildRecordAttribute), false)).ToList();
+			children.Sort((a1, a2) => System.String.CompareOrdinal(a1.ChildType.Name, a2.ChildType.Name));	
+
 			// Tag any subtypes
-			foreach (var attrib in (ChildRecordAttribute[])type.GetCustomAttributes(typeof(ChildRecordAttribute), false))
+			foreach (var attrib in children)
 			{
 
 
@@ -116,6 +122,7 @@ namespace Papyrus.Serialization.Utilities
 				var recordListType = typeof (RecordList<>).MakeGenericType(type);
 
 				TypeModel.Add(typeof (IRecordList), true).AddSubType(++_recordListFieldNo, recordListType);
+
 			}
 
 
@@ -137,6 +144,11 @@ namespace Papyrus.Serialization.Utilities
 
 			}
 
+		}
+
+		public static int TypeAlphaSort(Type t1, Type t2)
+		{
+			return System.String.CompareOrdinal(t1.Name, t2.Name);
 		}
 
 
