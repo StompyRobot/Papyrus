@@ -150,9 +150,9 @@ namespace Papyrus.DataTypes
 			var dataPointers = GetDataPointers();
 
 			foreach (var dataPointer in dataPointers) {
-				if(!sources.Contains(dataPointer.Source))
+				if(!string.IsNullOrEmpty(dataPointer.Source) && !sources.Contains(dataPointer.Source))
 					sources.Add(dataPointer.Source);
-				if (!sources.Contains(dataPointer.Plugin))
+				if (!string.IsNullOrEmpty(dataPointer.Plugin) && !sources.Contains(dataPointer.Plugin))
 					sources.Add(dataPointer.Plugin);
 			}
 

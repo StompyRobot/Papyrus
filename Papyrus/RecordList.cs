@@ -75,17 +75,9 @@ namespace Papyrus
 
 			List<string> sources = new List<string>();
 
-			var dataPointers = GetDataPointers();
-
-			foreach (var dataPointer in dataPointers) {
-				if (dataPointer != null && !string.IsNullOrEmpty(dataPointer.Source) && !sources.Contains(dataPointer.Source))
-					sources.Add(dataPointer.Source);
-			}
-
 			foreach (var recordContainer in Records) {
 
-				if (!string.IsNullOrEmpty(recordContainer.Destination))
-					sources.Add(recordContainer.Destination);
+				sources.AddRange(recordContainer.Record.GetDependencies().Except(sources));
 
 			}
 
