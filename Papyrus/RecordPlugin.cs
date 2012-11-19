@@ -401,7 +401,7 @@ namespace Papyrus
 					if (record == null)
 						writer.WriteLine("{2} {0} ({1})", recordContainer.Index, recordContainer.GetRecord().ID, title);
 					else
-						writer.WriteLine("{0}\n", record(recordContainer));
+						writer.WriteLine("{0}", record(recordContainer));
 				}
 
 				writer.Indent--;
