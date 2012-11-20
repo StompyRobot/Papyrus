@@ -58,10 +58,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Papyrus.Design\Papyrus.Design.csproj">
-      <Project>{F914AED6-C8F4-4D57-AAB3-49B414FAC82C}</Project>
-      <Name>Papyrus.Design</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Papyrus\Papyrus.csproj">
       <Project>{8B4C5B15-955D-47FE-A64E-F1457286786C}</Project>
       <Name>Papyrus</Name>

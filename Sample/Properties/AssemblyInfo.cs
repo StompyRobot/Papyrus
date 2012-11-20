@@ -1,22 +1,15 @@
-﻿/*
- * Copyright © 2012 Stompy Robot (http://www.stompyrobot.co.uk) (https://github.com/stompyrobot)
- * 
- * This program is licensed under the Microsoft Permissive License (Ms-PL). You should
- * have received a copy of the license along with the source code. If not, an online copy
- * of the license can be found at https://github.com/stompyrobot/Papyrus/wiki/License.
- */
-using System.Reflection;
+﻿using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Data.Design")]
+[assembly: AssemblyTitle("Sample")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Data.Design")]
+[assembly: AssemblyProduct("Sample")]
 [assembly: AssemblyCopyright("Copyright ©  2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -27,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("c86cfe16-5eaa-48bd-8c32-bbef004acbd9")]
+[assembly: Guid("ce0cb048-260d-4b34-9466-68113df66fad")]
 
 // Version information for an assembly consists of the following four values:
 //
