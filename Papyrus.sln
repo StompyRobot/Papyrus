@@ -3,15 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Papyrus", "Papyrus\Papyrus.csproj", "{8B4C5B15-955D-47FE-A64E-F1457286786C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Papyrus.Design", "Papyrus.Design\Papyrus.Design.csproj", "{F914AED6-C8F4-4D57-AAB3-49B414FAC82C}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{BEF50E84-0BEC-472A-9EC1-C489BC7C623C}"
-	ProjectSection(SolutionItems) = preProject
-		.nuget\NuGet.Config = .nuget\NuGet.Config
-		.nuget\NuGet.exe = .nuget\NuGet.exe
-		.nuget\NuGet.targets = .nuget\NuGet.targets
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Papyrus.Tests", "Papyrus.Tests\Papyrus.Tests.csproj", "{2B4CF5EF-0E3B-4BBC-99A1-765FBE3E3A98}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{AEBA623A-B4DC-4C02-AB48-A3FB4F7FFF91}"
@@ -22,6 +13,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Papyrus.Design.Controls", "Papyrus.Design.Controls\Papyrus.Design.Controls.csproj", "{6FB5A4F1-12D6-43ED-AD05-2CF37D830266}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample", "Sample\Sample.csproj", "{1400E2B1-F2B9-4DF6-AD23-6618243F3D50}"
 EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
@@ -46,16 +39,6 @@ Global
 		{8B4C5B15-955D-47FE-A64E-F1457286786C}.Release|Mixed Platforms.Build.0 = Release|x86
 		{8B4C5B15-955D-47FE-A64E-F1457286786C}.Release|x86.ActiveCfg = Release|x86
 		{8B4C5B15-955D-47FE-A64E-F1457286786C}.Release|x86.Build.0 = Release|x86
-		{F914AED6-C8F4-4D57-AAB3-49B414FAC82C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F914AED6-C8F4-4D57-AAB3-49B414FAC82C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F914AED6-C8F4-4D57-AAB3-49B414FAC82C}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{F914AED6-C8F4-4D57-AAB3-49B414FAC82C}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{F914AED6-C8F4-4D57-AAB3-49B414FAC82C}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{F914AED6-C8F4-4D57-AAB3-49B414FAC82C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F914AED6-C8F4-4D57-AAB3-49B414FAC82C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F914AED6-C8F4-4D57-AAB3-49B414FAC82C}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{F914AED6-C8F4-4D57-AAB3-49B414FAC82C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{F914AED6-C8F4-4D57-AAB3-49B414FAC82C}.Release|x86.ActiveCfg = Release|Any CPU
 		{2B4CF5EF-0E3B-4BBC-99A1-765FBE3E3A98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2B4CF5EF-0E3B-4BBC-99A1-765FBE3E3A98}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2B4CF5EF-0E3B-4BBC-99A1-765FBE3E3A98}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -76,6 +59,16 @@ Global
 		{6FB5A4F1-12D6-43ED-AD05-2CF37D830266}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{6FB5A4F1-12D6-43ED-AD05-2CF37D830266}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{6FB5A4F1-12D6-43ED-AD05-2CF37D830266}.Release|x86.ActiveCfg = Release|Any CPU
+		{1400E2B1-F2B9-4DF6-AD23-6618243F3D50}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{1400E2B1-F2B9-4DF6-AD23-6618243F3D50}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{1400E2B1-F2B9-4DF6-AD23-6618243F3D50}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{1400E2B1-F2B9-4DF6-AD23-6618243F3D50}.Debug|x86.ActiveCfg = Debug|x86
+		{1400E2B1-F2B9-4DF6-AD23-6618243F3D50}.Debug|x86.Build.0 = Debug|x86
+		{1400E2B1-F2B9-4DF6-AD23-6618243F3D50}.Release|Any CPU.ActiveCfg = Release|x86
+		{1400E2B1-F2B9-4DF6-AD23-6618243F3D50}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{1400E2B1-F2B9-4DF6-AD23-6618243F3D50}.Release|Mixed Platforms.Build.0 = Release|x86
+		{1400E2B1-F2B9-4DF6-AD23-6618243F3D50}.Release|x86.ActiveCfg = Release|x86
+		{1400E2B1-F2B9-4DF6-AD23-6618243F3D50}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
