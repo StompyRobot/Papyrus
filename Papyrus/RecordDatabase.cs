@@ -226,7 +226,7 @@ namespace Papyrus
 
 			RecordTable.Clear();
 
-			var dataTypes = GetRecordTypes();//dataTypes.Distinct().ToList();
+			var dataTypes = GetRecordTypes().Where(p => !p.Abstract);//dataTypes.Distinct().ToList();
 
 			// Add a collection of records to the record table for each type
 			foreach (var dataType in dataTypes)

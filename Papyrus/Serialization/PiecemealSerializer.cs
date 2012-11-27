@@ -100,7 +100,13 @@ namespace Papyrus.Serialization
 			}
 
 			// Move the new plugin to the output directory
-			Directory.Move(tempDirectory, pluginPath);
+			try {
+				Directory.Move(tempDirectory, pluginPath);
+			}
+			catch (IOException) {
+				Thread.Sleep(0);
+				Directory.Move(tempDirectory, pluginPath);
+			}
 
 			// return the file path
 			return headerPath;
