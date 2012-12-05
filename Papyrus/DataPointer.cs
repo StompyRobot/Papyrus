@@ -208,7 +208,18 @@ namespace Papyrus
 			try {
 				Value = database.PluginCollection.Plugins[Source].GetRecordList<T>().Records.Find(p => p.Destination == this.Source && p.Index == Index).Record;
 			} catch(Exception e) {
-				throw new DataPointerException("Unable to resolve pointer", e);
+
+				if (!Config.IgnoreDataPointerErrors) {
+
+					if (Config.DataPointerErrorCallback != null) {
+						var shouldIgnore = Config.DataPointerErrorCallback(this);
+						if (shouldIgnore)
+							return;
+					}
+
+					throw new DataPointerException("Unable to resolve pointer", e);
+				}
+
 			}
 		}
 

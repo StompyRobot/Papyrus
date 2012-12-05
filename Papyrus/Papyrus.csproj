@@ -108,6 +108,7 @@
     <Compile Include="Serialization\Utilities\JsonUtilities.cs" />
     <Compile Include="Serialization\Utilities\PapyrusJsonContractResolver.cs" />
     <Compile Include="Serialization\Utilities\ProtoBufUtils.cs" />
+    <Compile Include="Config.cs" />
     <Compile Include="Utilities\DependencySorter.cs" />
     <Compile Include="Utils.cs" />
     <Compile Include="ViewModel.cs" />
