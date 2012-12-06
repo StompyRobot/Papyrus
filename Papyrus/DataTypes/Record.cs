@@ -136,6 +136,10 @@ namespace Papyrus.DataTypes
 				dataPointerList.SetDatabase(database);
 			}
 
+			foreach (var pointerResolvingList in GetResolvingLists()) {
+				pointerResolvingList.SetDatabase(database);
+			}
+
 		}
 
 		/// <summary>
@@ -172,17 +176,32 @@ namespace Papyrus.DataTypes
 
 			var dataPointers = new List<DataPointer>();
 
-			var dataPointerProperties =
-				type.GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.FlattenHierarchy).Where(p => typeof(DataPointer).IsAssignableFrom(p.PropertyType));
+			dataPointers.AddRange(DataPointer.DataPointersInObject(this));
 
-			foreach (var propertyInfo in dataPointerProperties) {
-				dataPointers.Add(propertyInfo.GetValue(this, null) as DataPointer);
-			}
 
 			foreach (var dataPointerList in GetDataPointerLists()) {
 				dataPointers.AddRange(dataPointerList.DataPointers);
 			}
 
+			var subRecordFields =
+				type.GetProperties().Where(p => Attribute.IsDefined(p.PropertyType, typeof (SubRecordAttribute), true));
+
+			foreach (var subRecordField in subRecordFields) {
+
+				var value = subRecordField.GetValue(this, null);
+
+				if (value == null)
+					continue;
+
+				dataPointers.AddRange(DataPointer.DataPointersInObject(value));
+				
+			}
+
+			foreach (var pointerResolvingList in GetResolvingLists()) {
+
+				dataPointers.AddRange(pointerResolvingList.GetDataPointers());
+
+			}
 
 			return dataPointers;
 
@@ -202,6 +221,26 @@ namespace Papyrus.DataTypes
 
 			foreach (var propInfo in dataPointerListProperties) {
 				retList.Add(propInfo.GetValue(this, null) as IDataPointerList);
+			}
+
+			return retList;
+
+		}
+	
+		/// <summary>
+		/// Returns all the data pointer lists contained in this record.
+		/// </summary>
+		/// <returns>List of data pointer lists lists lists...</returns>
+		public IEnumerable<IPointerResolvingList> GetResolvingLists()
+		{
+
+			var dataPointerListProperties =
+				GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.FlattenHierarchy).Where(p => typeof(IPointerResolvingList).IsAssignableFrom(p.PropertyType));
+
+			var retList = new List<IPointerResolvingList>();
+
+			foreach (var propInfo in dataPointerListProperties) {
+				retList.Add(propInfo.GetValue(this, null) as IPointerResolvingList);
 			}
 
 			return retList;

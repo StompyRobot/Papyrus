@@ -6,7 +6,10 @@
  * of the license can be found at https://github.com/stompyrobot/Papyrus/wiki/License.
  */
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
+using System.Reflection;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Papyrus.DataTypes;
@@ -80,6 +83,31 @@ namespace Papyrus
 			DeserializationDatabase = database;
 		}
 
+
+		/// <summary>
+		/// Return a list of data pointers in the given object
+		/// </summary>
+		/// <param name="obj"></param>
+		/// <returns></returns>
+		public static List<DataPointer> DataPointersInObject(object obj)
+		{
+
+			var dataPointers = new List<DataPointer>();
+
+			if (obj == null)
+				return dataPointers;
+
+			var dataPointerProperties =
+				obj.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.FlattenHierarchy).Where(p => typeof(DataPointer).IsAssignableFrom(p.PropertyType));
+
+			foreach (var propertyInfo in dataPointerProperties) {
+				dataPointers.Add(propertyInfo.GetValue(obj, null) as DataPointer);
+			}
+
+			return dataPointers;
+
+		}
+
 	}
 
 
@@ -98,7 +126,7 @@ namespace Papyrus
 		/// <summary>
 		/// Returns an empty data pointer
 		/// </summary>
-		public static DataPointer<T> Empty {get {return new DataPointer<T>(0, "");}}
+		public static DataPointer<T> Empty {get {return new DataPointer<T>();}}
 
 		/// <summary>
 		/// Database this record is from. Can be null if this is a dangling pointer or not yet resolved.
@@ -152,6 +180,11 @@ namespace Papyrus
 		{
 			Index = 0;
 			Source = "";
+
+			if (Database == null) {
+				Database = Config.DefaultRecordDatabase;
+			}
+
 		}
 
 		public DataPointer(int id, string source, string plugin = null)
@@ -163,6 +196,10 @@ namespace Papyrus
 			Index =  id;
 			Source = source;
 			Plugin = plugin;
+
+			if (Database == null) {
+				Database = Config.DefaultRecordDatabase;
+			}
 
 		}
 

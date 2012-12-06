@@ -14,6 +14,11 @@ namespace Papyrus
 		/// </summary>
 		public static bool IgnoreDataPointerErrors = false;
 
+		/// <summary>
+		/// The default record database to use for new data pointers. (For use in the editor)
+		/// </summary>
+		public static RecordDatabase DefaultRecordDatabase = null;
+
 		public delegate bool DataPointerErrorDelegate(DataPointer dataPointer);
 
 		/// <summary>
