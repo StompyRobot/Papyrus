@@ -119,11 +119,11 @@ namespace Papyrus.Design.Controls
 		{
 			if (e.Key == Key.Up)
 			{
-				pointerListBox.SelectedIndex--;
+				pointerListBox.SelectedIndex = Math.Max(0, pointerListBox.SelectedIndex - 1);
 				e.Handled = true;
 			}
 			else if (e.Key == Key.Down) {
-				pointerListBox.SelectedIndex++;
+				pointerListBox.SelectedIndex = Math.Min(pointerListBox.Items.Count - 1, pointerListBox.SelectedIndex+1);
 				e.Handled = true;
 			}
 		}
