@@ -9,6 +9,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using Newtonsoft.Json;
 using ProtoBuf;
@@ -16,18 +17,19 @@ using ProtoBuf;
 namespace Papyrus
 {
 
-	public interface IPointerResolvingList {
+	public interface IPointerResolvingList : IList {
 		void SetDatabase(RecordDatabase database);
 		List<DataPointer> GetDataPointers();
 	}
 
+	// TODO: Fix this for protobuf deserialization into an existing object
 	[ProtoContract(IgnoreListHandling = true)]
-	[JsonObject(MemberSerialization.OptIn)]
-	public class PointerResolvingList<T> : IList<T>, IPointerResolvingList, IList
+	//[JsonObject(MemberSerialization.OptIn)]
+	public class PointerResolvingList<T> : IList<T>, IPointerResolvingList
 	{
 
-		[ProtoMember(1, OverwriteList = true, DynamicType = true)]
-		[JsonProperty(PropertyName = "List")]
+		[ProtoMember(1, DynamicType = true)]
+		//[JsonProperty(PropertyName = "List")]
 		public List<T> InternalList = new List<T>();
 
 		public RecordDatabase Database { get; private set; }
@@ -39,6 +41,13 @@ namespace Papyrus
 
 			GetDataPointers().ForEach(p => p.ResolvePointer(database));
 
+		}
+
+		//[ProtoBeforeDeserialization]
+		[OnDeserializing]
+		public void BeforeDeserialization(System.Runtime.Serialization.StreamingContext context)
+		{
+			InternalList.Clear();
 		}
 
 		public override string ToString()

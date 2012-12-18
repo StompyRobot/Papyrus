@@ -183,7 +183,8 @@ namespace Papyrus.Design
 
 					// Overwrite the old records values with our own
 					oldRecord.ReadOnly = false;
-					ProtoBufUtils.OverWrite(oldRecord, record);
+					JsonUtilities.OverWrite(oldRecord, record);
+					//ProtoBufUtils.OverWrite(oldRecord, record);
 					oldRecord.ResolveDependencies(this);
 					oldRecord.ReadOnly = true;
 
