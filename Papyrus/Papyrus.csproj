@@ -43,6 +43,9 @@
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>Lib\Newtonsoft.Json\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="PropertyTools">
+      <HintPath>..\lib\PropertyTools.dll</HintPath>
+    </Reference>
     <Reference Include="protobuf-net, Version=2.0.0.480, Culture=neutral, PublicKeyToken=257b51d87d2e4d67, processorArchitecture=MSIL">
       <HintPath>Lib\protobuf-net\protobuf-net.dll</HintPath>
     </Reference>

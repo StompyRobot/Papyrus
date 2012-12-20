@@ -32,6 +32,7 @@ namespace Papyrus.DataTypes
 		/// This is the editor name for a data object.
 		/// </summary>
 		[RecordProperty(1), DataMember, Category("Data"), Description("The design ID for this item. This is not shown in the game, it is only for use in the editor.")]
+		[PropertyTools.DataAnnotations.SortIndex(-1)]
 		public string ID
 		{
 			get { return _id; }
