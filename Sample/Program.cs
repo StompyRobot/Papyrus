@@ -13,7 +13,7 @@ namespace Sample
 		static void Main(string[] args)
 		{
 
-			Papyrus.RecordDatabase.Initialize(new [] { "Sample"});
+			Papyrus.RecordDatabase.Initialize(new [] { "Sample" });
 
 			// Use the PluginUtilities helper class to create an empty plugin in the current directory
 			var pluginHeader = Papyrus.PluginUtilities.CreateNewPlugin("NewPlugin", Environment.CurrentDirectory, DataFormat.Json);
