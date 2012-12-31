@@ -122,6 +122,7 @@ namespace Papyrus
 	[Editor("Papyrus.Design.Controls.DataPointerTypeEditor, Papyrus.Design.Controls", "Papyrus.Design.Controls.DataPointerTypeEditor, Papyrus.Design.Controls")]
 	public sealed class DataPointer<T> : DataPointer where T : Record
 	{
+		private string _plugin;
 
 		/// <summary>
 		/// Returns an empty data pointer
@@ -155,8 +156,16 @@ namespace Papyrus
 		/// </summary>
 		[ProtoMember(3)]
 		[DataMember]
-		[JsonProperty]
-		public override string Plugin { get; internal set; }
+		[JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
+		public override string Plugin
+		{
+			get
+			{
+				if(string.IsNullOrEmpty(_plugin)) return Source;
+				return _plugin;
+			}
+			internal set { _plugin = value; }
+		}
 
 		public T Value { get; private set; }
 
