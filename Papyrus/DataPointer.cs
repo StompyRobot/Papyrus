@@ -271,6 +271,15 @@ namespace Papyrus
 			get { return string.IsNullOrEmpty(Source) || string.IsNullOrEmpty(Plugin); }
 		}
 
+		/// <summary>
+		/// Returns true if this data pointer points to the same source and index as the other pointer.
+		/// </summary>
+		/// <param name="other">Pointer to compare too.</param>
+		/// <returns></returns>
+		public bool Equivalent(DataPointer<T> other)
+		{
+			return other.Index == Index && Equals(other.Source, Source);
+		}
 
 		public bool Equals(DataPointer<T> other)
 		{
@@ -280,7 +289,7 @@ namespace Papyrus
 			if (ReferenceEquals(this, other)) {
 				return true;
 			}
-			return other.Index == Index && Equals(other.Source, Source);
+			return false; // other.Index == Index && Equals(other.Source, Source);
 		}
 
 		public override bool Equals(object obj)

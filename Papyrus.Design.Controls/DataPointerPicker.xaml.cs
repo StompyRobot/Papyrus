@@ -41,8 +41,22 @@ namespace Papyrus.Design.Controls
 
 			var picker = new DataPointerPicker();
 			picker.Init(currentPointer);
+			picker.WindowStartupLocation = WindowStartupLocation.Manual;
+
+			// Position the picker at the mouse position
+			picker.Loaded += (sender, args) =>
+			{
+
+				var mousePosition = picker.PointToScreen(Mouse.GetPosition(picker));
+				picker.Left = mousePosition.X - picker.Width/2.0;
+				picker.Top = mousePosition.Y - picker.Height/4.0;
+
+			};
 
 			picker.ShowDialog();
+
+
+
 
 			if (!picker.DialogResult.HasValue || picker.DialogResult.Value == false)
 				return currentPointer;

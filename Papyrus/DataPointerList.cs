@@ -6,9 +6,11 @@
  * of the license can be found at https://github.com/stompyrobot/Papyrus/wiki/License.
  */
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using Papyrus.DataTypes;
 using ProtoBuf;
@@ -16,7 +18,7 @@ using ProtoBuf;
 namespace Papyrus
 {
 
-	public interface IDataPointerList
+	public interface IDataPointerList : IList
 	{
 
 		List<DataPointer> DataPointers { get; }
@@ -32,6 +34,8 @@ namespace Papyrus
 		/// </summary>
 		/// <param name="database"></param>
 		void SetDatabase(RecordDatabase database);
+
+		void Add(DataPointer dataPointer);
 
 	}
 
@@ -64,6 +68,12 @@ namespace Papyrus
 			Database = database;
 		}
 
+		[OnDeserializing]
+		public void BeforeDeserialization(System.Runtime.Serialization.StreamingContext context)
+		{
+			_internalList.Clear();
+		}
+
 		/// <summary>
 		/// Editor method for modifying a collection of data pointers
 		/// </summary>
@@ -76,6 +86,11 @@ namespace Papyrus
 		public override string ToString()
 		{
 			return string.Format("{0} List ({1} items)", typeof (T).Name, _internalList.Count);
+		}
+
+		public void Add(DataPointer pointer)
+		{
+			Add((DataPointer<T>)pointer);
 		}
 
 		#region IList Impl
@@ -146,6 +161,59 @@ namespace Papyrus
 			return _internalList.GetEnumerator();
 		}
 		#endregion
+
+
+		int IList.Add(object value)
+		{
+			Add((DataPointer<T>) value);
+			return 1;
+		}
+
+		bool IList.Contains(object value)
+		{
+			return Contains((DataPointer<T>) value);
+		}
+
+		int IList.IndexOf(object value)
+		{
+			return IndexOf((DataPointer<T>) (value));
+		}
+
+		void IList.Insert(int index, object value)
+		{
+			Insert(index, (DataPointer<T>)value);
+		}
+
+		bool IList.IsFixedSize
+		{
+			get { return false; }
+		}
+
+		void IList.Remove(object value)
+		{
+			Remove((DataPointer<T>) value);
+		}
+
+		object IList.this[int index]
+		{
+			get { return this[index]; }
+			set { this[index] = (DataPointer<T>) value; }
+		}
+
+		public void CopyTo(Array array, int index)
+		{
+			throw new NotImplementedException();
+		}
+
+		public bool IsSynchronized
+		{
+			get { return false; }
+		}
+
+		public object SyncRoot
+		{
+			get { return new object(); }
+		}
 
 	}
 }
