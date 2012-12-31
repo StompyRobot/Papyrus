@@ -120,7 +120,7 @@ namespace Papyrus
 	[DataContract]
 	[JsonObject(MemberSerialization.OptIn, ItemTypeNameHandling = TypeNameHandling.All)]
 	[Editor("Papyrus.Design.Controls.DataPointerTypeEditor, Papyrus.Design.Controls", "Papyrus.Design.Controls.DataPointerTypeEditor, Papyrus.Design.Controls")]
-	public sealed class DataPointer<T> : DataPointer, IEquatable<DataPointer<T>> where T : Record
+	public sealed class DataPointer<T> : DataPointer where T : Record
 	{
 
 		/// <summary>
@@ -279,48 +279,6 @@ namespace Papyrus
 		public bool Equivalent(DataPointer<T> other)
 		{
 			return other.Index == Index && Equals(other.Source, Source);
-		}
-
-		public bool Equals(DataPointer<T> other)
-		{
-			if (ReferenceEquals(null, other)) {
-				return false;
-			}
-			if (ReferenceEquals(this, other)) {
-				return true;
-			}
-			return false; // other.Index == Index && Equals(other.Source, Source);
-		}
-
-		public override bool Equals(object obj)
-		{
-			if (ReferenceEquals(null, obj)) {
-				return false;
-			}
-			if (ReferenceEquals(this, obj)) {
-				return true;
-			}
-			if (obj.GetType() != typeof (DataPointer<T>)) {
-				return false;
-			}
-			return Equals((DataPointer<T>) obj);
-		}
-
-		public override int GetHashCode()
-		{
-			unchecked {
-				return (Index.GetHashCode()*397) ^ (Source != null ? Source.GetHashCode() : 0);
-			}
-		}
-
-		public static bool operator ==(DataPointer<T> left, DataPointer<T> right)
-		{
-			return Equals(left, right);
-		}
-
-		public static bool operator !=(DataPointer<T> left, DataPointer<T> right)
-		{
-			return !Equals(left, right);
 		}
 
 		[OnDeserialized]
