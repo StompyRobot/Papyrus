@@ -348,9 +348,6 @@ namespace Papyrus
 			GetAllRecords().ForEach(p => p.GetRecord().ReadOnly = true);
 		}
 
-		private const string SummaryBigSep = "-------------------";
-		private const string SummarySmallSep = "-------";
-
 		public void GetRecordSummary(TextWriter writer)
 		{
 
