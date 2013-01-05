@@ -66,6 +66,7 @@
     <Compile Include="Attributes.cs" />
     <Compile Include="ChildRecordAttribute.cs" />
     <Compile Include="Converters\ColorTypeConverter.cs" />
+    <Compile Include="Converters\IntSizeTypeConverter.cs" />
     <Compile Include="Converters\Vector2TypeConverter.cs" />
     <Compile Include="DataPointer.cs" />
     <Compile Include="DataPointerList.cs" />

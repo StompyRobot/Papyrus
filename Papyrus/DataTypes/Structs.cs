@@ -10,12 +10,14 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using Newtonsoft.Json;
+using Papyrus.Converters;
 using ProtoBuf;
 namespace Papyrus.DataTypes
 {
 
 
-	[ProtoContract/*, TypeConverterAttribute(typeof(IntSizeStructConverter))*/]
+	[ProtoContract, TypeConverterAttribute(typeof(IntSizeTypeConverter)), JsonObject(MemberSerialization.OptIn)]
 	public struct IntSize
 	{
 
@@ -29,9 +31,9 @@ namespace Papyrus.DataTypes
 
 		public IntSize(int size) : this(size, size) { }
 
-		[ProtoMember(1)]
+		[ProtoMember(1), JsonProperty]
 		public int Width { get; set; }
-		[ProtoMember(2)]
+		[ProtoMember(2), JsonProperty]
 		public int Height { get; set; }
 
 		public override string ToString()

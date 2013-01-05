@@ -83,39 +83,6 @@ namespace Papyrus
 
 	}*/
 
-	public class IntSizeStructConverter : ExpandableObjectConverter
-	{
-
-		public override object CreateInstance(ITypeDescriptorContext context, System.Collections.IDictionary propertyValues)
-		{
-
-			if (context == null)
-				return base.CreateInstance(context, propertyValues);
-			if (context.GetType().Name.Contains("SingleSelectRootGridEntry"))
-				return base.CreateInstance(context, propertyValues);
-
-			var ret = new IntSize();
-
-			if (propertyValues.Contains("Width"))
-				ret.Width = (int)propertyValues["Width"];
-			if (propertyValues.Contains("Height"))
-				ret.Height = (int)propertyValues["Height"];
-
-			return ret;
-		}
-
-		public override bool GetCreateInstanceSupported(ITypeDescriptorContext context)
-		{
-			if (context == null)
-				return base.GetCreateInstanceSupported(context);
-			if (context.GetType().Name.Contains("SingleSelectRootGridEntry"))
-				return base.GetCreateInstanceSupported(context);
-
-			return true;
-		}
-
-	}
-
 	public static class EnumExtensions
 	{
 		private static void CheckIsEnum<T>(bool withFlags)
