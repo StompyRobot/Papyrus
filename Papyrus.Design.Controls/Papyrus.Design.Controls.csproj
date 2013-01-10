@@ -48,41 +48,15 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-    <Reference Include="WPFToolkit.Extended">
-      <HintPath>..\packages\Extended.Wpf.Toolkit.1.6.0\lib\net40\WPFToolkit.Extended.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="RecordConverters.cs" />
-    <Page Include="DataPointerListEditor.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="DataPointerListTypeEditor.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="DataPointerPicker.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="DataPointerTypeEditor.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Compile Include="ColorTypeConverter.cs" />
-    <Compile Include="DataPointerConverter.cs" />
-    <Compile Include="DataPointerListEditor.xaml.cs">
-      <DependentUpon>DataPointerListEditor.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="DataPointerListTypeEditor.xaml.cs">
-      <DependentUpon>DataPointerListTypeEditor.xaml</DependentUpon>
-    </Compile>
     <Compile Include="DataPointerPicker.xaml.cs">
       <DependentUpon>DataPointerPicker.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="DataPointerTypeEditor.xaml.cs">
-      <DependentUpon>DataPointerTypeEditor.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
