@@ -18,12 +18,12 @@ using ProtoBuf;
 namespace Papyrus
 {
 
-	public interface IDataPointerList : IList
+	public interface IRecordReferenceList : IList
 	{
 
-		List<DataPointer> DataPointers { get; }
+		List<RecordReference> Records { get; }
 
-		void SetInternalList(List<DataPointer> list);
+		void SetInternalList(List<RecordReference> list);
 
 		Type RecordType { get; }
 
@@ -35,28 +35,28 @@ namespace Papyrus
 		/// <param name="database"></param>
 		void SetDatabase(RecordDatabase database);
 
-		void Add(DataPointer dataPointer);
+		void Add(RecordReference recordReference);
 
 	}
 
 	/// <summary>
-	/// Bit of a hack to get editor handling of data pointer lists easier.
+	/// Bit of a hack to get editor handling of data recordReference lists easier.
 	/// </summary>
 	/// <typeparam name="T">Record type</typeparam>
 	[ProtoContract(IgnoreListHandling = true)]
-	[Editor("Papyrus.Design.Controls.DataPointerListTypeEditor, Papyrus.Design.Controls", "Papyrus.Design.Controls.DataPointerListTypeEditor, Papyrus.Design.Controls")]
-	public class DataPointerList<T> : IDataPointerList, IList<DataPointer<T>> where T : Record
+	[Editor("Papyrus.Design.Controls.RecordReferenceListTypeEditor, Papyrus.Design.Controls", "Papyrus.Design.Controls.RecordReferenceListTypeEditor, Papyrus.Design.Controls")]
+	public class RecordReferenceList<T> : IRecordReferenceList, IList<RecordReference<T>> where T : Record
 	{
 
 		[ProtoMember(1, OverwriteList = true)]
-		private List<DataPointer<T>> _internalList = new List<DataPointer<T>>();
+		private List<RecordReference<T>> _internalList = new List<RecordReference<T>>();
 
 		/// <summary>
-		/// Returns the internal list as a list of <c>DataPointer</c>
+		/// Returns the internal list as a list of <c>RecordReference</c>
 		/// </summary>
-		public List<DataPointer> DataPointers
+		public List<RecordReference> Records
 		{
-			get { return _internalList.Cast<DataPointer>().ToList(); }
+			get { return _internalList.Cast<RecordReference>().ToList(); }
 		}
 
 		public Type RecordType { get { return typeof (T); } }
@@ -78,9 +78,9 @@ namespace Papyrus
 		/// Editor method for modifying a collection of data pointers
 		/// </summary>
 		/// <param name="list"></param>
-		public void SetInternalList(List<DataPointer> list)
+		public void SetInternalList(List<RecordReference> list)
 		{
-			_internalList = list.Cast<DataPointer<T>>().ToList();
+			_internalList = list.Cast<RecordReference<T>>().ToList();
 		}
 
 		public override string ToString()
@@ -88,19 +88,19 @@ namespace Papyrus
 			return string.Format("{0} List ({1} items)", typeof (T).Name, _internalList.Count);
 		}
 
-		public void Add(DataPointer pointer)
+		public void Add(RecordReference recordReference)
 		{
-			Add((DataPointer<T>)pointer);
+			Add((RecordReference<T>)recordReference);
 		}
 
 		#region IList Impl
 
-		public int IndexOf(DataPointer<T> item)
+		public int IndexOf(RecordReference<T> item)
 		{
 			return _internalList.IndexOf(item);
 		}
 
-		public void Insert(int index, DataPointer<T> item)
+		public void Insert(int index, RecordReference<T> item)
 		{
 			_internalList.Insert(index, item);
 		}
@@ -110,13 +110,13 @@ namespace Papyrus
 			_internalList.RemoveAt(index);
 		}
 
-		public DataPointer<T> this[int index]
+		public RecordReference<T> this[int index]
 		{
 			get { return _internalList[index]; }
 			set { _internalList[index] = value; }
 		}
 
-		public void Add(DataPointer<T> item)
+		public void Add(RecordReference<T> item)
 		{
 			_internalList.Add(item);
 		}
@@ -126,12 +126,12 @@ namespace Papyrus
 			_internalList.Clear();
 		}
 
-		public bool Contains(DataPointer<T> item)
+		public bool Contains(RecordReference<T> item)
 		{
 			return _internalList.Contains(item);
 		}
 
-		public void CopyTo(DataPointer<T>[] array, int arrayIndex)
+		public void CopyTo(RecordReference<T>[] array, int arrayIndex)
 		{
 			_internalList.CopyTo(array, arrayIndex);
 		}
@@ -146,12 +146,12 @@ namespace Papyrus
 			get { return false; }
 		}
 
-		public bool Remove(DataPointer<T> item)
+		public bool Remove(RecordReference<T> item)
 		{
 			return _internalList.Remove(item);
 		}
 
-		public IEnumerator<DataPointer<T>> GetEnumerator()
+		public IEnumerator<RecordReference<T>> GetEnumerator()
 		{
 			return _internalList.GetEnumerator();
 		}
@@ -165,23 +165,23 @@ namespace Papyrus
 
 		int IList.Add(object value)
 		{
-			Add((DataPointer<T>) value);
+			Add((RecordReference<T>) value);
 			return 1;
 		}
 
 		bool IList.Contains(object value)
 		{
-			return Contains((DataPointer<T>) value);
+			return Contains((RecordReference<T>) value);
 		}
 
 		int IList.IndexOf(object value)
 		{
-			return IndexOf((DataPointer<T>) (value));
+			return IndexOf((RecordReference<T>) (value));
 		}
 
 		void IList.Insert(int index, object value)
 		{
-			Insert(index, (DataPointer<T>)value);
+			Insert(index, (RecordReference<T>)value);
 		}
 
 		bool IList.IsFixedSize
@@ -191,13 +191,13 @@ namespace Papyrus
 
 		void IList.Remove(object value)
 		{
-			Remove((DataPointer<T>) value);
+			Remove((RecordReference<T>) value);
 		}
 
 		object IList.this[int index]
 		{
 			get { return this[index]; }
-			set { this[index] = (DataPointer<T>) value; }
+			set { this[index] = (RecordReference<T>) value; }
 		}
 
 		public void CopyTo(Array array, int index)

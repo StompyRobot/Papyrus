@@ -20,7 +20,7 @@ namespace Papyrus
 	abstract class IRecordList
 	{
 
-		public abstract List<DataPointer> GetDataPointers();
+		public abstract List<RecordReference> GetRecordReferences();
 
 		public abstract List<string> GetDependencies();
 
@@ -28,7 +28,7 @@ namespace Papyrus
 
 		public abstract List<IRecordContainer> GetRecords();
 
-		public abstract List<IDataPointerList> GetDataPointerLists();
+		public abstract List<IRecordReferenceList> GetRecordReferenceLists();
 
 	}
 

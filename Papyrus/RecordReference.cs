@@ -20,10 +20,10 @@ namespace Papyrus
 {
 
 	/// <summary>
-	/// Abstract base class for all DataPointers
+	/// Abstract base class for all RecordReferences
 	/// </summary>
 	[JsonObject(MemberSerialization.OptIn, ItemTypeNameHandling = TypeNameHandling.All)]
-	public abstract class DataPointer// : IDataPointer
+	public abstract class RecordReference
 	{
 
 		/// <summary>
@@ -76,7 +76,7 @@ namespace Papyrus
 		/// </summary>
 		public abstract bool IsEmpty { get; }
 
-		internal abstract void ResolvePointer(RecordDatabase database);
+		internal abstract void ResolveReference(RecordDatabase database);
 
 		public static void SetDeserializationDatabase(RecordDatabase database)
 		{
@@ -89,22 +89,22 @@ namespace Papyrus
 		/// </summary>
 		/// <param name="obj"></param>
 		/// <returns></returns>
-		public static List<DataPointer> DataPointersInObject(object obj)
+		public static List<RecordReference> RecordReferencesInObject(object obj)
 		{
 
-			var dataPointers = new List<DataPointer>();
+			var references = new List<RecordReference>();
 
 			if (obj == null)
-				return dataPointers;
+				return references;
 
-			var dataPointerProperties =
-				obj.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.FlattenHierarchy).Where(p => typeof(DataPointer).IsAssignableFrom(p.PropertyType));
+			var recordReferenceProperties =
+				obj.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.FlattenHierarchy).Where(p => typeof(RecordReference).IsAssignableFrom(p.PropertyType));
 
-			foreach (var propertyInfo in dataPointerProperties) {
-				dataPointers.Add(propertyInfo.GetValue(obj, null) as DataPointer);
+			foreach (var propertyInfo in recordReferenceProperties) {
+				references.Add(propertyInfo.GetValue(obj, null) as RecordReference);
 			}
 
-			return dataPointers;
+			return references;
 
 		}
 
@@ -119,15 +119,14 @@ namespace Papyrus
 	[ProtoContract]
 	[DataContract]
 	[JsonObject(MemberSerialization.OptIn, ItemTypeNameHandling = TypeNameHandling.All)]
-	//[Editor("Papyrus.Design.Controls.DataPointerTypeEditor, Papyrus.Design.Controls", "Papyrus.Design.Controls.DataPointerTypeEditor, Papyrus.Design.Controls")]
-	public sealed class DataPointer<T> : DataPointer where T : Record
+	public sealed class RecordReference<T> : RecordReference where T : Record
 	{
 		private string _plugin;
 
 		/// <summary>
 		/// Returns an empty data pointer
 		/// </summary>
-		public static DataPointer<T> Empty {get {return new DataPointer<T>();}}
+		public static RecordReference<T> Empty {get {return new RecordReference<T>();}}
 
 		/// <summary>
 		/// Database this record is from. Can be null if this is a dangling pointer or not yet resolved.
@@ -185,7 +184,7 @@ namespace Papyrus
 			get { return Value; }
 		}
 
-		public DataPointer()
+		public RecordReference()
 		{
 			Index = 0;
 			Source = "";
@@ -196,7 +195,7 @@ namespace Papyrus
 
 		}
 
-		public DataPointer(int id, string source, string plugin = null)
+		public RecordReference(int id, string source, string plugin = null)
 		{
 
 			if (plugin == null)
@@ -212,18 +211,18 @@ namespace Papyrus
 
 		}
 
-		public DataPointer(DataPointer<T> cloneSource)
+		public RecordReference(RecordReference<T> cloneSource)
 		{
 
 			Index = cloneSource.Index;
 			Source = cloneSource.Source;
 			Plugin = cloneSource.Plugin;
-			ResolvePointer(cloneSource.Database);
+			ResolveReference(cloneSource.Database);
 
 		}
 
 		[Obsolete("Index is now int, not uint.")]
-		public DataPointer(uint id, string source) : this((int)id, source)
+		public RecordReference(uint id, string source) : this((int)id, source)
 		{
 			throw new NotSupportedException();
 		}
@@ -231,13 +230,13 @@ namespace Papyrus
 		/// <summary>
 		/// Implicitly convert this data pointer into the value it represents
 		/// </summary>
-		/// <param name="dataPointer">The data pointer to convert</param>
+		/// <param name="recordReference">The data pointer to convert</param>
 		/// <returns>Value the data pointer represents</returns>
-		public static implicit operator T(DataPointer<T> dataPointer)
+		public static implicit operator T(RecordReference<T> recordReference)
 		{
-			if (dataPointer == null || dataPointer.Value == null)
+			if (recordReference == null || recordReference.Value == null)
 				return null;
-			return dataPointer.Value;
+			return recordReference.Value;
 		}
 
 		public override string ToString()
@@ -254,7 +253,7 @@ namespace Papyrus
 		/// Resolves this data pointer using the given data object as the source
 		/// </summary>
 		/// <param name="database">The record database to use to resolve the reference.</param>
-		internal override void ResolvePointer(RecordDatabase database)
+		internal override void ResolveReference(RecordDatabase database)
 		{
 			Database = database;
 
@@ -265,15 +264,15 @@ namespace Papyrus
 				Value = database.PluginCollection.Plugins[Source].GetRecordList<T>().Records.Find(p => p.Destination == this.Source && p.Index == Index).Record;
 			} catch(Exception e) {
 
-				if (!Config.IgnoreDataPointerErrors) {
+				if (!Config.IgnoreReferenceErrors) {
 
-					if (Config.DataPointerErrorCallback != null) {
-						var shouldIgnore = Config.DataPointerErrorCallback(this);
+					if (Config.ReferenceErrorCallback != null) {
+						var shouldIgnore = Config.ReferenceErrorCallback(this);
 						if (shouldIgnore)
 							return;
 					}
 
-					throw new DataPointerException("Unable to resolve pointer", e);
+					throw new ReferenceException("Unable to resolve pointer", e);
 				}
 
 			}
@@ -295,7 +294,7 @@ namespace Papyrus
 		/// </summary>
 		/// <param name="other">Pointer to compare too.</param>
 		/// <returns></returns>
-		public bool Equivalent(DataPointer<T> other)
+		public bool Equivalent(RecordReference<T> other)
 		{
 			return other.Index == Index && Equals(other.Source, Source);
 		}
@@ -305,7 +304,7 @@ namespace Papyrus
 		{
 
 			if (DeserializationDatabase != null) {
-				this.ResolvePointer(DeserializationDatabase);
+				this.ResolveReference(DeserializationDatabase);
 			}
 
 		}

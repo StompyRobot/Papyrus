@@ -286,10 +286,10 @@ namespace Papyrus
 		/// Gets a list of data pointers contained in this database.
 		/// </summary>
 		/// <returns></returns>
-		public List<DataPointer> GetDataPointers()
+		public List<RecordReference> GetRecordReferences()
 		{
 
-			return RecordLists.Select(p => p.Value.GetDataPointers()).Aggregate(new List<DataPointer>()as IEnumerable<DataPointer>, (list, pointers) => list.Concat(pointers)).ToList();
+			return RecordLists.Select(p => p.Value.GetRecordReferences()).Aggregate(new List<RecordReference>()as IEnumerable<RecordReference>, (list, pointers) => list.Concat(pointers)).ToList();
 
 		} 
 
@@ -297,13 +297,13 @@ namespace Papyrus
 		/// Gets a list of all the data pointer lists in this plugin.
 		/// </summary>
 		/// <returns></returns>
-		public List<IDataPointerList> GetDataPointerLists()
+		public List<IRecordReferenceList> RecordRecordReferenceLists()
 		{
 
-			var dataPointerLists = RecordLists.Select(p => p.Value.GetDataPointerLists());
-			var retList = new List<IDataPointerList>();
-			foreach (var dataPointerList in dataPointerLists) {
-				retList.AddRange(dataPointerList);
+			var referenceLists = RecordLists.Select(p => p.Value.GetRecordReferenceLists());
+			var retList = new List<IRecordReferenceList>();
+			foreach (var list in referenceLists) {
+				retList.AddRange(list);
 			}
 			return retList;
 

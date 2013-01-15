@@ -22,11 +22,11 @@ namespace Papyrus.Serialization.Utilities
 			}
 
 			// Conditionally serialize the Plugin property if it is different from the Source.
-			if (typeof(DataPointer).IsAssignableFrom(ret.DeclaringType) && ret.PropertyName == "Plugin") {
+			if (typeof(RecordReference).IsAssignableFrom(ret.DeclaringType) && ret.PropertyName == "Plugin") {
 
 				ret.ShouldSerialize = o =>
 				{
-					DataPointer pointer = (DataPointer) o;
+					RecordReference pointer = (RecordReference) o;
 					return pointer.Plugin != pointer.Source;
 				};
 

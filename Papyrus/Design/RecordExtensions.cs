@@ -48,7 +48,7 @@ namespace Papyrus.Design
 		/// </summary>
 		/// <param name="record"></param>
 		/// <returns></returns>
-		public static bool CanGetDataPointer(this Record record)
+		public static bool CanGetReference(this Record record)
 		{
 			return !string.IsNullOrEmpty(record.Container.Location) && record.Container.Index >= 0;
 		}

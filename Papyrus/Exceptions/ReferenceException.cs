@@ -14,16 +14,16 @@ namespace Papyrus.Exceptions
 	/// Indicates an error while attempting to resolve a pointer
 	/// </summary>
 
-	public class DataPointerException : Exception
+	public class ReferenceException : Exception
 	{
 		/// <summary>Creates a new ProtoException instance.</summary>
-		public DataPointerException() { }
+		public ReferenceException() { }
 
 		/// <summary>Creates a new ProtoException instance.</summary>
-		public DataPointerException(string message) : base(message) { }
+		public ReferenceException(string message) : base(message) { }
 
 		/// <summary>Creates a new ProtoException instance.</summary>
-		public DataPointerException(string message, Exception innerException) : base(message, innerException) { }
+		public ReferenceException(string message, Exception innerException) : base(message, innerException) { }
 
 	}
 }

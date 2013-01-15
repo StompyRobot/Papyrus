@@ -15,17 +15,17 @@ using Papyrus.DataTypes;
 namespace Papyrus.Design.Controls
 {
 	/// <summary>
-	/// Interaction logic for DataPointerPicker.xaml
+	/// Interaction logic for RecordPicker.xaml
 	/// </summary>
-	public partial class DataPointerPicker : Window
+	public partial class RecordPicker : Window
 	{
 
 		private ICollection<Record> _records;
 		private ICollection<Record> _filteredRecords; 
 
-		public DataPointer SelectedDataPointer { get; protected set; }
+		public RecordReference SelectedRecordReference { get; protected set; }
 
-		public DataPointerPicker()
+		public RecordPicker()
 		{
 			InitializeComponent();
 			
@@ -36,10 +36,10 @@ namespace Papyrus.Design.Controls
 		/// </summary>
 		/// <param name="currentPointer">Currently selected data pointer</param>
 		/// <returns>Selected data pointer.</returns>
-		public static DataPointer PickRecord(DataPointer currentPointer)
+		public static RecordReference PickRecord(RecordReference currentPointer)
 		{
 
-			var picker = new DataPointerPicker();
+			var picker = new RecordPicker();
 			picker.Init(currentPointer);
 			picker.WindowStartupLocation = WindowStartupLocation.Manual;
 
@@ -62,20 +62,20 @@ namespace Papyrus.Design.Controls
 				return currentPointer;
 
 
-			var newPointer = picker.SelectedDataPointer;
+			var newPointer = picker.SelectedRecordReference;
 
-			DataPointerUtils.ResolveDataPointer(newPointer, currentPointer.Database);
+			RecordReferenceUtils.ResolveReference(newPointer, currentPointer.Database);
 
 
-			return picker.SelectedDataPointer;
+			return picker.SelectedRecordReference;
 
 		}
 
 
-		private void Init(DataPointer currentPointer)
+		private void Init(RecordReference currentPointer)
 		{
 
-			SelectedDataPointer = currentPointer;
+			SelectedRecordReference = currentPointer;
 
 			_records = currentPointer.Database.GetRecordsOfType(currentPointer.RecordType);
 			_filteredRecords = _records;
@@ -131,7 +131,7 @@ namespace Papyrus.Design.Controls
 
 				e.Handled = true;
 				DialogResult = true;
-				SelectedDataPointer = (recordListBox.SelectedItem as Record).GetDataPointer();
+				SelectedRecordReference = (recordListBox.SelectedItem as Record).GetReference();
 				Close();
 				return;
 			}
@@ -145,7 +145,7 @@ namespace Papyrus.Design.Controls
 		{
 			if (recordListBox.SelectedItem != null) {
 				DialogResult = true;
-				SelectedDataPointer = (recordListBox.SelectedItem as Record).GetDataPointer();
+				SelectedRecordReference = (recordListBox.SelectedItem as Record).GetReference();
 				Close();
 			}
 		}

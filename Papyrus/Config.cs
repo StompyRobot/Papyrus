@@ -10,22 +10,22 @@ namespace Papyrus
 	{
 
 		/// <summary>
-		/// Set to true to ignore data pointer resolution errors
+		/// Set to true to ignore reference resolution errors
 		/// </summary>
-		public static bool IgnoreDataPointerErrors = false;
+		public static bool IgnoreReferenceErrors = false;
 
 		/// <summary>
 		/// The default record database to use for new data pointers. (For use in the editor)
 		/// </summary>
 		public static RecordDatabase DefaultRecordDatabase = null;
 
-		public delegate bool DataPointerErrorDelegate(DataPointer dataPointer);
+		public delegate bool ReferenceErrorDelegate(RecordReference recordReference);
 
 		/// <summary>
 		/// Method to call when a data pointer resolution error occurs. Return true from this callback
 		/// to resume loading
 		/// </summary>
-		public static DataPointerErrorDelegate DataPointerErrorCallback;
+		public static ReferenceErrorDelegate ReferenceErrorCallback;
 
 	}
 
