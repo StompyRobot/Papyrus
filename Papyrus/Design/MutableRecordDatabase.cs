@@ -126,9 +126,10 @@ namespace Papyrus.Design
 		/// <summary>
 		/// Returns an editable copy of a record.
 		/// </summary>
-		/// <param name="record"></param>
+		/// <param name="record">The record to take an editable copy of</param>
+		/// <param name="replace">If true, will upon saving will replace the original record with this copy. False will create a new record.</param>
 		/// <returns></returns>
-		public Record GetEditableCopy(Record record)
+		public Record GetEditableCopy(Record record, bool replace = true)
 		{
 
 			var oldContainer = record.Container;
@@ -138,15 +139,26 @@ namespace Papyrus.Design
 			// Resolve any data pointers using this database. (They aren't copied)
 			recordCopy.ResolveDependencies(this);
 
+			// Check if the copy should replace the old record when saved.
+			if (!replace) {
+
+				// If not, we can create a new record container as normal and set the record reference to the copy.
+
+				var newContainer = RecordContainerFactory.CreateNewRecordContainer(record.GetType(), ActivePlugin);
+				newContainer.SetRecord(recordCopy);
+				recordCopy.ID = recordCopy.ID + " Copy";
+				return newContainer.GetRecord();
+
+			}
 			
-			// If this record is located in the active plugin, nothing special is required.
+			// If this record is located in the active plugin, nothing special is required to replace upon saving.
 			if (oldContainer.Location == ActivePlugin.Name) {
 
 				recordCopy.Container = oldContainer;
 
 			} else {
 
-				// Create a new record container which will replace the given record
+				// Create a new record container which will replace the given record, while being contained in a different plugin.
 				var newContainer = RecordContainerFactory.CreateReplaceContainerFromRecord(record, ActivePlugin);
 				recordCopy.Container = newContainer;
 				newContainer.SetRecord(recordCopy);

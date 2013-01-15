@@ -119,7 +119,7 @@ namespace Papyrus
 	[ProtoContract]
 	[DataContract]
 	[JsonObject(MemberSerialization.OptIn, ItemTypeNameHandling = TypeNameHandling.All)]
-	[Editor("Papyrus.Design.Controls.DataPointerTypeEditor, Papyrus.Design.Controls", "Papyrus.Design.Controls.DataPointerTypeEditor, Papyrus.Design.Controls")]
+	//[Editor("Papyrus.Design.Controls.DataPointerTypeEditor, Papyrus.Design.Controls", "Papyrus.Design.Controls.DataPointerTypeEditor, Papyrus.Design.Controls")]
 	public sealed class DataPointer<T> : DataPointer where T : Record
 	{
 		private string _plugin;
@@ -209,6 +209,16 @@ namespace Papyrus
 			if (Database == null) {
 				Database = Config.DefaultRecordDatabase;
 			}
+
+		}
+
+		public DataPointer(DataPointer<T> cloneSource)
+		{
+
+			Index = cloneSource.Index;
+			Source = cloneSource.Source;
+			Plugin = cloneSource.Plugin;
+			ResolvePointer(cloneSource.Database);
 
 		}
 
