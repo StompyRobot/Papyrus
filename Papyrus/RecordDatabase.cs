@@ -106,9 +106,11 @@ namespace Papyrus
 		public ReadOnlyCollection<Record> GetRecordsOfType(Type type)
 		{
 
+			// If this is a concrete type, there will likely be a RecordList for it
 			if (RecordTable.ContainsKey(type))
 				return RecordTable[type];
 
+			// If the type is abstract, get all the RecordLists that are a subtype of it
 			if(type.IsAbstract) {
 				
 				List<Record> records = new List<Record>();
