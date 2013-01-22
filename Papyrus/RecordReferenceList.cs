@@ -44,7 +44,7 @@ namespace Papyrus
 	/// </summary>
 	/// <typeparam name="T">Record type</typeparam>
 	[ProtoContract(IgnoreListHandling = true)]
-	[Editor("Papyrus.Design.Controls.RecordReferenceListTypeEditor, Papyrus.Design.Controls", "Papyrus.Design.Controls.RecordReferenceListTypeEditor, Papyrus.Design.Controls")]
+	//[Editor("Papyrus.Design.Controls.RecordReferenceListTypeEditor, Papyrus.Design.Controls", "Papyrus.Design.Controls.RecordReferenceListTypeEditor, Papyrus.Design.Controls")]
 	public class RecordReferenceList<T> : IRecordReferenceList, IList<RecordReference<T>> where T : Record
 	{
 
