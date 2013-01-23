@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using Newtonsoft.Json;
 using Papyrus.DataTypes;
 using Papyrus.Serialization.Utilities;
 
@@ -95,6 +96,37 @@ namespace Papyrus.Design
 
 				}
 
+			}
+
+			return false;
+
+		}
+
+		/// <summary>
+		/// Serialises a record and compares the json output to another record to detect
+		/// differences
+		/// </summary>
+		/// <param name="record"></param>
+		/// <param name="otherRecord"></param>
+		/// <returns>True if the records are the same</returns>
+		public static bool JsonEquals(this Record record, Record otherRecord)
+		{
+
+			using (var str = new StringWriter()) {
+
+				JsonUtilities.GetPapyrusJsonSerializer().Serialize(str, record);
+
+				var output = str.GetStringBuilder().ToString();
+
+				str.GetStringBuilder().Length = 0;
+
+				JsonUtilities.GetPapyrusJsonSerializer().Serialize(str, otherRecord);
+
+				var output2 = str.GetStringBuilder().ToString();
+
+				if (output == output2)
+					return true;
+	
 			}
 
 			return false;

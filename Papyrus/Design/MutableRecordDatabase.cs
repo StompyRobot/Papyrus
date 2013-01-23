@@ -189,7 +189,7 @@ namespace Papyrus.Design
 					var oldRecord = container.GetRecord();
 
 					// Check if there have been any changes
-					if(oldRecord.BinaryEquals(record)) {
+					if(oldRecord.JsonEquals(record)) {
 						return;
 					}
 
