@@ -129,9 +129,7 @@ namespace Papyrus.DataTypes
 			Database = database;
 
 			foreach (var reference in GetRecordReferences()) {
-
-				(reference as RecordReference).ResolveReference(database);
-
+				reference.ResolveReference(database);
 			}
 
 			foreach (var referenceList in GetRecordReferenceLists()) {
