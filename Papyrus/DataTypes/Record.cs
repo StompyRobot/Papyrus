@@ -31,9 +31,12 @@ namespace Papyrus.DataTypes
 		/// <summary>
 		/// This is the editor name for a data object.
 		/// </summary>
-		[RecordProperty(1), DataMember, Category("Data"), Description("The design ID for this item. This is not shown in the game, it is only for use in the editor.")]
+		[RecordProperty(1), Category("Data"), Description("The design ID for this item. This is not shown in the game, it is only for use in the editor.")]
 		[PropertyTools.DataAnnotations.SortIndex(-1)]
 		[PropertyTools.DataAnnotations.AutoUpdateText]
+#if JSON
+		[Newtonsoft.Json.JsonProperty(Order = int.MinValue)]
+#endif
 		public string ID
 		{
 			get { return _id; }
