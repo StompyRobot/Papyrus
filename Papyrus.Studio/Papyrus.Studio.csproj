@@ -1,0 +1,309 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{38633206-3B48-4CA1-8872-783F8A7D821C}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Papyrus.Studio</RootNamespace>
+    <AssemblyName>Papyrus.Studio</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <TargetFrameworkProfile />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AvalonDock, Version=2.0.1114.0, Culture=neutral, PublicKeyToken=96637cf0d3eefdfb, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\AvalonDock.2.0.1114\lib\net40\AvalonDock.dll</HintPath>
+    </Reference>
+    <Reference Include="AvalonDock.Themes.VS2010">
+      <HintPath>..\packages\AvalonDock.2.0.1114\lib\net40\AvalonDock.Themes.VS2010.dll</HintPath>
+    </Reference>
+    <Reference Include="AvalonWizard, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AvalonWizard.1.2.0\lib\net40\AvalonWizard.dll</HintPath>
+    </Reference>
+    <Reference Include="Caliburn.Micro">
+      <HintPath>..\packages\Caliburn.Micro.1.4.1\lib\net40\Caliburn.Micro.dll</HintPath>
+    </Reference>
+    <Reference Include="Ookii.Dialogs.Wpf">
+      <HintPath>..\packages\Ookii.Dialogs.1.0\lib\net35\Ookii.Dialogs.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="PropertyTools">
+      <HintPath>..\packages\PropertyTools.Wpf.2013.1.11.1\lib\NET40\PropertyTools.dll</HintPath>
+    </Reference>
+    <Reference Include="PropertyTools.Wpf">
+      <HintPath>..\packages\PropertyTools.Wpf.2013.1.11.1\lib\NET40\PropertyTools.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Caliburn.Micro.1.4.1\lib\net40\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="Xceed.Wpf.DataGrid">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.1.9.0\lib\net40\Xceed.Wpf.DataGrid.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.Toolkit">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.1.9.0\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="EditorBootstrapper.cs" />
+    <Compile Include="Framework\BindingUtil.cs" />
+    <Compile Include="Framework\Controls\CollectionEditor\CollectionEditor.cs" />
+    <Compile Include="Framework\Controls\ContextMenuButton.xaml.cs">
+      <DependentUpon>ContextMenuButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Framework\Controls\LongMessageBox.xaml.cs">
+      <DependentUpon>LongMessageBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Framework\Controls\PapyrusPropertyControl.xaml.cs">
+      <DependentUpon>PapyrusPropertyControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Framework\Controls\RecordList\RecordList.cs" />
+    <Compile Include="Framework\Controls\RecordReferenceItem\RecordReferenceItem.cs" />
+    <Compile Include="Framework\Converters\UnitScaleConverter.cs" />
+    <Compile Include="Framework\IRecordDocument.cs" />
+    <Compile Include="Framework\IRecordViewModel.cs" />
+    <Compile Include="Framework\ISaveAware.cs" />
+    <Compile Include="Framework\ItemsControl.cs" />
+    <Compile Include="Framework\PapyrusPropertyControlFactory.cs" />
+    <Compile Include="Framework\RecordViewModel.cs" />
+    <Compile Include="Framework\Reference.cs" />
+    <Compile Include="Framework\Results\Close.cs" />
+    <Compile Include="Framework\Results\CloseDocumentResult.cs" />
+    <Compile Include="Framework\Results\ShowExceptionResult.cs" />
+    <Compile Include="Framework\Results\ShowExt.cs" />
+    <Compile Include="Framework\Results\ShowModalResult.cs" />
+    <Compile Include="Framework\SaveUtil.cs" />
+    <Compile Include="Framework\Services\IExceptionHandler.cs" />
+    <Compile Include="Framework\Services\IRecordEditorProvider.cs" />
+    <Compile Include="Framework\Services\ResultExtensions.cs" />
+    <Compile Include="Framework\TypeSwitch.cs" />
+    <Compile Include="Framework\UIHelper.cs" />
+    <Compile Include="Framework\ViewLocatorTemplateSelector.cs" />
+    <Compile Include="Modules\ExceptionHandler\Module.cs" />
+    <Compile Include="Modules\ExceptionHandler\ViewModels\ExceptionHandlerViewModel.cs" />
+    <Compile Include="Modules\GenericRecordEditor\RecordEditorProvider.cs" />
+    <Compile Include="Modules\GenericRecordEditor\ViewModels\GenericEditorViewModel.cs" />
+    <Compile Include="Modules\GenericRecordEditor\ViewModels\GenericRecordViewModel.cs" />
+    <Compile Include="Modules\GenericRecordEditor\Views\GenericEditorView.xaml.cs">
+      <DependentUpon>GenericEditorView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\GenericRecordEditor\Views\GenericRecordView.xaml.cs">
+      <DependentUpon>GenericRecordView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\PapyrusManager\IPapyrusManager.cs" />
+    <Compile Include="Modules\PapyrusManager\Module.cs" />
+    <Compile Include="Modules\PapyrusManager\ViewModels\ConvertPluginViewModel.cs" />
+    <Compile Include="Modules\PapyrusManager\ViewModels\EditorSelectViewModel.cs" />
+    <Compile Include="Modules\PapyrusManager\ViewModels\NewPluginViewModel.cs" />
+    <Compile Include="Modules\PapyrusManager\ViewModels\PapyrusErrorViewModel.cs" />
+    <Compile Include="Modules\PapyrusManager\ViewModels\PapyrusManagerViewModel.cs" />
+    <Compile Include="Modules\PapyrusManager\ViewModels\PapyrusSetupViewModel.cs" />
+    <Compile Include="Modules\PapyrusManager\Views\ConvertPluginView.xaml.cs">
+      <DependentUpon>ConvertPluginView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\PapyrusManager\Views\EditorSelectView.xaml.cs">
+      <DependentUpon>EditorSelectView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\PapyrusManager\Views\NewPluginView.xaml.cs">
+      <DependentUpon>NewPluginView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\PapyrusManager\Views\PapyrusSetupView.xaml.cs">
+      <DependentUpon>PapyrusSetupView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\RecordBrowser\IRecordBrowser.cs" />
+    <Compile Include="Modules\RecordBrowser\Module.cs" />
+    <Compile Include="Modules\RecordBrowser\ViewModels\RecordBrowserViewModel.cs" />
+    <Compile Include="Modules\RecordBrowser\ViewModels\RecordTypeViewModel.cs" />
+    <Compile Include="Modules\RecordBrowser\Views\RecordBrowserView.xaml.cs">
+      <DependentUpon>RecordBrowserView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Startup\Module.cs" />
+    <Compile Include="PapyrusCloseStrategy.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Dependencies\Gemini\src\Gemini\Gemini.csproj">
+      <Project>{13dbfc87-c152-4a86-94b0-d9944beef647}</Project>
+      <Name>Gemini</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Papyrus.Design.Controls\Papyrus.Design.Controls.csproj">
+      <Project>{6fb5a4f1-12d6-43ed-ad05-2cf37d830266}</Project>
+      <Name>Papyrus.Design.Controls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Papyrus\Papyrus.csproj">
+      <Project>{8b4c5b15-955d-47fe-a64e-f1457286786c}</Project>
+      <Name>Papyrus</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Framework\Controls\CollectionEditor\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Framework\Controls\ContextMenuButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Framework\Controls\LongMessageBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Framework\Controls\PapyrusPropertyControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Framework\Controls\RecordList\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Framework\Controls\RecordReferenceItem\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Framework\Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\GenericRecordEditor\Views\GenericEditorView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\GenericRecordEditor\Views\GenericRecordView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\PapyrusManager\Views\ConvertPluginView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\PapyrusManager\Views\EditorSelectView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\PapyrusManager\Views\NewPluginView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\PapyrusManager\Views\PapyrusSetupView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\RecordBrowser\Views\RecordBrowserResources.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\RecordBrowser\Views\RecordBrowserView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\RecordBrowser\Views\VS2010Theme.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Framework\Resources\" />
+    <Folder Include="Modules\Startup\ViewModels\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\EngineHardpoint.png" />
+    <Resource Include="Resources\Icons\Copy.png" />
+    <Resource Include="Resources\Icons\Database.png" />
+    <Resource Include="Resources\Icons\Eyedropper.png" />
+    <Resource Include="Resources\Icons\Fullscreen.png" />
+    <Resource Include="Resources\Icons\Minus_Blue.png" />
+    <Resource Include="Resources\Icons\New.png" />
+    <Resource Include="Resources\Icons\plus_24x24.png" />
+    <Resource Include="Resources\Icons\Plus_Blue.png" />
+    <Resource Include="Resources\Icons\Search.png" />
+    <Resource Include="Resources\Icons\Table.ico" />
+    <Resource Include="Resources\Icons\Table.png" />
+    <Resource Include="Resources\Icons\x_28x28.png" />
+    <Resource Include="Resources\WeaponHardpoint.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

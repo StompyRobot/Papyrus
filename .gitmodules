@@ -1,0 +1,3 @@
+[submodule "Dependencies/Gemini"]
+	path = Dependencies/Gemini
+	url = git://github.com/stompyrobot/gemini.git

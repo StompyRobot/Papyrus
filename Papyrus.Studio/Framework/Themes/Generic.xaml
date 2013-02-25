@@ -1,0 +1,32 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:pt="http://propertytools.codeplex.com"
+					xmlns:views="clr-namespace:Gemini.Modules.PropertyGrid.Views;assembly=Gemini"
+					xmlns:framework="clr-namespace:Papyrus.Studio.Framework;assembly=Papyrus.Studio"
+					xmlns:controls="clr-namespace:Papyrus.Studio.Framework.Controls" xmlns:framework2="clr-namespace:Papyrus.Studio.Framework">
+	
+	<ResourceDictionary.MergedDictionaries>
+
+		<ResourceDictionary Source="/Papyrus.Studio;component/Framework/Controls/RecordReferenceItem/Generic.xaml" />
+        <ResourceDictionary Source="/Papyrus.Studio;component/Framework/Controls/RecordList/Generic.xaml" />
+        <ResourceDictionary Source="/Papyrus.Studio;component/Framework/Controls/CollectionEditor/Generic.xaml" />
+		
+	</ResourceDictionary.MergedDictionaries>
+	
+	<!-- Override the default property grid with our property control -->
+	<framework2:PapyrusPropertyControlFactory x:Key="ControlFactory" />
+	
+	<Style TargetType="views:PropertyGridView">
+
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate>
+					
+					<controls:PapyrusPropertyControl SelectedObject="{Binding SelectedObject}"></controls:PapyrusPropertyControl>
+					
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+		
+	</Style>
+
+</ResourceDictionary>

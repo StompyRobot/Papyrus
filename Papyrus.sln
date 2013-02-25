@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Papyrus", "Papyrus\Papyrus.csproj", "{8B4C5B15-955D-47FE-A64E-F1457286786C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Papyrus.Tests", "Papyrus.Tests\Papyrus.Tests.csproj", "{2B4CF5EF-0E3B-4BBC-99A1-765FBE3E3A98}"
@@ -15,6 +15,19 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Papyrus.Design.Controls", "Papyrus.Design.Controls\Papyrus.Design.Controls.csproj", "{6FB5A4F1-12D6-43ED-AD05-2CF37D830266}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample", "Sample\Sample.csproj", "{1400E2B1-F2B9-4DF6-AD23-6618243F3D50}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Papyrus.Studio", "Papyrus.Studio\Papyrus.Studio.csproj", "{38633206-3B48-4CA1-8872-783F8A7D821C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "external", "external", "{4ED7C39D-1599-40E0-814A-26D59F95AF5D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{27D2A38A-BCE5-43C2-8509-13CE4F4E904F}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gemini", "Dependencies\Gemini\src\Gemini\Gemini.csproj", "{13DBFC87-C152-4A86-94B0-D9944BEEF647}"
 EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
@@ -69,8 +82,31 @@ Global
 		{1400E2B1-F2B9-4DF6-AD23-6618243F3D50}.Release|Mixed Platforms.Build.0 = Release|x86
 		{1400E2B1-F2B9-4DF6-AD23-6618243F3D50}.Release|x86.ActiveCfg = Release|x86
 		{1400E2B1-F2B9-4DF6-AD23-6618243F3D50}.Release|x86.Build.0 = Release|x86
+		{38633206-3B48-4CA1-8872-783F8A7D821C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38633206-3B48-4CA1-8872-783F8A7D821C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38633206-3B48-4CA1-8872-783F8A7D821C}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{38633206-3B48-4CA1-8872-783F8A7D821C}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{38633206-3B48-4CA1-8872-783F8A7D821C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{38633206-3B48-4CA1-8872-783F8A7D821C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38633206-3B48-4CA1-8872-783F8A7D821C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38633206-3B48-4CA1-8872-783F8A7D821C}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{38633206-3B48-4CA1-8872-783F8A7D821C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{38633206-3B48-4CA1-8872-783F8A7D821C}.Release|x86.ActiveCfg = Release|Any CPU
+		{13DBFC87-C152-4A86-94B0-D9944BEEF647}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13DBFC87-C152-4A86-94B0-D9944BEEF647}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13DBFC87-C152-4A86-94B0-D9944BEEF647}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{13DBFC87-C152-4A86-94B0-D9944BEEF647}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{13DBFC87-C152-4A86-94B0-D9944BEEF647}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{13DBFC87-C152-4A86-94B0-D9944BEEF647}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13DBFC87-C152-4A86-94B0-D9944BEEF647}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13DBFC87-C152-4A86-94B0-D9944BEEF647}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{13DBFC87-C152-4A86-94B0-D9944BEEF647}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{13DBFC87-C152-4A86-94B0-D9944BEEF647}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{13DBFC87-C152-4A86-94B0-D9944BEEF647} = {4ED7C39D-1599-40E0-814A-26D59F95AF5D}
 	EndGlobalSection
 EndGlobal
