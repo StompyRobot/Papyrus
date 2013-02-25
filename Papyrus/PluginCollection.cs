@@ -96,6 +96,9 @@ namespace Papyrus
 		public static List<PluginHeader> SortDependencies(List<PluginHeader> plugins)
 		{
 
+			if (!plugins.Any())
+				return new List<PluginHeader>();
+
 			var sorter = new Utilities.DependencySorter<PluginHeader>();
 			sorter.AddObjects(plugins.ToArray());
 

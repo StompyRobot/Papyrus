@@ -12,11 +12,6 @@ namespace Papyrus.Studio.Modules.PapyrusManager
 	{
 
 		event EventHandler RecordDatabaseChanged;
-
-		/// <summary>
-		/// Papyrus modules (paths to assemblies) active
-		/// </summary>
-		IObservableCollection<string> Modules { get; }
 		
 		/// <summary>
 		/// Opens the data file selection screen

@@ -45,15 +45,9 @@ namespace Papyrus.Studio.Modules.PapyrusManager.ViewModels
 			}
 		}
 
-		private Caliburn.Micro.BindableCollection<string> _modules = new BindableCollection<string>();
-
 		private List<string> _activeMasters;
 		private string _activePlugin;
 
-		public IObservableCollection<string> Modules
-		{
-			get { return _modules; }
-		}
 
 		private List<IRecordDocument> _recordEditors = new List<IRecordDocument>(); 
 
@@ -68,7 +62,7 @@ namespace Papyrus.Studio.Modules.PapyrusManager.ViewModels
 			if (!_papyrusInit)
 			{
 
-				Papyrus.RecordDatabase.Initialize(Modules);
+				Papyrus.RecordDatabase.Initialize(EditorBootstrapper.PapyrusModules);
 				_papyrusInit = true;
 
 
@@ -168,7 +162,8 @@ namespace Papyrus.Studio.Modules.PapyrusManager.ViewModels
 
 			yield return new SequentialResult(SelectDataFiles().GetEnumerator());
 
-		} 
+		}
+
 
 		public IEnumerable<IResult> SelectDataFiles()
 		{

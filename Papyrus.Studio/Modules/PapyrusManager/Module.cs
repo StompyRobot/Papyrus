@@ -22,8 +22,6 @@ namespace Papyrus.Studio.Modules.PapyrusManager
 		public override void Initialize()
 		{
 
-			_papyrusManager.Modules.AddRange(Settings.Default.PapyrusModules.Split(';'));
-
 			var menuItem = Shell.MainMenu.FirstOrDefault(p => p.Name == "File") as MenuItem;
 
 			if (menuItem != null)

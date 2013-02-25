@@ -44,4 +44,4 @@ using System.Runtime.Versioning;
 //      Build Number
 //      Revision
 //
-[assembly: AssemblyVersion("1.0.0.0")]
+[assembly: AssemblyVersion("0.1.0.0")]
