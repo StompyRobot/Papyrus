@@ -8,6 +8,7 @@
 		private int _moveSpeed;
 		private int _radius;
 		private string _unitName;
+		private RecordReference<SimpleUnit> _testUnit = RecordReference<SimpleUnit>.Empty;
 
 		[RecordProperty(1)]
 		public string UnitName
@@ -54,6 +55,18 @@
 				ThrowIfReadOnly("Radius");
 				_radius = value;
 				RaisePropertyChanged("Radius");
+			}
+		}
+
+		[RecordProperty(5)]
+		public RecordReference<SimpleUnit> TestUnit
+		{
+			get { return _testUnit; }
+			set
+			{
+				ThrowIfReadOnly("TestUnit");
+				_testUnit = value;
+				RaisePropertyChanged("TestUnit");
 			}
 		}
 

@@ -21,7 +21,7 @@ namespace Papyrus.Studio.Modules.RecordBrowser
 			MainMenu.All.First(x => x.Name == "View")
 				.Add(new MenuItem("Record Browser", OpenRecordBrowser).WithIcon("Resources/Icons/Database.png"));
 
-			//Coroutine.BeginExecute(OpenRecordBrowser().GetEnumerator());
+			Coroutine.BeginExecute(OpenRecordBrowser().GetEnumerator());
 
 		}
 

@@ -126,7 +126,7 @@ namespace Papyrus.Studio.Framework.Controls
 			// Hack to fix control factory not being applied correctly
 			var propGrid = UIHelper.FindChild<PropertyControl>(this, "_propGrid");
 			
-			propGrid.PropertyControlFactory = new PapyrusPropertyControlFactory();
+			propGrid.PropertyControlFactory = PapyrusPropertyControlFactory.GetControlFactory();
 			
 			// Hack to have items refreshing correctly when a property changes in the grid
 			var listView = UIHelper.FindChild<ListBox>(this, "_itemList");

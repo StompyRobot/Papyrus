@@ -8,10 +8,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-		<pt:PropertyControl UseTabs="False" SelectedObject="{Binding Path=Record}" Background="White" Margin="1" Name="propGrid">
-			<pt:PropertyControl.PropertyControlFactory>
-				<framework:PapyrusPropertyControlFactory />
-			</pt:PropertyControl.PropertyControlFactory>
+		<pt:PropertyControl UseTabs="False" SelectedObject="{Binding Path=Record}" Background="White" Margin="1" Name="PropGrid">
 		</pt:PropertyControl>
     </Grid>
 </UserControl>

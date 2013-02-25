@@ -38,7 +38,7 @@ namespace Papyrus.Studio.Framework.Controls
 		private void OnLoaded(object sender, RoutedEventArgs routedEventArgs)
 		{
 			
-			propControl.PropertyControlFactory = new PapyrusPropertyControlFactory();
+			propControl.PropertyControlFactory = PapyrusPropertyControlFactory.GetControlFactory();
 
 		}
 
