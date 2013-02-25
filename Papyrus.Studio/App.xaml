@@ -1,13 +1,12 @@
 ﻿<Application x:Class="Papyrus.Studio.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:Editor="clr-namespace:Papyrus.Studio">
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:editor="clr-namespace:Papyrus.Studio">
     <Application.Resources>
         <ResourceDictionary>
                 <ResourceDictionary.MergedDictionaries>
                     <ResourceDictionary>
-                        <Editor:EditorBootstrapper x:Key="Bootstrapper" />
+                        <editor:EditorBootstrapper x:Key="Bootstrapper" />
                     </ResourceDictionary>
-                    <ResourceDictionary Source="Modules/RecordBrowser/Views/VS2010Theme.xaml"/>
                     <ResourceDictionary Source="Framework/Themes/Generic.xaml"/>
                 </ResourceDictionary.MergedDictionaries>
             </ResourceDictionary>

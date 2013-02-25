@@ -278,7 +278,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Framework\Resources\" />
     <Folder Include="Modules\Startup\ViewModels\" />
   </ItemGroup>
   <ItemGroup>

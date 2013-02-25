@@ -6,7 +6,8 @@
 	
 	<ResourceDictionary.MergedDictionaries>
 
-		<ResourceDictionary Source="/Papyrus.Studio;component/Framework/Controls/RecordReferenceItem/Generic.xaml" />
+        <ResourceDictionary Source="/Papyrus.Studio;component/Modules/RecordBrowser/Views/VS2010Theme.xaml"/>
+        <ResourceDictionary Source="/Papyrus.Studio;component/Framework/Controls/RecordReferenceItem/Generic.xaml" />
         <ResourceDictionary Source="/Papyrus.Studio;component/Framework/Controls/RecordList/Generic.xaml" />
         <ResourceDictionary Source="/Papyrus.Studio;component/Framework/Controls/CollectionEditor/Generic.xaml" />
 		

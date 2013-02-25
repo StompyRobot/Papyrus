@@ -4,7 +4,7 @@ using Gemini.Framework.Services;
 
 namespace Papyrus.Studio
 {
-	class EditorBootstrapper : AppBootstrapper
+	public class EditorBootstrapper : AppBootstrapper
 	{
 
 		protected override void OnStartup(object sender, System.Windows.StartupEventArgs e)
