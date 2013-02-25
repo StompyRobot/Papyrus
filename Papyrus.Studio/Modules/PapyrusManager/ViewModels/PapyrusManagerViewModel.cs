@@ -160,8 +160,6 @@ namespace Papyrus.Studio.Modules.PapyrusManager.ViewModels
 			Settings.Default.DataPath = folder.SelectedPath;
 			Settings.Default.Save();
 
-			yield return new SequentialResult(SelectDataFiles().GetEnumerator());
-
 		}
 
 
