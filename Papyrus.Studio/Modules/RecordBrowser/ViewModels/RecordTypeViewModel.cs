@@ -20,5 +20,7 @@ namespace Papyrus.Studio.Modules.RecordBrowser.ViewModels
 
 		public bool Visible { get; set; }
 
+		public RecordTypeViewModel Parent { get; set; }
+
 	}
 }

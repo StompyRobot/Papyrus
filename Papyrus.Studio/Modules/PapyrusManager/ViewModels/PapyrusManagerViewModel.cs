@@ -62,20 +62,34 @@ namespace Papyrus.Studio.Modules.PapyrusManager.ViewModels
 			if (!_papyrusInit)
 			{
 
-				Papyrus.RecordDatabase.Initialize(EditorBootstrapper.PapyrusModules);
-				_papyrusInit = true;
 
 
-				bool yesToAll = false;
+				Exception error = null;
 
-				Papyrus.Config.ReferenceErrorCallback = pointer =>
-				{
-					if (yesToAll)
-						return true;
+				try {
 
-					var handler = new PapyrusErrorViewModel();
-					return handler.HandleException(pointer, ref yesToAll);
-				};
+					Papyrus.RecordDatabase.Initialize(EditorBootstrapper.PapyrusModules);
+
+					_papyrusInit = true;
+
+					bool yesToAll = false;
+
+					Papyrus.Config.ReferenceErrorCallback = pointer =>
+					{
+						if (yesToAll)
+							return true;
+
+						var handler = new PapyrusErrorViewModel();
+						return handler.HandleException(pointer, ref yesToAll);
+					};
+
+				} catch (Exception e) {
+					error = e;
+				}
+
+				if (error != null) {
+					ShowExt.Exception(error);
+				}
 
 			}
 

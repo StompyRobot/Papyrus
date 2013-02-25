@@ -269,10 +269,14 @@ namespace Papyrus.Studio.Modules.RecordBrowser.ViewModels
 				{
 
 					var newRecordType = new RecordTypeViewModel(recordType.Type);
-
-
 					newRecordType.Visible = recordType.ShowInEditor;
-					recordTypeDictionary[baseType].SubTypes.Add(newRecordType);
+
+					var parent = recordTypeDictionary[baseType];
+					parent = FindVisibleParent(parent);
+
+					parent.SubTypes.Add(newRecordType);
+
+					newRecordType.Parent = parent;
 					recordTypeDictionary[recordType.Type] = newRecordType;
 					recordTypes.RemoveAt(0);
 
@@ -289,6 +293,21 @@ namespace Papyrus.Studio.Modules.RecordBrowser.ViewModels
 			}
 
 			return baseRecordType;
+
+		}
+
+		/// <summary>
+		/// Find the nearest visible parent in the tree, stopping at root.
+		/// </summary>
+		/// <param name="parent"></param>
+		/// <returns></returns>
+		private static RecordTypeViewModel FindVisibleParent(RecordTypeViewModel parent)
+		{
+
+			while (!parent.Visible && parent.Parent != null)
+				parent = parent.Parent;
+
+			return parent;
 
 		}
 

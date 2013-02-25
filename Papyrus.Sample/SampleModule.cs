@@ -3,7 +3,7 @@
 namespace Papyrus.Sample
 {
 
-	[Record]
+	[Record(ShowInEditor = false)]
 	[ChildRecord(10, typeof(SimpleUnit))]
 	public class SampleModule : Papyrus.DataTypes.Record
 	{
