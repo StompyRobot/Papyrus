@@ -27,8 +27,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{27D2A3
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gemini", "Dependencies\Gemini\src\Gemini\Gemini.csproj", "{13DBFC87-C152-4A86-94B0-D9944BEEF647}"
-EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Papyrus.vsmdi
@@ -92,21 +90,8 @@ Global
 		{38633206-3B48-4CA1-8872-783F8A7D821C}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{38633206-3B48-4CA1-8872-783F8A7D821C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{38633206-3B48-4CA1-8872-783F8A7D821C}.Release|x86.ActiveCfg = Release|Any CPU
-		{13DBFC87-C152-4A86-94B0-D9944BEEF647}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{13DBFC87-C152-4A86-94B0-D9944BEEF647}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{13DBFC87-C152-4A86-94B0-D9944BEEF647}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{13DBFC87-C152-4A86-94B0-D9944BEEF647}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{13DBFC87-C152-4A86-94B0-D9944BEEF647}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{13DBFC87-C152-4A86-94B0-D9944BEEF647}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{13DBFC87-C152-4A86-94B0-D9944BEEF647}.Release|Any CPU.Build.0 = Release|Any CPU
-		{13DBFC87-C152-4A86-94B0-D9944BEEF647}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{13DBFC87-C152-4A86-94B0-D9944BEEF647}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{13DBFC87-C152-4A86-94B0-D9944BEEF647}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{13DBFC87-C152-4A86-94B0-D9944BEEF647} = {4ED7C39D-1599-40E0-814A-26D59F95AF5D}
 	EndGlobalSection
 EndGlobal
