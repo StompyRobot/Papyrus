@@ -13,6 +13,13 @@ namespace Papyrus.Studio.Framework
 	public class PapyrusPropertyControlFactory : DefaultPropertyControlFactory
 	{
 
+		public static Type FactoryType = typeof(PapyrusPropertyControlFactory);
+
+		public static IPropertyControlFactory GetControlFactory()
+		{
+			return Activator.CreateInstance(FactoryType) as IPropertyControlFactory;
+		}
+
 		public PapyrusPropertyControlFactory()
 		{
 			
