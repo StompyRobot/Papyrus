@@ -55,11 +55,11 @@
     </Reference>
     <Reference Include="PropertyTools, Version=0.0.0.0, Culture=neutral, PublicKeyToken=ea0c9f2b460934d0, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\PropertyTools.Wpf.2013.1.11.1\lib\NET40\PropertyTools.dll</HintPath>
+      <HintPath>..\lib\PropertyTools.dll</HintPath>
     </Reference>
     <Reference Include="PropertyTools.Wpf, Version=2013.1.1.1, Culture=neutral, PublicKeyToken=ea0c9f2b460934d0, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\PropertyTools.Wpf.2013.1.11.1\lib\NET40\PropertyTools.Wpf.dll</HintPath>
+      <HintPath>..\lib\PropertyTools.Wpf.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />

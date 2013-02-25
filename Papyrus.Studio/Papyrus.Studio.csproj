@@ -31,10 +31,11 @@
     <PlatformTarget>x86</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>..\Output\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>..\Output\Papyrus.Studio.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject />
@@ -62,11 +63,13 @@
     <Reference Include="Ookii.Dialogs.Wpf">
       <HintPath>..\packages\Ookii.Dialogs.1.0\lib\net35\Ookii.Dialogs.Wpf.dll</HintPath>
     </Reference>
-    <Reference Include="PropertyTools">
-      <HintPath>..\packages\PropertyTools.Wpf.2013.1.11.1\lib\NET40\PropertyTools.dll</HintPath>
+    <Reference Include="PropertyTools, Version=0.0.0.0, Culture=neutral, PublicKeyToken=ea0c9f2b460934d0, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\PropertyTools.dll</HintPath>
     </Reference>
-    <Reference Include="PropertyTools.Wpf">
-      <HintPath>..\packages\PropertyTools.Wpf.2013.1.11.1\lib\NET40\PropertyTools.Wpf.dll</HintPath>
+    <Reference Include="PropertyTools.Wpf, Version=2013.1.1.1, Culture=neutral, PublicKeyToken=ea0c9f2b460934d0, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\PropertyTools.Wpf.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
