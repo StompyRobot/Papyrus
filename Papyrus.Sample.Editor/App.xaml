@@ -1,0 +1,24 @@
+﻿<Application x:Class="Papyrus.Sample.Editor.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:studio="clr-namespace:Papyrus.Studio;assembly=Papyrus.Studio"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary>
+
+                    <studio:EditorBootstrapper x:Key="bootstrap">
+                        <studio:EditorBootstrapper.Modules>
+                            <sys:String>Papyrus.Sample</sys:String>
+                        </studio:EditorBootstrapper.Modules>
+                    </studio:EditorBootstrapper>
+                    
+                </ResourceDictionary>
+                <ResourceDictionary Source="/Papyrus.Studio;component/Framework/Themes/Generic.xaml"/>
+                
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+
+    </Application.Resources>
+</Application>

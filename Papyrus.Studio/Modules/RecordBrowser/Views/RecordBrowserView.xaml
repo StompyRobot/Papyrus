@@ -1,0 +1,106 @@
+﻿<UserControl Name="RecordBrowser" x:Class="Papyrus.Studio.Modules.RecordBrowser.Views.RecordBrowserView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:viewModels="clr-namespace:Papyrus.Studio.Modules.RecordBrowser.ViewModels" mc:Ignorable="d" 
+             d:DesignHeight="350" MinWidth="180"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:cal="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro"
+             xmlns:pt="http://propertytools.codeplex.com"
+             d:DataContext="{d:DesignInstance Type=viewModels:RecordBrowserViewModel}">
+	<UserControl.Resources>
+		<ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="VS2010Theme.xaml"></ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+			<pt:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+			<!-- Header data grid column. Has to be here to get the main DataContext to fetch the active record type name.  -->
+            <DataGridTextColumn x:Key="HeaderDataGridColumn" CanUserReorder="False" Binding="{Binding Path=ID}" Header="{Binding Path=DataContext.SelectedRecordTypeName, Source={x:Reference Name=RecordBrowser}}" />
+		</ResourceDictionary>
+	</UserControl.Resources>
+	<DockPanel>
+
+		<Grid>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="30*" />
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="50*" />
+			</Grid.RowDefinitions>
+			
+			<TreeView Height="Auto" Name="RecordTypes" Width="Auto" Grid.Row="0" SelectedItemChanged="RecordTypes_SelectedItemChanged">
+				<TreeView.ItemTemplate>
+					<HierarchicalDataTemplate DataType = "{x:Type viewModels:RecordTypeViewModel}"
+									ItemsSource = "{Binding Path=SubTypes}">
+						<TextBlock Text="{Binding Path=Type.Name}" Visibility="{Binding Path=Visible, Converter={StaticResource BoolToVisibilityConverter}}"/>
+					</HierarchicalDataTemplate>
+				</TreeView.ItemTemplate>
+				<TreeView.ItemContainerStyle>
+				<Style TargetType="TreeViewItem">
+
+					<Setter Property="Visibility" Value="Collapsed"/>
+					<Style.Triggers>
+						<DataTrigger Binding="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=Header.Visible }" Value="True">
+							<Setter Property="Visibility" Value="Visible"/>
+						</DataTrigger>
+					</Style.Triggers>
+
+					</Style>
+					
+				</TreeView.ItemContainerStyle>
+			</TreeView>
+			
+			<GridSplitter Background="Transparent" ResizeDirection="Rows" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="3" Width="Auto"></GridSplitter>
+			<DockPanel Grid.Row="2">
+                <Grid DockPanel.Dock="Top" Height="26" Style="{DynamicResource ToolBarStyle}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel DockPanel.Dock="Top" Height="26" Width="Auto" FlowDirection="LeftToRight" Orientation="Horizontal">
+                        
+                        <Button Name="NewRecord" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Template="{DynamicResource ToolbarButtonControlTemplate}" ToolTip="New Record">
+                            <Image Source="/Papyrus.Studio;component/Resources/Icons/New.png" ></Image>
+                        </Button>
+                        <Button Name="CopyRecord" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Template="{DynamicResource ToolbarButtonControlTemplate}" ToolTip="Duplicate Record">
+                            <Image Source="/Papyrus.Studio;component/Resources/Icons/Copy.png" ></Image>
+                        </Button>
+                        
+                    </StackPanel>
+
+                    <xctk:WatermarkTextBox Grid.Column="1" Width="Auto" Height="Auto" Margin="1,1,1,1" VerticalAlignment="Stretch" Watermark="Filter" x:Name="Filter" SelectAllOnGotFocus="True" />
+
+
+                </Grid>
+
+				<DataGrid x:Name="RecordGrid" SelectedCellsChanged="DataGrid_SelectedCellsChanged" MouseDoubleClick="OnDataGridDoubleClick" AutoGenerateColumns="False" ItemsSource="{Binding Path=ActiveRecords}" IsReadOnly="True" SelectionMode="Single" CanUserResizeRows="False" CanUserReorderColumns="False" IsTextSearchEnabled="True">
+					<DataGrid.Columns>
+						<StaticResource ResourceKey="HeaderDataGridColumn"/>
+					</DataGrid.Columns>
+
+                    <DataGrid.Resources>
+                        <ContextMenu x:Key="RowContextMenu">
+                            <MenuItem Header="Open"
+                              cal:Message.Attach="[Event Click] = [Action OpenRecord($dataContext)]"
+                              cal:Action.TargetWithoutContext="{Binding DataContext, Source={x:Reference RecordBrowser}}" />
+                            <MenuItem Header="Open With..."
+                              cal:Message.Attach="[Event Click] = [Action OpenRecordWith($dataContext)]"
+                              cal:Action.TargetWithoutContext="{Binding DataContext, Source={x:Reference RecordBrowser}}" />
+                            <MenuItem Header="Delete Record (!!)"
+                              cal:Message.Attach="[Event Click] = [Action DeleteRecord($dataContext)]"
+                              cal:Action.TargetWithoutContext="{Binding DataContext, Source={x:Reference RecordBrowser}}" />
+                        </ContextMenu>
+                    </DataGrid.Resources>
+
+                    <DataGrid.RowStyle>
+                        <Style TargetType="DataGridRow">
+                            <Setter Property="ContextMenu" Value="{StaticResource RowContextMenu}"/>
+                        </Style>
+                    </DataGrid.RowStyle>
+
+                </DataGrid>
+			</DockPanel>
+		</Grid>
+	</DockPanel>
+</UserControl>

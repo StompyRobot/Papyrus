@@ -53,16 +53,16 @@ namespace Papyrus
 		/// Returns a list of data pointers that records in this list contain
 		/// </summary>
 		/// <returns></returns>
-		public override List<DataPointer> GetDataPointers()
+		public override List<RecordReference> GetRecordReferences()
 		{
 
-			var dataPointers = new List<DataPointer>();
+			var references = new List<RecordReference>();
 
 			foreach (var record in Records) {
-				dataPointers.AddRange(record.Record.GetDataPointers().Except(dataPointers));
+				references.AddRange(record.Record.GetRecordReferences().Except(references));
 			}
 
-			return dataPointers;
+			return references;
 
 		}
 
@@ -88,13 +88,13 @@ namespace Papyrus
 		/// Returns a list of data pointer lists in this record list.
 		/// </summary>
 		/// <returns></returns>
-		public override List<IDataPointerList> GetDataPointerLists()
+		public override List<IRecordReferenceList> GetRecordReferenceLists()
 		{
 
-			var retList = new List<IDataPointerList>();
+			var retList = new List<IRecordReferenceList>();
 
 			foreach (var recordContainer in Records) {
-				retList.AddRange(recordContainer.Record.GetDataPointerLists());
+				retList.AddRange(recordContainer.Record.GetRecordReferenceLists());
 			}
 
 			return retList;

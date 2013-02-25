@@ -1,0 +1,87 @@
+﻿<Window x:Class="Papyrus.Studio.Modules.PapyrusManager.Views.NewPluginView"
+		xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:aw="clr-namespace:AvalonWizard;assembly=AvalonWizard" xmlns:cal="http://www.caliburnproject.org"
+        Title="New Plugin" Height="470" Width="600" ResizeMode="NoResize">
+	<Grid>
+		<aw:Wizard Finished="Wizard_Finished" Cancelled="Wizard_Cancelled" aw:Designer.PageIndex="2" WizardStyle="Wizard97" aw:Wizard97.Subtitle="Create a new empty plugin." FinishButtonContent="Create Plugin">
+
+			<aw:Wizard.Resources>
+				<Style TargetType="{x:Type aw:WizardPage}">
+					<Setter Property="Padding" Value="18" />
+				</Style>
+			</aw:Wizard.Resources>
+
+			<aw:WizardPage Header="New Plugin" ShowBack="True" Padding="16">
+				
+				This wizard will create a new plugin from scratch.
+				
+			</aw:WizardPage>
+			<!--<xctk:WizardPage Title="New Plugin" Description="This wizard will create a new plugin."></xctk:WizardPage>-->
+
+			<aw:WizardPage Name="PageTwo" Header="Plugin Details" Padding="16" AllowNext="{Binding PageOneValid}">
+				<Grid HorizontalAlignment="Stretch">
+
+					<Grid.RowDefinitions>
+						<RowDefinition Height="Auto" />
+						<RowDefinition Height="Auto" />
+						<RowDefinition Height="Auto" />
+						<RowDefinition Height="Auto" />
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="1*" />
+						<ColumnDefinition Width="3*" />
+					</Grid.ColumnDefinitions>
+
+					<Label HorizontalAlignment="Stretch" Grid.Row="0" Grid.Column="0" Content="Plugin Name" VerticalContentAlignment="Center" HorizontalContentAlignment="Right"></Label>
+					<TextBox HorizontalAlignment="Stretch" Text="{Binding Path=PluginName, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Margin="2" />
+
+					<Label HorizontalAlignment="Stretch" Grid.Row="1" Grid.Column="0" Content="Plugin Author" HorizontalContentAlignment="Right"></Label>
+					<TextBox HorizontalAlignment="Stretch" Grid.Row="1" Text="{Binding PluginAuthor}" Grid.Column="1" Margin="2" />
+
+					<Label HorizontalAlignment="Stretch" Grid.Row="2" Grid.Column="0" Content="Plugin Description" HorizontalContentAlignment="Right"></Label>
+					<TextBox HorizontalAlignment="Stretch" Grid.Row="2" Text="{Binding PluginDescription}" Grid.Column="1" Margin="2,2,2,-91" Height="115" Grid.RowSpan="2" TextWrapping="Wrap" AcceptsReturn="True" />
+				</Grid>
+
+			</aw:WizardPage>
+
+			<aw:WizardPage Header="Plugin Details" Padding="16" AllowFinish="{Binding PageTwoValid}">
+				
+				<Grid>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="Auto" />
+						<RowDefinition Height="Auto"/>
+						<RowDefinition Height="301*" />
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="Auto" />
+						<ColumnDefinition Width="370*" />
+					</Grid.ColumnDefinitions>
+					
+					<Label Content="Plugin Directory" HorizontalContentAlignment="Right" Margin="5"></Label>
+					<DockPanel Grid.Column="1" >
+						<Button Width="20" Margin="0,5,5,5" Content="..." DockPanel.Dock="Right" cal:Message.Attach="[Event Click] = [Action PickDirectory()]">
+							
+						</Button>
+						<TextBox Margin="5" Text="{Binding Path=PluginDirectory, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+					</DockPanel>
+					<Label Content="Plugin Type" Grid.Row="1" HorizontalContentAlignment="Right" />
+					<DockPanel Grid.Column="1" Grid.Row="1" Width="Auto" Height="Auto">
+						<TextBlock DockPanel.Dock="Bottom" Text="{Binding Path=PluginType.Description, Mode=OneWay}" TextWrapping="Wrap"></TextBlock>
+						
+						<ListBox ItemsSource="{Binding Path=PluginTypes, UpdateSourceTrigger=PropertyChanged}" Height="Auto" HorizontalAlignment="Stretch" Margin="6" SelectedItem="{Binding PluginType}" VerticalAlignment="Stretch">
+							<ListBox.ItemTemplate>
+								<DataTemplate>
+									<TextBlock Text="{Binding Name}"></TextBlock>
+								</DataTemplate>
+							</ListBox.ItemTemplate>
+						</ListBox>
+					</DockPanel>
+
+				</Grid>
+				
+			</aw:WizardPage>
+			
+		</aw:Wizard> 
+	</Grid>
+</Window>

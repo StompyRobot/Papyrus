@@ -19,7 +19,7 @@ namespace Papyrus
 
 	public interface IPointerResolvingList : IList {
 		void SetDatabase(RecordDatabase database);
-		List<DataPointer> GetDataPointers();
+		List<RecordReference> GetRecordReferences();
 	}
 
 	// TODO: Fix this for protobuf deserialization into an existing object
@@ -39,7 +39,7 @@ namespace Papyrus
 
 			Database = database;
 
-			GetDataPointers().ForEach(p => p.ResolvePointer(database));
+			GetRecordReferences().ForEach(p => p.ResolveReference(database));
 
 		}
 
@@ -55,10 +55,10 @@ namespace Papyrus
 			return string.Format("{0} List ({1} items)", typeof(T).Name, InternalList.Count);
 		}
 
-		public List<DataPointer> GetDataPointers()
+		public List<RecordReference> GetRecordReferences()
 		{
 
-			return InternalList.Select(p => DataPointer.DataPointersInObject(p)).Aggregate(new List<DataPointer>(),
+			return InternalList.Select(p => RecordReference.RecordReferencesInObject(p)).Aggregate(new List<RecordReference>(),
 			                                                                                (list, pointers) =>
 			                                                                                list.Concat(pointers).ToList());
 

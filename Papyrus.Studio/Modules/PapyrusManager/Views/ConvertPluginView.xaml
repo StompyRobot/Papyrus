@@ -1,0 +1,59 @@
+﻿<Window x:Class="Papyrus.Studio.Modules.PapyrusManager.Views.ConvertPluginView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:AvalonWizard="clr-namespace:AvalonWizard;assembly=AvalonWizard"
+        xmlns:cal="http://www.caliburnproject.org" Height="358" Width="486" Title="Convert Plugin" ResizeMode="NoResize" WindowStartupLocation="CenterOwner">
+    <Grid>
+		<AvalonWizard:Wizard AvalonWizard:Designer.PageIndex="2" Finished="Wizard_Finished" Cancelled="Wizard_Cancelled">
+			<AvalonWizard:WizardPage Name="PageOne" Header="Convert Plugin" Padding="16" AllowNext="{Binding PageOneValid}">
+				<StackPanel>
+					
+					<RadioButton Margin="5" Content="Overwrite existing plugin with new data format." Height="16" Name="OverwriteExisting" GroupName="OverwriteAction" Checked="OverwriteExisting_Checked" />
+				
+					<RadioButton Margin="5" Content="Copy plugin to new directory and convert. (Safest)" Height="16" Name="CopyConvert" GroupName="OverwriteAction" Checked="CopyConvert_Checked" />
+					
+				</StackPanel>
+			</AvalonWizard:WizardPage>
+			
+			<AvalonWizard:WizardPage Header="Select Directory" Name="PageTwo" Padding="16" AllowNext="{Binding PageTwoValid}">
+				<Grid>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="40" />
+						<RowDefinition />
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition />
+						<ColumnDefinition  Width="65"/>
+					</Grid.ColumnDefinitions>
+					
+					<TextBlock Grid.ColumnSpan="2"><TextBlock.Text>
+						Select a located to save the plugin.
+					</TextBlock.Text></TextBlock>
+					
+					<TextBox Height="26" Margin="0" Grid.Row="1" Text="{Binding Path=PluginDirectory, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+					<Button Content="Browse" Grid.Row="1" Width="60" Height="26" Grid.Column="1" cal:Message.Attach="[Event Click] = [Action PickDirectory()]" />
+				</Grid>
+			</AvalonWizard:WizardPage>		
+			
+			<AvalonWizard:WizardPage Header="Select Format" Name="PageThree" Padding="16">
+				
+				<DockPanel Grid.Column="1" Grid.Row="1" Width="Auto" Height="Auto">
+					<TextBlock DockPanel.Dock="Bottom" Text="{Binding Path=PluginFormat.Description, Mode=OneWay}" TextWrapping="Wrap" Height="Auto"></TextBlock>
+
+					<ListBox ItemsSource="{Binding Path=PluginTypes, UpdateSourceTrigger=PropertyChanged}" Height="Auto" HorizontalAlignment="Stretch" Margin="6" SelectedItem="{Binding PluginFormat}" VerticalAlignment="Stretch">
+						<ListBox.ItemTemplate>
+							<DataTemplate>
+								<TextBlock Text="{Binding Name}"></TextBlock>
+							</DataTemplate>
+						</ListBox.ItemTemplate>
+					</ListBox>
+					
+				</DockPanel>
+
+
+			</AvalonWizard:WizardPage>
+			
+		</AvalonWizard:Wizard>
+		
+	</Grid>
+</Window>

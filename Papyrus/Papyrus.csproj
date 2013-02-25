@@ -12,6 +12,7 @@
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <DebugSymbols>true</DebugSymbols>
@@ -41,10 +42,15 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>Lib\Newtonsoft.Json\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="protobuf-net, Version=2.0.0.480, Culture=neutral, PublicKeyToken=257b51d87d2e4d67, processorArchitecture=MSIL">
-      <HintPath>Lib\protobuf-net\protobuf-net.dll</HintPath>
+    <Reference Include="PropertyTools, Version=0.0.0.0, Culture=neutral, PublicKeyToken=ea0c9f2b460934d0, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\PropertyTools.dll</HintPath>
+    </Reference>
+    <Reference Include="protobuf-net-patch">
+      <HintPath>..\lib\protobuf-net-patch.dll</HintPath>
     </Reference>
     <Reference Include="System">
       <Private>False</Private>
@@ -63,15 +69,16 @@
     <Compile Include="Attributes.cs" />
     <Compile Include="ChildRecordAttribute.cs" />
     <Compile Include="Converters\ColorTypeConverter.cs" />
+    <Compile Include="Converters\IntSizeTypeConverter.cs" />
     <Compile Include="Converters\Vector2TypeConverter.cs" />
-    <Compile Include="DataPointer.cs" />
-    <Compile Include="DataPointerList.cs" />
+    <Compile Include="RecordReference.cs" />
+    <Compile Include="RecordReferenceList.cs" />
     <Compile Include="DataTypes\AudioAsset.cs" />
-    <Compile Include="Design\DataPointerUtils.cs" />
+    <Compile Include="Design\RecordReferenceUtils.cs" />
     <Compile Include="Design\MutableRecordDatabase.cs" />
     <Compile Include="Design\RecordEventArgs.cs" />
     <Compile Include="Design\RecordExtensions.cs" />
-    <Compile Include="Exceptions\DataPointerException.cs" />
+    <Compile Include="Exceptions\ReferenceException.cs" />
     <Compile Include="Exceptions\DependencyException.cs" />
     <Compile Include="Exceptions\PluginLoadException.cs" />
     <Compile Include="Exceptions\PluginSaveException.cs" />
@@ -120,6 +127,7 @@
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <!--
       To modify your build process, add your task inside one of the targets below and uncomment it. 
       Other similar extension points exist, see Microsoft.Common.targets.

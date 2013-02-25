@@ -31,7 +31,12 @@ namespace Papyrus.DataTypes
 		/// <summary>
 		/// This is the editor name for a data object.
 		/// </summary>
-		[RecordProperty(1), DataMember, Category("Data"), Description("The design ID for this item. This is not shown in the game, it is only for use in the editor.")]
+		[RecordProperty(1), Category("Data"), Description("The design ID for this item. This is not shown in the game, it is only for use in the editor.")]
+		[PropertyTools.DataAnnotations.SortIndex(-1)]
+		[PropertyTools.DataAnnotations.AutoUpdateText]
+#if JSON
+		[Newtonsoft.Json.JsonProperty(Order = int.MinValue)]
+#endif
 		public string ID
 		{
 			get { return _id; }
@@ -72,39 +77,39 @@ namespace Papyrus.DataTypes
 
 		}
 
-		private static MethodInfo _getDataPointerMethodInfo;
+		private static MethodInfo _getReferenceMethodInfo;
 
 		/// <summary>
 		/// Returns a pointer to this record that can be used to reference later.
 		/// </summary>
 		/// <typeparam name="T"></typeparam>
 		/// <returns></returns>
-		public DataPointer<T> GetDataPointer<T>() where T : Record
+		public RecordReference<T> GetReference<T>() where T : Record
 		{
 
 			if(string.IsNullOrEmpty(Container.Location) || Container.Index < 0)
 				throw new InvalidOperationException("Attempted to get a data pointer to a record which has never been saved.");
 
-			var newPointer =  new DataPointer<T>(Container.Index, Container.Destination, Container.Location);
+			var newPointer =  new RecordReference<T>(Container.Index, Container.Destination, Container.Location);
 
 			try {
-				newPointer.ResolvePointer(Database);
-			} catch(DataPointerException) {
+				newPointer.ResolveReference(Database);
+			} catch(ReferenceException) {
 				
 			}
 			return newPointer;
 		}
 
-		public DataPointer GetDataPointer()
+		public RecordReference GetReference()
 		{
 
-			if (_getDataPointerMethodInfo == null)
-				_getDataPointerMethodInfo =
+			if (_getReferenceMethodInfo == null)
+				_getReferenceMethodInfo =
 					GetType().GetMethods(BindingFlags.Public | BindingFlags.Instance).Single(
-						p => p.Name == "GetDataPointer" && p.IsGenericMethod);
+						p => p.Name == "GetReference" && p.IsGenericMethod);
 
-			var method = _getDataPointerMethodInfo.MakeGenericMethod(GetType());
-			return method.Invoke(this, null) as DataPointer;
+			var method = _getReferenceMethodInfo.MakeGenericMethod(GetType());
+			return method.Invoke(this, null) as RecordReference;
 
 		}
 
@@ -126,18 +131,16 @@ namespace Papyrus.DataTypes
 
 			Database = database;
 
-			foreach (var dataPointer in GetDataPointers()) {
-
-				(dataPointer as DataPointer).ResolvePointer(database);
-
+			foreach (var reference in GetRecordReferences()) {
+				reference.ResolveReference(database);
 			}
 
-			foreach (var dataPointerList in GetDataPointerLists()) {
-				dataPointerList.SetDatabase(database);
+			foreach (var referenceList in GetRecordReferenceLists()) {
+				referenceList.SetDatabase(database);
 			}
 
-			foreach (var pointerResolvingList in GetResolvingLists()) {
-				pointerResolvingList.SetDatabase(database);
+			foreach (var resolvingList in GetResolvingLists()) {
+				resolvingList.SetDatabase(database);
 			}
 
 		}
@@ -151,13 +154,13 @@ namespace Papyrus.DataTypes
 
 			List<string> sources = new List<string>();
 
-			var dataPointers = GetDataPointers();
+			var references = GetRecordReferences();
 
-			foreach (var dataPointer in dataPointers) {
-				if(!string.IsNullOrEmpty(dataPointer.Source) && !sources.Contains(dataPointer.Source))
-					sources.Add(dataPointer.Source);
-				if (!string.IsNullOrEmpty(dataPointer.Plugin) && !sources.Contains(dataPointer.Plugin))
-					sources.Add(dataPointer.Plugin);
+			foreach (var reference in references) {
+				if(!string.IsNullOrEmpty(reference.Source) && !sources.Contains(reference.Source))
+					sources.Add(reference.Source);
+				if (!string.IsNullOrEmpty(reference.Plugin) && !sources.Contains(reference.Plugin))
+					sources.Add(reference.Plugin);
 			}
 
 			return sources;
@@ -169,18 +172,18 @@ namespace Papyrus.DataTypes
 		/// <remarks>Do not call on a per-frame basis. Initialisation only!</remarks>
 		/// </summary>
 		/// <returns>List of data pointers contained in this record.</returns>
-		public virtual IEnumerable<DataPointer> GetDataPointers()
+		public virtual IEnumerable<RecordReference> GetRecordReferences()
 		{
 
 			var type = this.GetType();
 
-			var dataPointers = new List<DataPointer>();
+			var references = new List<RecordReference>();
 
-			dataPointers.AddRange(DataPointer.DataPointersInObject(this));
+			references.AddRange(RecordReference.RecordReferencesInObject(this));
 
 
-			foreach (var dataPointerList in GetDataPointerLists()) {
-				dataPointers.AddRange(dataPointerList.DataPointers);
+			foreach (var referenceList in GetRecordReferenceLists()) {
+				references.AddRange(referenceList.Records);
 			}
 
 			var subRecordFields =
@@ -193,17 +196,17 @@ namespace Papyrus.DataTypes
 				if (value == null)
 					continue;
 
-				dataPointers.AddRange(DataPointer.DataPointersInObject(value));
+				references.AddRange(RecordReference.RecordReferencesInObject(value));
 				
 			}
 
-			foreach (var pointerResolvingList in GetResolvingLists()) {
+			foreach (var resolvingList in GetResolvingLists()) {
 
-				dataPointers.AddRange(pointerResolvingList.GetDataPointers());
+				references.AddRange(resolvingList.GetRecordReferences());
 
 			}
 
-			return dataPointers;
+			return references;
 
 		}
 
@@ -211,16 +214,16 @@ namespace Papyrus.DataTypes
 		/// Returns all the data pointer lists contained in this record.
 		/// </summary>
 		/// <returns>List of data pointer lists lists lists...</returns>
-		public IEnumerable<IDataPointerList> GetDataPointerLists()
+		public IEnumerable<IRecordReferenceList> GetRecordReferenceLists()
 		{
 
-			var dataPointerListProperties =
-				GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.FlattenHierarchy).Where(p => typeof(IDataPointerList).IsAssignableFrom(p.PropertyType));
+			var referenceListProperties =
+				GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.FlattenHierarchy).Where(p => typeof(IRecordReferenceList).IsAssignableFrom(p.PropertyType));
 
-			var retList = new List<IDataPointerList>();
+			var retList = new List<IRecordReferenceList>();
 
-			foreach (var propInfo in dataPointerListProperties) {
-				retList.Add(propInfo.GetValue(this, null) as IDataPointerList);
+			foreach (var propInfo in referenceListProperties) {
+				retList.Add(propInfo.GetValue(this, null) as IRecordReferenceList);
 			}
 
 			return retList;
@@ -234,12 +237,12 @@ namespace Papyrus.DataTypes
 		public IEnumerable<IPointerResolvingList> GetResolvingLists()
 		{
 
-			var dataPointerListProperties =
+			var referenceListProperties =
 				GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.FlattenHierarchy).Where(p => typeof(IPointerResolvingList).IsAssignableFrom(p.PropertyType));
 
 			var retList = new List<IPointerResolvingList>();
 
-			foreach (var propInfo in dataPointerListProperties) {
+			foreach (var propInfo in referenceListProperties) {
 				retList.Add(propInfo.GetValue(this, null) as IPointerResolvingList);
 			}
 

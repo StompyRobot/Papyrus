@@ -67,7 +67,7 @@ namespace Papyrus.Converters
 
 			var color = value as DataTypes.Color;
 
-			if(destinationType == typeof(string)) {
+			if(color != null && destinationType == typeof(string)) {
 
 				return string.Format("{0}, {1}, {2}, {3}", color.R, color.G, color.B, color.A);
 
