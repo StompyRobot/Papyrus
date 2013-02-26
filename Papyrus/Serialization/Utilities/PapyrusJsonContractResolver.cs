@@ -32,6 +32,16 @@ namespace Papyrus.Serialization.Utilities
 
 			}
 
+			if (typeof (IRecordContainer).IsAssignableFrom(ret.DeclaringType) && ret.PropertyName == "Destination") {
+
+				ret.ShouldSerialize = o =>
+				{
+					IRecordContainer pointer = (IRecordContainer)o;
+					return pointer.Destination != pointer.Location;
+				};
+
+			}
+
 			return ret;
 
 		}

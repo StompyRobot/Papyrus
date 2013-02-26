@@ -30,6 +30,9 @@ namespace Papyrus
 
 		[DataMember]
 		[ProtoMember(1)]
+#if JSON
+		[Newtonsoft.Json.JsonProperty(DefaultValueHandling = Newtonsoft.Json.DefaultValueHandling.IgnoreAndPopulate)]
+#endif
 		public RecordMode Mode { get; set; }
 
 		/// <summary>
@@ -71,7 +74,12 @@ namespace Papyrus
 		[ProtoAfterDeserialization]
 		private void PostDeserialization()
 		{
+
 			Record.Container = this;
+
+			if (string.IsNullOrEmpty(Destination))
+				Destination = Location;
+
 		}
 
 #if JSON
