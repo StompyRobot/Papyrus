@@ -36,7 +36,7 @@ namespace Papyrus
 	/// Marks a class as being a subrecord, which means it can be serialized
 	/// correctly inside a record.
 	/// </summary>
-	[AttributeUsage(AttributeTargets.Class)]
+	[AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct)]
 	public sealed class SubRecordAttribute : Attribute
 	{
 

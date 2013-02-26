@@ -6,13 +6,13 @@
  * of the license can be found at https://github.com/stompyrobot/Papyrus/wiki/License.
  */
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Papyrus
 {
 
+	/// <summary>
+	/// Register a record type as a child of this record class.
+	/// </summary>
 	[AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
 	public sealed class ChildRecordAttribute : Attribute
 	{

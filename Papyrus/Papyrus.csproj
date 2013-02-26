@@ -67,7 +67,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Attributes.cs" />
     <Compile Include="ChildRecordAttribute.cs" />
     <Compile Include="Converters\ColorTypeConverter.cs" />
     <Compile Include="Converters\IntSizeTypeConverter.cs" />
