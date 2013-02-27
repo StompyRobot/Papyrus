@@ -1,4 +1,6 @@
-﻿namespace Papyrus.Sample
+﻿using Papyrus.DataTypes;
+
+namespace Papyrus.Sample
 {
 	[Record]
 	public class SimpleUnit : SampleModule
@@ -67,6 +69,20 @@
 				ThrowIfReadOnly("TestUnit");
 				_testUnit = value;
 				RaisePropertyChanged("TestUnit");
+			}
+		}
+
+		private Color _unitColor;
+
+		[RecordProperty(6)]
+		public Color UnitColor
+		{
+			get { return _unitColor; }
+			set
+			{
+				ThrowIfReadOnly("UnitColor");
+				_unitColor = value;
+				RaisePropertyChanged("UnitColor");
 			}
 		}
 

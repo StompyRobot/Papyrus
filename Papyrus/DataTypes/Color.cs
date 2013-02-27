@@ -14,30 +14,28 @@ using System.Text;
 namespace Papyrus.DataTypes
 {
 
-	//[Serializable]
 	[ProtoBuf.ProtoContract]
 	[TypeConverter("Papyrus.Converters.ColorTypeConverter, Papyrus")]
-	//[TypeConverter(typeof(ExpandableObjectConverter))]
 	public class Color
 	{
 		[ProtoBuf.ProtoMember(1)]
-		public int R { get; set; }
+		public byte R { get; set; }
 
 		[ProtoBuf.ProtoMember(2)]
-		public int G { get; set; }
+		public byte G { get; set; }
 
 		[ProtoBuf.ProtoMember(3)]
-		public int B { get; set; }
+		public byte B { get; set; }
 
 		[ProtoBuf.ProtoMember(4)]
-		public int A { get; set; }
+		public byte A { get; set; }
 
 		public Color()
 		{
 			R = G = B = A = 0;
 		}
 
-		public Color(int r, int g, int b, int a = 255)
+		public Color(byte r, byte g, byte b, byte a = 255)
 		{
 			R = r;
 			G = g;
@@ -47,10 +45,10 @@ namespace Papyrus.DataTypes
 
 		public Color(float r, float g, float b, float a = 1.0f)
 		{
-			R = (int)(r * 255f);
-			G = (int)(g * 255f);
-			B = (int)(b * 255f);
-			A = (int)(a * 255f);
+			R = (byte)(r * 255f);
+			G = (byte)(g * 255f);
+			B = (byte)(b * 255f);
+			A = (byte)(a * 255f);
 		}
 
 #if XNA

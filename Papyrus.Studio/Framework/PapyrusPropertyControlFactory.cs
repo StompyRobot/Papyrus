@@ -5,6 +5,7 @@ using System.Text;
 using System.Windows;
 using Papyrus;
 using Papyrus.Studio.Framework.Controls;
+using Papyrus.Studio.Framework.Converters;
 using PropertyTools.Wpf;
 
 namespace Papyrus.Studio.Framework
@@ -42,7 +43,7 @@ namespace Papyrus.Studio.Framework
 
 			if (typeof (Papyrus.DataTypes.Color) == property.ActualPropertyType) {
 
-				return CreateColorControl(property);
+				return CreatePapyrusColorControl(property);
 
 			}
 
@@ -66,6 +67,15 @@ namespace Papyrus.Studio.Framework
 			c.SetBinding(RecordList.SourceListProperty, item.CreateBinding());
 			return c;
 
+		}
+
+		public FrameworkElement CreatePapyrusColorControl(PropertyItem item)
+		{
+			var c = new ColorPicker2();
+			var binding = item.CreateBinding();
+			binding.Converter = new PapyrusColorConverter();
+			c.SetBinding(ColorPicker2.SelectedColorProperty, binding);
+			return c;
 		}
 
 	}

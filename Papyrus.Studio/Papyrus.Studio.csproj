@@ -126,6 +126,7 @@
     </Compile>
     <Compile Include="Framework\Controls\RecordList\RecordList.cs" />
     <Compile Include="Framework\Controls\RecordReferenceItem\RecordReferenceItem.cs" />
+    <Compile Include="Framework\Converters\PapyrusColorConverter.cs" />
     <Compile Include="Framework\Converters\UnitScaleConverter.cs" />
     <Compile Include="Framework\IRecordDocument.cs" />
     <Compile Include="Framework\IRecordViewModel.cs" />

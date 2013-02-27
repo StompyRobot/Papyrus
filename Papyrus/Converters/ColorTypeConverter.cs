@@ -49,12 +49,12 @@ namespace Papyrus.Converters
 				throw new FormatException("Invalid number of params");
 
 			var newColor = new DataTypes.Color();
-			newColor.R = Math.Min(255, Math.Max(int.Parse(values[0]), 0));
-			newColor.G = Math.Min(255, Math.Max(int.Parse(values[1]), 0));
-			newColor.B = Math.Min(255, Math.Max(int.Parse(values[2]), 0));
+			newColor.R = byte.Parse(values[0]);
+			newColor.G = byte.Parse(values[1]);
+			newColor.B = byte.Parse(values[2]);
 
 			if (values.Count == 4)
-				newColor.A = Math.Min(255, Math.Max(int.Parse(values[3]), 0));
+				newColor.A = byte.Parse(values[3]);
 			else
 				newColor.A = 255;
 
