@@ -122,8 +122,10 @@
     <Compile Include="ViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\Papyrus.licenseheader">
+      <Link>Papyrus.licenseheader</Link>
+    </None>
     <None Include="packages.config" />
-    <None Include="Papyrus.licenseheader" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

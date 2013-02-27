@@ -56,6 +56,9 @@
     <Compile Include="RecordDatabaseTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\Papyrus.licenseheader">
+      <Link>Papyrus.licenseheader</Link>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
