@@ -5,6 +5,8 @@
  * have received a copy of the license along with the source code. If not, an online copy
  * of the license can be found at https://github.com/stompyrobot/Papyrus/wiki/License.
  */
+
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -25,7 +27,7 @@ namespace Papyrus.Studio.Framework.Controls
 			"RecordReference",
 			typeof(RecordReference),
 			typeof(RecordReferenceItem),
-			new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+			new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, RecordReferenceChangedCallback));
 
 		/// <summary>
 		/// Gets or sets the data pointer.
@@ -43,12 +45,14 @@ namespace Papyrus.Studio.Framework.Controls
 			}
 		}
 
+		public event EventHandler RecordReferenceChanged;
+
 		/// <summary>
 		/// Gets or sets the browse command.
 		/// </summary>
 		/// <value> The browse command. </value>
 		public ICommand BrowseCommand { get; set; }
-	
+
 		/// <summary>
 		/// Gets or sets the open command.
 		/// </summary>
@@ -84,6 +88,20 @@ namespace Papyrus.Studio.Framework.Controls
 
 			}
 
+		}
+
+		protected void OnRecordReferenceChanged(RecordReference oldReference, RecordReference newReference)
+		{
+
+			if (RecordReferenceChanged != null)
+				RecordReferenceChanged(this, EventArgs.Empty);
+
+		}
+
+		private static void RecordReferenceChangedCallback(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs args)
+		{
+			((RecordReferenceItem) dependencyObject).OnRecordReferenceChanged(args.OldValue as RecordReference,
+			                                                                  args.NewValue as RecordReference);
 		}
 
 	}

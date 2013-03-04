@@ -18,6 +18,8 @@ namespace Papyrus.Studio.Modules.PapyrusManager
 	public interface IPapyrusManager : INotifyPropertyChangedEx
 	{
 
+		string DataPath { get; }
+
 		event EventHandler RecordDatabaseChanged;
 		
 		/// <summary>
