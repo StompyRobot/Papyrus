@@ -11,6 +11,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text;
+using Newtonsoft.Json;
 using Papyrus.DataTypes;
 using Papyrus.Serialization.Utilities;
 
@@ -37,12 +38,31 @@ namespace Papyrus
 				throw new ArgumentException("The type must be a protocontract.", "source");
 			}*/
 
-			var clone = ProtoBufUtils.TypeModel.DeepClone(source) as T;
+			var ser = JsonUtilities.GetPapyrusJsonSerializer();
 
-			clone.ResolveDependencies((source as Record).Database);
+			var sb = new StringBuilder();
 
+			using (var writ = new StringWriter(sb)) {
 
-			return clone;
+				using (var jsonWriter = new JsonTextWriter(writ)) {
+					
+					ser.Serialize(jsonWriter, source);
+
+				}
+
+			}
+
+			using (var read = new StringReader(sb.ToString())) {
+
+				using (var jsonReader = new JsonTextReader(read)) {
+
+					var record = (T)ser.Deserialize(jsonReader, source.GetType());
+					record.ResolveDependencies(source.Database);
+					return record;
+
+				}
+
+			}
 
 		}
 	}
