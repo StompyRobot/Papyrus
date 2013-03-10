@@ -11,7 +11,10 @@
 		Command="&quot;$(ProjectDir).nuget/Nuget.exe&quot; install &quot;$(ProjectDir)Papyrus/packages.config&quot; -o &quot;$(ProjectDir)/packages&quot;" />
 		<Exec
 		Command="&quot;$(ProjectDir).nuget/Nuget.exe&quot; install &quot;$(ProjectDir)Papyrus.Studio/packages.config&quot; -o &quot;$(ProjectDir)/packages&quot;" />
+		<Exec
+		Command="&quot;$(ProjectDir).nuget/Nuget.exe&quot; install &quot;$(ProjectDir)Papyrus.Tests/packages.config&quot; -o &quot;$(ProjectDir)/packages&quot;" />
 		<Message Text="Nuget for $(TargetName) finished." />
+
 	</Target>
 	
 	<ItemGroup>
