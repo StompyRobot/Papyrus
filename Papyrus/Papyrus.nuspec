@@ -15,6 +15,12 @@
     <tags></tags>
   </metadata>
   
+ <dependencies>
+	<group targetFramework=".NETFramework3.5">
+		<dependency id="Newtonsoft.Json" version="4.5.11" />
+	</group>
+</dependencies>
+  
   <files>
 	<file src="..\Output\Papyrus\protobuf-net-patch.dll" target="lib\net35" /> 
 	<file src="..\Output\Papyrus\PropertyTools.dll" target="lib\net35" /> 
