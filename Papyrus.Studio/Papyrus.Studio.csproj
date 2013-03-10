@@ -16,6 +16,12 @@
     <TargetFrameworkProfile />
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
+		<BUILD_NUMBER Condition="'$(BUILD_NUMBER)' == ''">0</BUILD_NUMBER>
+		<Major>1</Major>
+		<Minor>0</Minor>
+		<!--Hudson sets BUILD_NUMBER and SVN_REVISION -->
+		<Build>$(BUILD_NUMBER)</Build>
+		<Revision>0</Revision>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -112,6 +118,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AssemblyVersion.cs" />
     <Compile Include="EditorBootstrapper.cs" />
     <Compile Include="Framework\BindingUtil.cs" />
     <Compile Include="Framework\Controls\CollectionEditor\CollectionEditor.cs" />
@@ -316,6 +323,11 @@
     <Resource Include="Resources\WeaponHardpoint.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+	<Import Project="$(MSBuildExtensionsPath)\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets" Condition="Exists('$(MSBuildExtensionsPath)\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets')" />
+	<Target Name="BeforeBuild" Condition="Exists('$(MSBuildExtensionsPath)\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets')">
+		<Message Text="Version: $(Major).$(Minor).$(Build).$(Revision)" />
+		<AssemblyInfo CodeLanguage="CS" OutputFile="AssemblyVersion.cs" AssemblyFileVersion="$(Major).$(Minor).$(Build).$(Revision)" AssemblyConfiguration="$(Configuration)" Condition="$(Revision) != '' " />
+	</Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
