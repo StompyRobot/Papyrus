@@ -1,0 +1,19 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<PropertyGroup>
+		<BuildDependsOn>$(BuildDependsOn);Nuget</BuildDependsOn>
+		<RebuildDependsOn>$(RebuildDependsOn);Nuget</RebuildDependsOn>
+	</PropertyGroup>    
+ 
+	<Target Name="Nuget">
+		<Message Text="Nuget for $(TargetName) starting." />
+		<Exec Command="dir" />
+		<Exec
+		Command="&quot;$(ProjectDir).nuget/Nuget.exe&quot; install &quot;$(ProjectDir)Papyrus/packages.config&quot; -o &quot;$(ProjectDir)/packages&quot;" />
+		<Exec
+		Command="&quot;$(ProjectDir).nuget/Nuget.exe&quot; install &quot;$(ProjectDir)Papyrus.Studio/packages.config&quot; -o &quot;$(ProjectDir)/packages&quot;" />
+		<Message Text="Nuget for $(TargetName) finished." />
+	</Target>
+	
+	<Import Project="$(ProjectDir)Papyrus/Papyrus.csproj"/>
+	
+</Project>
