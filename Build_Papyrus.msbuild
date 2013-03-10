@@ -15,5 +15,6 @@
 	</Target>
 	
 	<Import Project="$(ProjectDir)Papyrus/Papyrus.csproj"/>
+	<Import Project="$(ProjectDir)Papyrus.Studio/Papyrus.Studio.csproj"/>
 	
 </Project>
