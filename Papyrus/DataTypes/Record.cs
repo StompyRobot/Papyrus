@@ -80,7 +80,7 @@ namespace Papyrus.DataTypes
 		private static MethodInfo _getReferenceMethodInfo;
 
 		/// <summary>
-		/// Returns a pointer to this record that can be used to reference later.
+		/// Returns a reference to this record position.
 		/// </summary>
 		/// <typeparam name="T"></typeparam>
 		/// <returns></returns>
@@ -100,6 +100,10 @@ namespace Papyrus.DataTypes
 			return newPointer;
 		}
 
+		/// <summary>
+		/// Returns a pointer to this record position.
+		/// </summary>
+		/// <returns></returns>
 		public RecordReference GetReference()
 		{
 
@@ -295,7 +299,7 @@ namespace Papyrus.DataTypes
 
 		public override int GetHashCode()
 		{
-			return (Container.Destination.GetHashCode() + Container.Index.GetHashCode()).GetHashCode();
+			return (Container.RecordType.GetHashCode() + Container.Destination.GetHashCode() + Container.Index.GetHashCode()).GetHashCode();
 		}
 
 		public static bool operator ==(Record left, Record right)
