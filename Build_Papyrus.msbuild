@@ -14,6 +14,14 @@
 		<Message Text="Nuget for $(TargetName) finished." />
 	</Target>
 	
-	<Import Project="$(ProjectDir)Papyrus.sln"/>
+	<ItemGroup>
+        <ProjectToBuild Include="Papyrus.sln">
+            <Properties>Configuration=Release</Properties>
+        </ProjectToBuild>
+    </ItemGroup>
+
+    <Target Name="Build">
+        <MSBuild Projects="@(ProjectToBuild)"/>
+    </Target>
 	
 </Project>
