@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Papyrus</id>
+    <version>$version$</version>
+    <title>Papyrus</title>
+    <authors>Stompy Robot</authors>
+    <owners>Simie</owners>
+    <licenseUrl>https://github.com/stompyrobot/Papyrus/wiki/License</licenseUrl>
+    <projectUrl>https://github.com/stompyrobot/Papyrus</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Game-centric database system, with support for plugins/modding. This is the data part, there is also Papyrus.Studio, an editor.</description>
+    <releaseNotes></releaseNotes>
+    <copyright>Copyright 2013</copyright>
+    <tags></tags>
+  </metadata>
+  
+  <files>
+	<file src="..\Output\Papyrus\protobuf-net-patch.dll" target="lib\net35" /> 
+	<file src="..\Output\Papyrus\PropertyTools.dll" target="lib\net35" /> 
+  </files>
+  
+</package>
