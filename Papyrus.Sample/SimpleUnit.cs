@@ -7,6 +7,7 @@
  */
 using Papyrus.DataTypes;
 
+
 namespace Papyrus.Sample
 {
 	[Record]
