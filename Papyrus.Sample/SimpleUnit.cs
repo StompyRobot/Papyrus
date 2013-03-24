@@ -92,7 +92,16 @@ namespace Papyrus.Sample
 				_unitColor = value;
 				RaisePropertyChanged("UnitColor");
 			}
-		}
+		}	
+		
 
+		private RecordReferenceList<SimpleUnit> _recordListTest = new RecordReferenceList<SimpleUnit>();
+
+		[RecordProperty(7, OverwriteList = true)]
+		public RecordReferenceList<SimpleUnit> RecordListTest
+		{
+			get { return _recordListTest; }
+			set { _recordListTest = value; }
+		}
 	}
 }

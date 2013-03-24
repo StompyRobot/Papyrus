@@ -52,7 +52,9 @@
 											<MouseBinding Gesture="LeftDoubleClick" Command="{Binding BrowseCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:RecordList, AncestorLevel=1}}"
 														  CommandParameter="{Binding}"></MouseBinding>
 										</DockPanel.InputBindings>
-										<Label Content="{Binding Record.ID, FallbackValue=Unresolved}"></Label>
+										<Label>
+                                            <TextBlock Text="{Binding Record.ID, FallbackValue=Unresolved}" />
+                                        </Label>
 									</DockPanel>
 								</DataTemplate>
 							</ListBox.ItemTemplate>
