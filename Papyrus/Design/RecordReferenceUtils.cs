@@ -35,5 +35,14 @@ namespace Papyrus.Design
 
 		}
 
+		/// <summary>
+		/// Returns the internal index for a record reference. This us used for external network sync tools, using this locally is not advised.
+		/// </summary>
+		/// <returns>Internal index for record reference</returns>
+		public static int GetInternalIndex(RecordReference reference)
+		{
+			return reference.Index;
+		}
+
 	}
 }
