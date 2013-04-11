@@ -45,21 +45,21 @@ namespace Papyrus.Studio
 			_internalStrategy.Execute(toClose, (editorsCanClose, screens) =>
 			                                   {
 
-												   Framework.SaveUtil.EndSaveOperation();
+								Framework.SaveUtil.EndSaveOperation();
 
-												   // If an editor has already cancelled shutdown, we don't need to stop it.
-												   if (!editorsCanClose) {
-												   	callback(editorsCanClose, screens);
-												   	return;
-												   }
+								// If an editor has already cancelled shutdown, we don't need to stop it.
+								if (!editorsCanClose) {
+									callback(editorsCanClose, screens);
+									return;
+								}
 
 												   
 
 			                                   	var p = IoC.Get<IPapyrusManager>() as
 			                                   		Modules.PapyrusManager.ViewModels.PapyrusManagerViewModel;
 
-												   // Check if papyrus has a problem closing
-												   p.CanClose(papyrusCanClose => callback(papyrusCanClose, screens));
+								// Check if papyrus has a problem closing
+								p.CanClose(papyrusCanClose => callback(papyrusCanClose, screens));
 
 			                                   });
 
